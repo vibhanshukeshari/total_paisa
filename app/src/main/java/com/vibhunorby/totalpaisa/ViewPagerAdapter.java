@@ -1,5 +1,5 @@
 package com.vibhunorby.totalpaisa;
-//Sharing project on GitHubb
+//Sharing project on GitHub
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
