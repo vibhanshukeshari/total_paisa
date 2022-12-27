@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/footerMain"
+            android:orientation="vertical"
+            android:id="@+id/parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/appBar_layout">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:elevation="4dp"
+                    app:tabTextColor="#fff"
+                    app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                    <include
+                        layout="@layout/appbar"
+                        android:clickable="false"
+                        />
+
+                </FrameLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tabLayout"
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    app:tabTextAppearance="@style/MineCustomTabText"
+                    android:background="#15202b"
+                    android:elevation="4dp"
+                    app:tabTextColor="#8899a6"
+                    android:minHeight="?attr/actionBarSize"
+                    app:tabSelectedTextColor="#1da1f3"
+                    app:tabIndicatorColor="#1da1f3"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/viewPager"
+                android:background="#15202b"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            </androidx.viewpager.widget.ViewPager>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/footerMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:elevation="8dp"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/footer_layout"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewResultTopBar"
+                    android:paddingTop="0.2dp"
+                    android:background="#39434d"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/textViewResultAmountLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#15202b"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="5dp"
+                                android:clickable="false"
+                                android:paddingEnd="5dp"
+                                android:maxLines="1"
+                                android:maxWidth="160dp"
+                                android:ellipsize="end"
+                                android:text="Total Amount =>"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/textViewRupeesSymbol"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rupeesSymbol"
+                                android:textAlignment="center"
+                                android:textColor="#3bd16f"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/textViewResult"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.9"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="5dp"
+                                android:textColor="#3bd16f"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textViewWordsCalculationFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="9dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="5dp"
+                            android:textSize="14sp"
+                            android:hint="Zero Rupees Only. "
+                            android:textColorHint="#8899a6"
+                            android:textColor="#ccffffff"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="5dp">
+
+                        <Button
+                            android:id="@+id/save_button"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_save"
+                            app:iconGravity="textEnd"
+                            app:iconTint="#ffffff"
+                            android:backgroundTint="#1da1f3"
+                            style="@style/Widget.MaterialComponents.Button.Icon" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/detailsFooterButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#15202b"
+                    android:gravity="center"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/reset_button_details"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_reset"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="#1da1f3"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+
+
+                    <Button
+                        android:id="@+id/speak_button_details"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_baseline_speaker_notes_24"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="#1da1f3"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+
+
+                    <Button
+                        android:id="@+id/copy_button_details"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_baseline_file_copy_24"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="#1da1f3"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+
+                    <Button
+                        android:id="@+id/share_button_details"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_baseline_share_24"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="#1da1f3"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+
+                    <Button
+                        android:id="@+id/save_button_details"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_save"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="#1da1f3"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:id="@+id/underLine"
+                    android:orientation="vertical"
+                    android:background="#39434d"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/botton_navigation_layout">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/adsContainer_main">
+
+                    <com.google.android.gms.ads.AdView
+                        android:id="@+id/adView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:adSize="SMART_BANNER"
+                        android:background="#15202b"
+                        app:adUnitId="ca-app-pub-2808567025402378/7365986297">
+                    </com.google.android.gms.ads.AdView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:background="#39434d"/>
+
+                    <com.google.android.material.bottomnavigation.BottomNavigationView
+                        android:id="@+id/botton_navigation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#15202b"
+                        app:itemIconTint="@color/navigation_color"
+                        app:itemTextColor="@color/navigation_color"
+                        app:menu="@menu/menu_item" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:headerLayout="@layout/header"
+            android:fitsSystemWindows="true"
+            android:layout_gravity="start"
+            app:menu="@menu/navigation_menu"
+            android:background="#10171f"
+            android:id="@+id/navigation_view" >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/fake_button"/>
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+

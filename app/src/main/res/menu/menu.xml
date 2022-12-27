@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Remove Ad"
+        android:icon="@drawable/remove_ads_white_png"
+        android:id="@+id/RemoveAd"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:title="Reset"
+        android:icon="@drawable/ic_reset"
+        android:id="@+id/RefreshButton"
+        app:showAsAction="always"/>
+    <item
+        android:title="Share"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:id="@+id/ShareButton"
+        app:showAsAction="always"/>
+    <item
+        android:title="Delete All"
+        android:icon="@drawable/ic_baseline_delete_forever_24"
+        android:id="@+id/DeleteAll"
+        app:showAsAction="always"/>
+</menu>

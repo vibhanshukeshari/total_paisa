@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/totalPaisa"
+        android:icon="@drawable/money"
+        android:title="Total Paisa" />
+
+    <item
+        android:id="@+id/gst"
+        android:icon="@drawable/calcnew"
+        android:iconTint="#ffffff"
+        android:title="Gst Calculator" />
+
+</menu>

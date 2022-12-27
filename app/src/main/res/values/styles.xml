@@ -1,0 +1,104 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#1da1f3 </item>
+        <item name="colorPrimaryDark">#131d27</item>
+        <item name="colorAccent">#ffffff</item>
+        <item name="drawerArrowStyle">@style/humbergerStyle</item>
+    </style>
+
+
+    <style name="humbergerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+   <item name="spinBars">true</item>
+        <item name="color">#ffffff</item>
+    </style>
+
+    <style name="toggleTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#1da1f3 </item>
+        <item name="colorSwitchThumbNormal">#eaf4fc</item>
+        <item name="android:colorForeground">#ffffff</item>
+
+    </style>
+
+
+    <style name="vibhuButtonThemeForCalenderPicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">#ffffff</item>
+        <item name="backgroundTint">#1da1f3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+
+    <style name="vibhuCalenderPickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">#10171f</item>
+        <item name="android:colorBackground">#10171f</item>
+        <item name="colorAccent">#1da1f3</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+    </style>
+
+
+
+    <style name="Rate_us_button_negative" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">#ffffff</item>
+        <item name="backgroundTint">#10171f</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+
+
+    <style name="Rate_us_dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">#10171f</item>
+        <item name="android:colorBackground">#10171f</item>
+        <item name="colorAccent">#1da1f3</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/Rate_us_button_negative</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/Rate_us_button_negative</item>
+    </style>
+
+
+
+
+
+
+    <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">#10171f</item>
+        <item name="colorAccent">#1da1f3</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
+
+    </style>
+<style name="MineCustomTabText" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textSize">16sp</item>
+</style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">#15202b</item>
+    </style>
+
+    <style name="myPrefixTextSize" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+
+
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen_bg</item>
+        <item name="android:navigationBarColor">#001da1f3</item>
+
+    </style>
+
+</resources>

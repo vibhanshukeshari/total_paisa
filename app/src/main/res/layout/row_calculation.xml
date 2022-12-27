@@ -1,0 +1,1651 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/parent"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:background="#10171f">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nested"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:descendantFocusability="beforeDescendants"
+                android:orientation="vertical">
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#15202b"
+                android:elevation="1dp"
+                android:paddingTop="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        android:hint="Payee Name"
+                        app:boxStrokeWidth="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPayeeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPersonName"
+                            android:padding="5dp"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/textViewTodayTomorrowYesterday"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:textColor="#8899a6"
+                                android:textSize="10sp"
+                                android:text="Today :"/>
+
+                            <TextView
+                            android:id="@+id/textViewCalender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            android:textSize="16sp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8"/>
+                            <TextView
+                                android:id="@+id/textViewDayOfTheWeek"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="#8899a6"
+                                android:layout_gravity="end"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <Button
+                        android:id="@+id/calender"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_calender"
+                        app:iconGravity="textEnd"
+                        app:iconTint="#ffffff"
+                        android:backgroundTint="#12202b"
+                        style="@style/Widget.MaterialComponents.Button.Icon"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#15202b"
+                    android:gravity="center"
+                    android:elevation="1dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/myHintSuggetion"
+                    android:textSize="10sp"
+                    android:textColor="#8899a6"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:background="#15202b" />
+                <TextView
+                    android:id="@+id/textViewTime"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:textColor="#8899a6"
+                    android:gravity="center"
+                    android:background="#15202b"
+                    android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#15202b"
+                android:paddingBottom="15dp"
+                android:elevation="1dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Teller Balance"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        app:prefixText="₹ "
+                        app:prefixTextAppearance="@style/myPrefixTextSize"
+                        app:prefixTextColor="#ffffff"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tallyAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            android:maxLength="12"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTellerBalance"
+                    android:textSize="18sp"
+                    android:textColor="#3bd16f"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:gravity="center"
+                    android:hint=""
+                    android:layout_weight="1"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#15202b"
+                    android:elevation="1dp"
+                    android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2000"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="2000 X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:textColorHint="#8899a6"
+                    app:hintTextColor="#8899a6"
+                    app:boxStrokeColor="#8899a6"
+                    app:boxStrokeWidth="1dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="1dp"
+                    app:boxBackgroundColor="#10171f"
+                    app:boxCornerRadiusBottomEnd="15dp"
+                    app:boxCornerRadiusTopEnd="15dp"
+                    app:boxCornerRadiusBottomStart="15dp"
+                    app:boxCornerRadiusTopStart="15dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    android:gravity="center"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextNumber2000"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingStart="2dp"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:paddingEnd="2dp"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:importantForAutofill="no"
+                        android:maxLength="5"
+                        style="@style/Theme.MaterialComponents"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+<!--                <EditText-->
+<!--                        android:id="@+id/editTextNumber2000"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:layout_marginLeft="5dp"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        android:layout_marginBottom="15dp"-->
+<!--                        android:layout_weight="0.7"-->
+<!--                        android:background="@drawable/edittextdesign"-->
+<!--                        android:ems="10"-->
+<!--                        android:importantForAutofill="no"-->
+<!--                        android:gravity="center"-->
+<!--                        android:inputType="number"-->
+<!--                        android:maxLength="5"-->
+<!--                        android:paddingStart="2dp"-->
+<!--                        android:paddingEnd="2dp"-->
+<!--                        android:textColor="#ffffff"-->
+<!--                        android:textSize="20sp" />-->
+
+                    <TextView
+                        android:id="@+id/textVieweq2000"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes2000"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView500"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="500  X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber500"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq500"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="gravity"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes500"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView200"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="200  X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber200"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq200"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes200"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="100  X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber100"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes100"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView50"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="50   X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq50"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes50"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="20   X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes20"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="10   X"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="5    X"
+                        android:textColor="#ffffff"
+                        android:textSize="21sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:maxLength="5"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="1dp"
+                    android:background="#15202b"
+                    android:orientation="vertical">
+
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingBottom="7.5dp"
+                        android:paddingTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView20Coin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="0.8"
+                            android:gravity="center"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:text="20 coin x"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp" />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:textColorHint="#8899a6"
+                            app:hintTextColor="#8899a6"
+                            app:boxStrokeColor="#8899a6"
+                            app:boxStrokeWidth="1dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="1dp"
+                            app:boxBackgroundColor="#10171f"
+                            app:boxCornerRadiusBottomEnd="15dp"
+                            app:boxCornerRadiusTopEnd="15dp"
+                            app:boxCornerRadiusBottomStart="15dp"
+                            app:boxCornerRadiusTopStart="15dp"
+                            app:boxStrokeWidthFocused="1dp"
+                            android:gravity="center"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextNumber20Coin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:paddingStart="2dp"
+                                android:paddingEnd="2dp"
+                                android:inputType="number"
+                                android:ems="10"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:gravity="center"
+                                android:importantForAutofill="no"
+                                android:maxLength="6"
+                                style="@style/Theme.MaterialComponents"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="#ffffff"
+                                android:textSize="20sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/textVieweq20Coin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:text="="
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/textViewRes20Coin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1.4"
+                            android:gravity="center"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                    <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView10Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="10 coin x"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber10Coin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="6"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq10Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes10Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView5Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="5 coin x"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber5Coin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            android:maxLength="6"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq5Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes5Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="7.5dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="2 coin x"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber2Coin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="6"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq2Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes2Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="7.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView1Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:text="1 coin x"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumber1Coin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:maxLength="6"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweq1Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRes1Coin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.2dp"
+                        android:background="#39434d">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#39434d">
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:elevation="1dp"
+                    android:background="#15202b">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewCoinExtra"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:visibility="visible"
+                        android:text="Extra Coins ="
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:textColorHint="#8899a6"
+                        app:hintTextColor="#8899a6"
+                        app:boxStrokeColor="#8899a6"
+                        app:boxStrokeWidth="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="1dp"
+                        app:boxBackgroundColor="#10171f"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        android:gravity="center"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextNumberCoinExtra"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="2dp"
+                            android:paddingEnd="2dp"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:importantForAutofill="no"
+                            android:maxLength="6"
+                            style="@style/Theme.MaterialComponents"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/textVieweqCoinExtra"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="="
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/textViewResCoinExtra"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="noScroll"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#181818">
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
+
+
+
