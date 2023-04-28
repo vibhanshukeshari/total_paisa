@@ -16,6 +16,11 @@
         android:textSize="22sp"
         android:layout_margin="20dp"
         android:textColor="#8899a6" />
+    <ImageView
+        android:id="@+id/image_view_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/not_found" />
 
     <!--recycler view for displaying our cashes-->
     <androidx.recyclerview.widget.RecyclerView

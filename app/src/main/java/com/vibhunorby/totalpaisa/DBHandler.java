@@ -12,13 +12,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // creating a constant variables for our database.
     // below variable is for our database name.
-    private static final String DB_NAME = "currencydb";
+    private static final String DB_NAME = "currencyDb";
 
     // below int is our database version
-    private static final int DB_VERSION = 6;
+    private static final int DB_VERSION = 3;
 
     // below variable is for our table name.
-    private static final String TABLE_NAME = "mycurrencies";
+    private static final String TABLE_NAME = "mycurrencie";
 
     // below variable is for our id column.
     private static final String ID_COL = "id";
@@ -175,7 +175,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // on below line we are creating a new array list.
         ArrayList<CurrencyModal> currencyModalArrayList = new ArrayList<>();
 
-        // moving our cursor to first position.
+
         if (cursorCurrencies.moveToLast()) {
             do {
                 // on below line we are adding the data from cursor to our array list.
@@ -202,7 +202,6 @@ public class DBHandler extends SQLiteOpenHelper {
                         cursorCurrencies.getString(21)
                 ));
             } while (cursorCurrencies.moveToPrevious());
-            // moving our cursor to next.
         }
         // at last closing our cursor
         // and returning our array list.
@@ -210,18 +209,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return currencyModalArrayList;
     }
 
-    public void deleteCurrency(String currency2000, String currency500, String currency200, String currency100,
-                               String currency50, String currency20, String currency10, String currency5,
-                               String currency20_coin, String currency10_coin, String currency5_coin, String currency_2_coin,
-                               String currency1_coin, String currency_extra, String result, String payee, String date,
-                               String time, String day, String notes, String coins) {
+    public void deleteCurrency(String time) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE_NAME, "two_thousand_col=? and five_hundred=? and two_hundred=? and one_hundred=? and fifty=? and twenty=? and ten=?" +
-                " and five=? and twenty_coin=? and ten_coin=? and five_coin=? and two_coin=? and one_coin=? and extra_coin=? and result=? and payee_name=? and date=? and time=? and day=? and notes=? and coins=?",new String[] {currency2000,currency500,currency200,currency100
-        ,currency50,currency20,currency10,currency5,currency20_coin,currency10_coin,currency5_coin,currency_2_coin
-                ,currency1_coin,currency_extra,result,payee,date,time,day,notes,coins});
+        db.delete(TABLE_NAME, "time=?",new String[] {time});
         db.close();
 
     }

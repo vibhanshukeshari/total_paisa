@@ -1,14 +1,24 @@
 // Development was started from  07/01/2021
 //GSt merged with total paisa on 08/07/2021
 //Ad remove purchase feature removed due to unsupported version of anjlab library
-// Tried to implement new billing library by google but left coz was messy
+// Tried to implement new billing library by google but left coz was messy( haha.. see line no 15. achieved on that day)
 // only 6 pro was sold in 4 months.
 //Final version of total Paisa  with in app purchase to remove ad was released on 09/10/2021
 // Total paisa took approximately 7 months constantly.
 //present of total paisa on today 09/10/21 it has 2706 downloads on play store
 // In future I vibhu has decided to add calculator and cash ledger like khata book with mysql database.
 //I learnt one thing after developing total paisa Never stop ,you will face many errors and bug but even though keep trying keep tying....
+// In total paisa assert background color changing toast were used which were creating issue of crash on Redmi and 1 plus decices it fixed after two yeas when i checked on my sister divice(12/03/2023)
+// since all toast are normal and old one are removed.
+// I made some changes on Data base, reduced data base lag (But it is not a proper way ) in Interest calculator I have done very welll(10/03/23).
+// From 10/2022 downloads are decreased alot ( Reason is still not recognised).
+//  App billing by google (IN app purchase added) latest version on 28/04/23
+// Dialog box enhanced - 28/04/23
+//G20 icon added - 28/04/23
+// Native ads added - 28/04/23
+// icon kitcken website is used to create icon and it is improved 28/04/23 it has a foreground color problem - https://icon.kitchen/i/H4sIAAAAAAAAA6tWKkvMKU0tVrKqVkpJLMoOyUjNTVWyKikqTa3VUcrNTynNAUlGKyXmpRTlZ6Yo6Shl5hcDyfLUJKXYWgA19PHYPwAAAA%3D%3D
 //jay swami narayan :)
+
 
 package com.vibhunorby.totalpaisa;
 import androidx.annotation.NonNull;
@@ -63,6 +73,7 @@ import static com.vibhunorby.totalpaisa.MainActivity.adRemoved;
 
 public class Gst extends AppCompatActivity {
 
+    Prefs prefs;
     EditText editTextInitialValue;
     TextView totalAmountWord;
     LinearLayout adscontainergst;
@@ -97,29 +108,58 @@ public class Gst extends AppCompatActivity {
         toolbar.setTitle("Gst Easy Calculator");
         setSupportActionBar(toolbar);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+        adscontainergst = findViewById(R.id.adsContainer_gst);
 
-            }
-        });
+        prefs = new Prefs(getApplicationContext());
+
+
+
+
+        mAdView = findViewById(R.id.adView);
+
+
+        if(!prefs.isRemoveAd()) {
+
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                }
+            });
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+
+
+        } else {
+
+            try {
+                adscontainergst.setVisibility(View.GONE);
+            }catch (NullPointerException ignored) {}
+
+        }
+
+
+
+
+
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.parseColor("#15202b"));
         }
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adscontainergst = findViewById(R.id.adsContainer_gst);
+//        mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        adscontainergst = findViewById(R.id.adsContainer_gst);
 
-        if(adRemoved){
-
-            adscontainergst.removeView(mAdView);
-        } else {
-            mAdView.loadAd(adRequest);
-        }
-
+//        if(adRemoved){
+//
+//            adscontainergst.removeView(mAdView);
+//        } else {
+//            mAdView.loadAd(adRequest);
+//        }
+//
 
 
 
@@ -10682,22 +10722,7 @@ public class Gst extends AppCompatActivity {
                 startActivity(sendIntent);
             } else {
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Zero amount can't be shared.", Toast.LENGTH_SHORT);
-                View view1 = toast.getView();
-
-                try {
-
-                    TextView textView = toast.getView().findViewById(android.R.id.message);
-                    textView.setTextColor(Color.parseColor("#ffffff"));
-
-                }catch (NullPointerException ignored){ }
-
-
-                try {
-                    assert view1 != null;
-                    view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                } catch (NullPointerException ignored) { }
-                toast.show();
+                Toast.makeText(getApplicationContext(), "Zero amount can't be shared.", Toast.LENGTH_SHORT).show();
 
             }
 

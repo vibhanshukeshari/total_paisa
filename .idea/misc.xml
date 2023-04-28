@@ -11,6 +11,28 @@
         <entry key="..\:/Users/Vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/menu_item.xml" value="0.209375" />
         <entry key="..\:/Users/Vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/navigation_menu.xml" value="0.209375" />
         <entry key="..\:/Users/Vibhu/AndroidStudioProjects/YourCash/app/src/main/res/xml/qureka.xml" value="0.14993169398907105" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable-hdpi/delete_simple_warning_icon.xml" value="0.1285" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/alert_icon.xml" value="0.1285" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/background_details.xml" value="0.154" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/delete_icon.xml" value="0.123" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/erase_all_icon.xml" value="0.123" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/ic_reset.xml" value="0.145" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/drawable/splash_screen_bg.xml" value="0.102" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout-v26/native_alert.xml" value="0.2" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/actionbar.xml" value="0.20380434782608695" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/activity_gst.xml" value="0.11865942028985507" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/appbar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/currency_rv_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/drawer_switch.xml" value="0.20380434782608695" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/header.xml" value="0.20380434782608695" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/native_alert.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/row_calculation.xml" value="0.18" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/layout/row_history.xml" value="0.20380434782608695" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/menu_gst.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/menu_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/vibhu/AndroidStudioProjects/YourCash/app/src/main/res/menu/navigation_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

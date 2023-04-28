@@ -68,15 +68,15 @@
 
 
 
-    <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">#10171f</item>
-        <item name="colorAccent">#1da1f3</item>
-        <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColorSecondary">#ffffff</item>
-        <item name="android:buttonBarPositiveButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
-        <item name="android:buttonBarNegativeButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>
-
-    </style>
+<!--    <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="android:background">#10171f</item>-->
+<!--        <item name="colorAccent">#1da1f3</item>-->
+<!--        <item name="android:textColorPrimary">#ffffff</item>-->
+<!--        <item name="android:textColorSecondary">#ffffff</item>-->
+<!--        <item name="android:buttonBarPositiveButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>-->
+<!--        <item name="android:buttonBarNegativeButtonStyle">@style/vibhuButtonThemeForCalenderPicker</item>-->
+<!---->
+<!--    </style>-->
 <style name="MineCustomTabText" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
@@ -92,13 +92,28 @@
     </style>
 
 
-
-
-
     <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen_bg</item>
         <item name="android:navigationBarColor">#001da1f3</item>
 
     </style>
+
+
+    <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:dialogCornerRadius">10dp</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:background">#15202b</item>
+        <item name="android:textColorPrimary">#d9ffffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
+
+<!--    <style name="alertDialogForExitAd" parent="Theme.AppCompat.Light.Dialog.Alert">-->
+<!--        <item name="android:dialogCornerRadius">10dp</item>-->
+<!--        <item name="android:forceDarkAllowed">false</item>-->
+<!--        <item name="android:background">#15202b</item>-->
+<!--        <item name="android:textColorPrimary">#d9ffffff</item>-->
+<!--        <item name="android:textColorSecondary">@color/white</item>-->
+<!--    </style>-->
+
 
 </resources>

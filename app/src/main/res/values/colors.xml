@@ -5,6 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="TwitterBlue">#1da1f3</color>
     <color name="mtrl_textinput_default_box_stroke_color">#39434d</color>
-
+    <color name="highlight_blue">#1da1f3</color>
+    <color name="light_blue">#15202b</color>
+    <color name="dark_blue">#10171f</color>
+    <color name="light_white">#8899a6</color>
+    <color name="blue_white">#daf0ff</color>
 
 </resources>

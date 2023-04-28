@@ -412,7 +412,7 @@ tools:context=".Gst">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:adSize="SMART_BANNER"
+                app:adSize="FULL_WIDTHx50"
                 app:adUnitId="ca-app-pub-2808567025402378/6751514838">
             </com.google.android.gms.ads.AdView>
         </LinearLayout>

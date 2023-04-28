@@ -402,7 +402,7 @@
                     android:id="@+id/delete_button"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:icon="@drawable/ic_baseline_delete_24"
+                    app:icon="@drawable/delete_icon"
                     app:iconGravity="textEnd"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
@@ -455,49 +455,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         <LinearLayout

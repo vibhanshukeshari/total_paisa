@@ -3,11 +3,9 @@ package com.vibhunorby.totalpaisa;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -33,10 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import static android.content.Context.INPUT_METHOD_SERVICE;
-import static com.vibhunorby.totalpaisa.MainActivity.adRemoved;
 
 public class CalculationFragment extends Fragment {
 
+    Prefs prefs;
     private SoundPool soundPool;
     private int soundTalliedCash;
     private boolean edit = true;
@@ -72,6 +70,7 @@ public class CalculationFragment extends Fragment {
         final View view = inflater.inflate(R.layout.row_calculation, container, false);
         setHasOptionsMenu(true);
 
+        prefs = new Prefs(requireContext());
 
         textViewDayOfTheWeek = view.findViewById(R.id.textViewDayOfTheWeek);
         textViewTellerBalance = view.findViewById(R.id.textViewTellerBalance);
@@ -132,18 +131,14 @@ public class CalculationFragment extends Fragment {
         MainActivity.textViewResult.setText("0");
 
                 //It is used for null pointer exception throw;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .build();
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(4)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else {
-            soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
-        }
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .build();
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(4)
+                .setAudioAttributes(audioAttributes)
+                .build();
 
         soundTalliedCash = soundPool.load(getActivity(), R.raw.cashsound, 1);
 
@@ -179,7 +174,6 @@ public class CalculationFragment extends Fragment {
             }
 
         });
-
 
 
         calender.setOnClickListener(new View.OnClickListener() {
@@ -533,11 +527,6 @@ public class CalculationFragment extends Fragment {
                 }
             }
         });
-
-
-
-
-
 
 
         editTextNumber20Coin.setOnClickListener(new View.OnClickListener() {
@@ -1051,7 +1040,6 @@ public class CalculationFragment extends Fragment {
         });
 
 
-
         tallyAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1068,22 +1056,7 @@ public class CalculationFragment extends Fragment {
 
                 if((tallyAmount.getText().toString().length() == 12)  && (Long.parseLong("0"+tallyAmount.getText().toString().replaceAll(",","")) <= 307497096 ) ) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -1091,22 +1064,7 @@ public class CalculationFragment extends Fragment {
 
 
                     if(Long.parseLong("0"+tallyAmount.getText().toString().replaceAll(",","")) >327497076 ) {
-                        Toast toast = Toast.makeText(getContext(), "Limit exceeded can't be tallied.", Toast.LENGTH_SHORT);
-                        View view1 = toast.getView();
-
-                        try {
-
-                            TextView textView = toast.getView().findViewById(android.R.id.message);
-                            textView.setTextColor(Color.parseColor("#ffffff"));
-
-                        }catch (NullPointerException ignored){ }
-
-
-                        try {
-                            assert view1 != null;
-                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                        } catch (NullPointerException ignored) { }
-                        toast.show();
+                         Toast.makeText(getContext(), "Limit exceeded can't be tallied.", Toast.LENGTH_SHORT).show();
 
                         tallyAmount.getText().clear();
                     }
@@ -1312,22 +1270,7 @@ public class CalculationFragment extends Fragment {
                 int TwoThousand;
                 if(editTextNumber2000.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
                 if (!editTextNumber2000.getText().toString().equals("")) {
@@ -1364,8 +1307,6 @@ public class CalculationFragment extends Fragment {
                         TextView textViewTotalValueOfNotes = getActivity().findViewById(R.id.textViewTotalValueOfNotes);
                         textViewTotalValueOfNotes.setText("₹ " + myStringTotalValueOfNotes);
                     } catch (NullPointerException ignored){ }
-
-
 
 
 
@@ -1507,22 +1448,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber500.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -1696,23 +1622,9 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber200.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
-
+//
                 }
 
                 if (!editTextNumber200.getText().toString().equals("")) {
@@ -1875,22 +1787,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber100.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -2060,22 +1957,8 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber50.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
+                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
 
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
 
                 }
 
@@ -2247,22 +2130,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber20.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -2432,21 +2300,8 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber10.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
 
                 }
 
@@ -2617,22 +2472,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber5.getText().toString().length() == 5) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -2806,22 +2646,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber20Coin.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -2982,14 +2807,6 @@ public class CalculationFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
         editTextNumber10Coin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -3002,22 +2819,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber10Coin.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -3190,22 +2992,8 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber5Coin.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
+                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
 
                 }
 
@@ -3365,22 +3153,8 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber2Coin.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
 
                 }
 
@@ -3546,22 +3320,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumber1Coin.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -3726,22 +3485,7 @@ public class CalculationFragment extends Fragment {
 
                 if(editTextNumberCoinExtra.getText().toString().length() == 6) {
 
-                    Toast toast = Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-
-                        TextView textView = toast.getView().findViewById(android.R.id.message);
-                        textView.setTextColor(Color.parseColor("#ffffff"));
-
-                    }catch (NullPointerException ignored){ }
-
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -4176,12 +3920,8 @@ public class CalculationFragment extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
-// I was afraid of using in app purchase I was like if user deletes the app he will loose 90/- but then got a perfect api:
-        if(adRemoved){
-            menu.findItem(R.id.RemoveAd).setVisible(false);
-        } else {
-//            I set false for temporary till there is no billing software
-//            Do not remove product id ever the items are purchased by user other wise it will be lost
+
+        if (prefs.isRemoveAd()) {
             menu.findItem(R.id.RemoveAd).setVisible(false);
         }
 

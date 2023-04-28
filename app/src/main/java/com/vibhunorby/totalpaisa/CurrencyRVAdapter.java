@@ -1,5 +1,12 @@
 package com.vibhunorby.totalpaisa;
 
+import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumber10;
+import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumber20;
+import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumberCoinExtra;
+import static com.vibhunorby.totalpaisa.HistoryFragment.imageViewNotFound;
+import static com.vibhunorby.totalpaisa.HistoryFragment.isRecordVisible;
+import static com.vibhunorby.totalpaisa.MainActivity.ArrayListSize;
+
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Build;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -23,22 +31,38 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.ViewHolder> {
 
     // variable for our array list and context
-    private ArrayList<CurrencyModal> currencyModalArrayList;
-    private Context context;
+    private final ArrayList<CurrencyModal> currencyModalArrayList;
+    private final Context context;
 
 
     // constructor
     public CurrencyRVAdapter(ArrayList<CurrencyModal> currencyModalArrayList, Context context) {
+
+
+        setHasStableIds(true);
+
         this.currencyModalArrayList = currencyModalArrayList;
         this.context = context;
+
+
 
     }
 
@@ -53,10 +77,12 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull  ViewHolder holder,  int position) {
         // on below line we are setting data
         // to our views of recycler view item.
-        CurrencyModal modal = currencyModalArrayList.get(position);
+        CurrencyModal modal = currencyModalArrayList.get(holder.getAdapterPosition());
+
+
         holder.currency2000TV.setText(modal.getCurrency2000());
         holder.currency500TV.setText(modal.getCurrency500());
         holder.currency200TV.setText(modal.getCurrency200());
@@ -103,83 +129,206 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder alertDialoBuider = new AlertDialog.Builder(context, R.style.alertDialog);
-                alertDialoBuider.setTitle("Delete ?");
-                alertDialoBuider.setIcon(R.drawable.warning);
-                alertDialoBuider.setMessage("Are you sure want to delete this data ?");
 
-                alertDialoBuider.setPositiveButton(Html.fromHtml("<font color='#ff0000'>Delete</font>"), new DialogInterface.OnClickListener() {
+
+
+
+//
+//
+//
+//                AlertDialog.Builder alertDialoBuider = new AlertDialog.Builder(context, R.style.alertDialog);
+//                alertDialoBuider.setTitle("Delete ?");
+//                alertDialoBuider.setIcon(R.drawable.warning);
+//                alertDialoBuider.setMessage("Are you sure want to delete this data ?");
+//
+//                alertDialoBuider.setPositiveButton(Html.fromHtml("<font color='#ff0000'>Delete</font>"), new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(context, "Data has been deleted.", Toast.LENGTH_SHORT).show();
+////                        View view1 = toast.getView();
+////
+////                        try {
+////
+////                            TextView textView = Objects.requireNonNull(toast.getView()).findViewById(android.R.id.message);
+////                            textView.setTextColor(Color.parseColor("#ffffff"));
+////
+////                        }catch (NullPointerException ignored){ }
+////
+////
+////                        try {
+////                            assert view1 != null;
+////                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+////                        } catch (NullPointerException ignored) { }
+////                        toast.show();
+//
+//                        DBHandler db = new DBHandler(context);
+//
+////                        String currency2000 = holder.currency2000TV.getText().toString();
+////                        String currency500 = holder.currency500TV.getText().toString();
+////                        String currency200 = holder.currency200TV.getText().toString();
+////                        String currency100 = holder.currency100TV.getText().toString();
+////                        String currency50 = holder.currency50TV.getText().toString();
+////                        String currency20 = holder.currency20TV.getText().toString();
+////                        String currency10 = holder.currency10TV.getText().toString();
+////                        String currency5 = holder.currency5TV.getText().toString();
+////                        String currency20_coin = holder.currency20CoinTV.getText().toString();
+////                        String currency10_coin = holder.currency10CoinTV.getText().toString();
+////                        String currency5_coin = holder.currency5CoinTV.getText().toString();
+////                        String currency2_coin = holder.currency2CoinTV.getText().toString();
+////                        String currency1_coin = holder.currency1CoinTV.getText().toString();
+////                        String currency_extra_coin = holder.currencyExtraCoinTV.getText().toString();
+////                        String result = holder.resultTV.getText().toString();
+////                        String payee = holder.payeeName.getText().toString();
+////                        String date = holder.date.getText().toString();
+//                        String time = holder.time.getText().toString();
+////                        String day = holder.day.getText().toString();
+////                        String notes = holder.notes.getText().toString();
+////                        String coins = holder.coins.getText().toString();
+//
+//                        db.deleteCurrency(time);
+//
+//                        db.close();
+//
+////                Took two days, before i was using visibility.gone;
+////                        currencyModalArrayList.remove(holder.getAdapterPosition());
+////                        notifyItemRemoved(holder.getAdapterPosition());
+//
+//                        removeItem(holder.getAdapterPosition());
+////                        notifyDataSetChanged();
+//
+//                    }
+//
+//                });
+//
+//
+//                alertDialoBuider.setNegativeButton(Html.fromHtml("<font color='#ffffff'>Cancel</font>"), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.cancel();
+//
+//                    }
+//
+//
+//                });
+//                AlertDialog alertDialog = alertDialoBuider.create();
+//                alertDialog.show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                MaterialAlertDialogBuilder alertDialoBuider = new MaterialAlertDialogBuilder(view.getContext(),R.style.alertDialog);
+                alertDialoBuider.setTitle("Confirm Delete!");
+                alertDialoBuider.setIcon(R.drawable.delete_simple_warning);
+                alertDialoBuider.setMessage("Are you sure you want to delete?");
+
+                alertDialoBuider.setPositiveButton("Delete!", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast toast = Toast.makeText(context, "Data has been deleted.", Toast.LENGTH_SHORT);
-                        View view1 = toast.getView();
-
-                        try {
-
-                            TextView textView = toast.getView().findViewById(android.R.id.message);
-                            textView.setTextColor(Color.parseColor("#ffffff"));
-
-                        }catch (NullPointerException ignored){ }
 
 
-                        try {
-                            assert view1 != null;
-                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                        } catch (NullPointerException ignored) { }
-                        toast.show();
+
+                        Toast.makeText(context, "Data has been deleted.", Toast.LENGTH_SHORT).show();
+//                        View view1 = toast.getView();
+//
+//                        try {
+//
+//                            TextView textView = Objects.requireNonNull(toast.getView()).findViewById(android.R.id.message);
+//                            textView.setTextColor(Color.parseColor("#ffffff"));
+//
+//                        }catch (NullPointerException ignored){ }
+//
+//
+//                        try {
+//                            assert view1 != null;
+//                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                        } catch (NullPointerException ignored) { }
+//                        toast.show();
 
                         DBHandler db = new DBHandler(context);
 
-                        String currency2000 = holder.currency2000TV.getText().toString();
-                        String currency500 = holder.currency500TV.getText().toString();
-                        String currency200 = holder.currency200TV.getText().toString();
-                        String currency100 = holder.currency100TV.getText().toString();
-                        String currency50 = holder.currency50TV.getText().toString();
-                        String currency20 = holder.currency20TV.getText().toString();
-                        String currency10 = holder.currency10TV.getText().toString();
-                        String currency5 = holder.currency5TV.getText().toString();
-                        String currency20_coin = holder.currency20CoinTV.getText().toString();
-                        String currency10_coin = holder.currency10CoinTV.getText().toString();
-                        String currency5_coin = holder.currency5CoinTV.getText().toString();
-                        String currency2_coin = holder.currency2CoinTV.getText().toString();
-                        String currency1_coin = holder.currency1CoinTV.getText().toString();
-                        String currency_extra_coin = holder.currencyExtraCoinTV.getText().toString();
-                        String result = holder.resultTV.getText().toString();
-                        String payee = holder.payeeName.getText().toString();
-                        String date = holder.date.getText().toString();
+//                        String currency2000 = holder.currency2000TV.getText().toString();
+//                        String currency500 = holder.currency500TV.getText().toString();
+//                        String currency200 = holder.currency200TV.getText().toString();
+//                        String currency100 = holder.currency100TV.getText().toString();
+//                        String currency50 = holder.currency50TV.getText().toString();
+//                        String currency20 = holder.currency20TV.getText().toString();
+//                        String currency10 = holder.currency10TV.getText().toString();
+//                        String currency5 = holder.currency5TV.getText().toString();
+//                        String currency20_coin = holder.currency20CoinTV.getText().toString();
+//                        String currency10_coin = holder.currency10CoinTV.getText().toString();
+//                        String currency5_coin = holder.currency5CoinTV.getText().toString();
+//                        String currency2_coin = holder.currency2CoinTV.getText().toString();
+//                        String currency1_coin = holder.currency1CoinTV.getText().toString();
+//                        String currency_extra_coin = holder.currencyExtraCoinTV.getText().toString();
+//                        String result = holder.resultTV.getText().toString();
+//                        String payee = holder.payeeName.getText().toString();
+//                        String date = holder.date.getText().toString();
                         String time = holder.time.getText().toString();
-                        String day = holder.day.getText().toString();
-                        String notes = holder.notes.getText().toString();
-                        String coins = holder.coins.getText().toString();
+//                        String day = holder.day.getText().toString();
+//                        String notes = holder.notes.getText().toString();
+//                        String coins = holder.coins.getText().toString();
 
-                        db.deleteCurrency(currency2000, currency500, currency200, currency100
-                                , currency50, currency20, currency10, currency5, currency20_coin, currency10_coin, currency5_coin, currency2_coin
-                                , currency1_coin, currency_extra_coin, result, payee, date, time, day, notes, coins);
+                        db.deleteCurrency(time);
 
                         db.close();
 
 //                Took two days, before i was using visibility.gone;
-                        currencyModalArrayList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyDataSetChanged();
+//                        currencyModalArrayList.remove(holder.getAdapterPosition());
+//                        notifyItemRemoved(holder.getAdapterPosition());
+
+                        removeItem(holder.getAdapterPosition());
+//                        notifyDataSetChanged();
+
+
 
                     }
 
                 });
 
-
-                alertDialoBuider.setNegativeButton(Html.fromHtml("<font color='#ffffff'>Cancel</font>"), new DialogInterface.OnClickListener() {
+                alertDialoBuider.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
 
+
+
                     }
-
-
                 });
-                AlertDialog alertDialog = alertDialoBuider.create();
+
+                androidx.appcompat.app.AlertDialog alertDialog = alertDialoBuider.create();
                 alertDialog.show();
+                alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#A52121"));
+                alertDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#8899a6"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             }
         });
@@ -324,23 +473,23 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
                 ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("Currency_info", myTextViewInNumbers);
                 clipboardManager.setPrimaryClip(clip);
-                Toast toast = Toast.makeText(context, "Amount copied to clipboard.", Toast.LENGTH_SHORT);
-                View view1 = toast.getView();
-
-                try {
-
-                    TextView textView = toast.getView().findViewById(android.R.id.message);
-                    textView.setTextColor(Color.parseColor("#ffffff"));
-
-                }catch (NullPointerException ignored){ }
-
-
-                try {
-                    assert view1 != null;
-                    view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                } catch (NullPointerException ignored) { }
-                toast.show();
-
+                Toast.makeText(context, "Amount copied to clipboard.", Toast.LENGTH_SHORT).show();
+//                View view1 = toast.getView();
+//
+//                try {
+//
+//                    TextView textView = toast.getView().findViewById(android.R.id.message);
+//                    textView.setTextColor(Color.parseColor("#ffffff"));
+//
+//                }catch (NullPointerException ignored){ }
+//
+//
+//                try {
+//                    assert view1 != null;
+//                    view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                } catch (NullPointerException ignored) { }
+//                toast.show();
+//
 
             }
         });
@@ -358,22 +507,22 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
                     case AudioManager.RINGER_MODE_NORMAL:
 
 
-                        Toast toast = Toast.makeText(context, "Playing total amount.", Toast.LENGTH_SHORT);
-                        View view1 = toast.getView();
-
-                        try {
-
-                            TextView textView = toast.getView().findViewById(android.R.id.message);
-                            textView.setTextColor(Color.parseColor("#ffffff"));
-
-                        }catch (NullPointerException ignored){ }
-
-
-                        try {
-                            assert view1 != null;
-                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                        } catch (NullPointerException ignored) { }
-                        toast.show();
+                        Toast.makeText(context, "Playing total amount.", Toast.LENGTH_SHORT).show();
+//                        View view1 = toast.getView();
+//
+//                        try {
+//
+//                            TextView textView = toast.getView().findViewById(android.R.id.message);
+//                            textView.setTextColor(Color.parseColor("#ffffff"));
+//
+//                        }catch (NullPointerException ignored){ }
+//
+//
+//                        try {
+//                            assert view1 != null;
+//                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                        } catch (NullPointerException ignored) { }
+//                        toast.show();
 
                         holder.tts = new TextToSpeech(context.getApplicationContext(), new TextToSpeech.OnInitListener() {
                             @Override
@@ -406,44 +555,44 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
                     case AudioManager.RINGER_MODE_SILENT:
 
 
-                        toast = Toast.makeText(context, "Can't play in silent mode.", Toast.LENGTH_SHORT);
-                         view1 = toast.getView();
-
-                        try {
-
-                            TextView textView = toast.getView().findViewById(android.R.id.message);
-                            textView.setTextColor(Color.parseColor("#ffffff"));
-
-                        }catch (NullPointerException ignored){ }
-
-
-                        try {
-                            assert view1 != null;
-                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                        } catch (NullPointerException ignored) { }
-                        toast.show();
+                        Toast.makeText(context, "Can't play in silent mode.", Toast.LENGTH_SHORT).show();
+//                         view1 = toast.getView();
+//
+//                        try {
+//
+//                            TextView textView = toast.getView().findViewById(android.R.id.message);
+//                            textView.setTextColor(Color.parseColor("#ffffff"));
+//
+//                        }catch (NullPointerException ignored){ }
+//
+//
+//                        try {
+//                            assert view1 != null;
+//                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                        } catch (NullPointerException ignored) { }
+//                        toast.show();
 
                         break;
 
                     case AudioManager.RINGER_MODE_VIBRATE:
 
 
-                        toast = Toast.makeText(context, "Can't play in vibration mode.", Toast.LENGTH_SHORT);
-                         view1 = toast.getView();
-
-                        try {
-
-                            TextView textView = toast.getView().findViewById(android.R.id.message);
-                            textView.setTextColor(Color.parseColor("#ffffff"));
-
-                        }catch (NullPointerException ignored){ }
-
-
-                        try {
-                            assert view1 != null;
-                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                        } catch (NullPointerException ignored) { }
-                        toast.show();
+                        Toast.makeText(context, "Can't play in vibration mode.", Toast.LENGTH_SHORT).show();
+//                         view1 = toast.getView();
+//
+//                        try {
+//
+//                            TextView textView = toast.getView().findViewById(android.R.id.message);
+//                            textView.setTextColor(Color.parseColor("#ffffff"));
+//
+//                        }catch (NullPointerException ignored){ }
+//
+//
+//                        try {
+//                            assert view1 != null;
+//                            view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                        } catch (NullPointerException ignored) { }
+//                        toast.show();
 
                         break;
 
@@ -699,14 +848,14 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
                 } else {
 
 //                    That is useless even though i have used for comfort haha lol.
-                    Toast toast = Toast.makeText(context, "Zero amount can't be shared.", Toast.LENGTH_SHORT);
-                    View view1 = toast.getView();
-
-                    try {
-                        assert view1 != null;
-                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
-                    } catch (NullPointerException ignored) { }
-                    toast.show();
+                    Toast.makeText(context, "Zero amount can't be shared.", Toast.LENGTH_SHORT).show();
+//                    View view1 = toast.getView();
+//
+//                    try {
+//                        assert view1 != null;
+//                        view1.getBackground().setColorFilter(Color.parseColor("#10171f"), PorterDuff.Mode.SRC_IN);
+//                    } catch (NullPointerException ignored) { }
+//                    toast.show();
                 }
 
 
@@ -725,11 +874,44 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
 
     }
 
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     @Override
     public int getItemCount() {
         // returning the size of our array list
+
+// this feature added on 28/04/23 at baragaon munchun's office
+        ArrayListSize = currencyModalArrayList.size();
+        if(ArrayListSize == 0 && isRecordVisible){
+
+            if(imageViewNotFound.getVisibility() != View.VISIBLE){
+                imageViewNotFound.setVisibility(View.VISIBLE);
+
+            }
+        }else if(ArrayListSize > 0 && isRecordVisible){
+            if(imageViewNotFound.getVisibility() == View.VISIBLE){
+                imageViewNotFound.setVisibility(View.GONE);
+
+            }
+        }
+
+
+
+
+
         return currencyModalArrayList.size();
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -839,6 +1021,24 @@ public class CurrencyRVAdapter extends RecyclerView.Adapter<CurrencyRVAdapter.Vi
             editText2CoinRv = itemView.findViewById(R.id.editText2CoinRv);
             editText1CoinRv = itemView.findViewById(R.id.editText1CoinRv);
             editTextExtraCoinRv = itemView.findViewById(R.id.editTextExtraCoinRv);
+
+
+        }
+
+    }
+
+
+    public void removeItem(int position) {
+        if (position > 0) {
+            currencyModalArrayList.remove(position);
+            notifyItemRemoved(position);
+
+
+        } else {
+
+            currencyModalArrayList.remove(position);
+            notifyItemRemoved(position);
+            notifyDataSetChanged();
 
 
         }

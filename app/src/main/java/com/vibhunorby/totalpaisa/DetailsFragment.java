@@ -20,6 +20,7 @@ import static com.vibhunorby.totalpaisa.MainActivity.adRemoved;
 
 public class DetailsFragment extends Fragment {
 
+    Prefs prefs;
     static TextView TotalAmount,TotalAmountInWords;
     TextView textViewRupeesSymbolFragment;
 
@@ -42,6 +43,7 @@ public class DetailsFragment extends Fragment {
         setHasOptionsMenu(true);
 
 
+        prefs = new Prefs(requireContext());
         textViewRupeesSymbolFragment = view.findViewById(R.id.textViewRupeesSymbolDetailsFragment);
         TotalAmount = view.findViewById(R.id.textViewTotalAmount);
         TotalAmountInWords = view.findViewById(R.id.textViewTotalAmountInWords);
@@ -53,9 +55,8 @@ public class DetailsFragment extends Fragment {
 
         menu.findItem(R.id.RefreshButton).setVisible(false);
         menu.findItem(R.id.ShareButton).setVisible(false);
-        if(adRemoved){
-            menu.findItem(R.id.RemoveAd).setVisible(false);
-        } else {
+
+        if (prefs.isRemoveAd()) {
             menu.findItem(R.id.RemoveAd).setVisible(false);
         }
 

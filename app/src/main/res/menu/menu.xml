@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="Remove Ad"
-        android:icon="@drawable/remove_ads_white_png"
-        android:id="@+id/RemoveAd"
-        app:showAsAction="ifRoom"/>
+        android:title="G 20 India"
+        android:icon="@drawable/g_20"
+        android:id="@+id/g_20"
+        app:showAsAction="always"/>
+
     <item
         android:title="Reset"
         android:icon="@drawable/ic_reset"
@@ -19,7 +20,12 @@
         app:showAsAction="always"/>
     <item
         android:title="Delete All"
-        android:icon="@drawable/ic_baseline_delete_forever_24"
+        android:icon="@drawable/erase_all_icon"
         android:id="@+id/DeleteAll"
+        app:showAsAction="always"/>
+    <item
+        android:title="Remove Ads"
+        android:icon="@drawable/crown"
+        android:id="@+id/RemoveAd"
         app:showAsAction="always"/>
 </menu>

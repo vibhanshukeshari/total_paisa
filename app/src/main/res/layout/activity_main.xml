@@ -47,8 +47,7 @@
 
                     <include
                         layout="@layout/appbar"
-                        android:clickable="false"
-                        />
+                        android:clickable="false" />
 
                 </FrameLayout>
 
@@ -310,7 +309,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:adSize="SMART_BANNER"
+                        app:adSize="FULL_WIDTHx50"
                         android:background="#15202b"
                         app:adUnitId="ca-app-pub-2808567025402378/7365986297">
                     </com.google.android.gms.ads.AdView>
@@ -357,8 +356,21 @@
 
 
 
+<!--banner id-->
+<!--    ca-app-pub-2808567025402378/7365986297-->
+<!--native 1-->
+<!--    ca-app-pub-2808567025402378/2063210847-->
+<!--native 2-->
+<!--    ca-app-pub-2808567025402378/3771044188-->
+<!--native 3-->
+<!--    ca-app-pub-2808567025402378/6898118013-->
+<!--interstitial id-->
+<!--    ca-app-pub-2808567025402378/8723523975-->
 
 
+
+<!--native test -->
+<!--    ca-app-pub-3940256099942544/2247696110-->
 
 
 

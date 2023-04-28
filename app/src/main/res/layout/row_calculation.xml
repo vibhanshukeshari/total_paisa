@@ -69,7 +69,7 @@
                             android:id="@+id/editTextPayeeName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:inputType="textPersonName"
+                            android:inputType="textCapWords"
                             android:padding="5dp"
                             android:imeOptions="actionNext"
                             android:singleLine="true"
@@ -247,6 +247,38 @@
                     android:background="#39434d">
 
                 </LinearLayout>
+
+
+                <com.google.android.ads.nativetemplates.TemplateView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nativeAds2"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:gnt_template_type="@layout/gnt_medium_template_view"/>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/dividerNativeAd3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="#39434d"
+                    android:visibility="gone">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/dividerNativeAd4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:background="#39434d">
+                </LinearLayout>
+
+
 
 
                 <LinearLayout
@@ -1026,6 +1058,7 @@
 
 
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.2dp"
@@ -1033,6 +1066,37 @@
                     android:background="#39434d">
 
                 </LinearLayout>
+
+
+                <com.google.android.ads.nativetemplates.TemplateView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nativeAds"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:gnt_template_type="@layout/gnt_medium_template_view"/>
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/dividerNativeAd1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:background="#39434d"
+                    android:visibility="gone">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/dividerNativeAd2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:background="#39434d">
+                </LinearLayout>
+
 
 
                 <LinearLayout
