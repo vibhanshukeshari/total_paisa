@@ -17,6 +17,12 @@
 //G20 icon added - 28/04/23
 // Native ads added - 28/04/23
 // icon kitcken website is used to create icon and it is improved 28/04/23 it has a foreground color problem - https://icon.kitchen/i/H4sIAAAAAAAAA6tWKkvMKU0tVrKqVkpJLMoOyUjNTVWyKikqTa3VUcrNTynNAUlGKyXmpRTlZ6Yo6Shl5hcDyfLUJKXYWgA19PHYPwAAAA%3D%3D
+//Calc lite added on 27/09/2023 totally designed by vibhu
+// some ads are altered due to the decreament of Ecpm;
+//G20 icon removed
+//2000 currency removed
+// gst easy clear button placed to top
+//and some other featur altered on 27/09/23
 //jay swami narayan :)
 
 
@@ -27,7 +33,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -69,8 +74,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.vibhunorby.totalpaisa.MainActivity.adRemoved;
-
 public class Gst extends AppCompatActivity {
 
     Prefs prefs;
@@ -105,10 +108,10 @@ public class Gst extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gst);
         toolbar = findViewById(R.id.myToolBar);
-        toolbar.setTitle("Gst Easy Calculator");
+        toolbar.setTitle("Gst Easy");
         setSupportActionBar(toolbar);
 
-        adscontainergst = findViewById(R.id.adsContainer_gst);
+//        adscontainergst = findViewById(R.id.adsContainer_gst);
 
         prefs = new Prefs(getApplicationContext());
 
@@ -118,25 +121,25 @@ public class Gst extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
 
 
-        if(!prefs.isRemoveAd()) {
-
-            MobileAds.initialize(this, new OnInitializationCompleteListener() {
-                @Override
-                public void onInitializationComplete(InitializationStatus initializationStatus) {
-                }
-            });
-
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-
-
-        } else {
-
-            try {
-                adscontainergst.setVisibility(View.GONE);
-            }catch (NullPointerException ignored) {}
-
-        }
+//        if(!prefs.isRemoveAd()) {
+//
+//            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//                @Override
+//                public void onInitializationComplete(InitializationStatus initializationStatus) {
+//                }
+//            });
+//
+//            AdRequest adRequest = new AdRequest.Builder().build();
+//            mAdView.loadAd(adRequest);
+//
+//
+//        } else {
+//
+//            try {
+//                adscontainergst.setVisibility(View.GONE);
+//            }catch (NullPointerException ignored) {}
+//
+//        }
 
 
 
@@ -246,7 +249,15 @@ public class Gst extends AppCompatActivity {
                         return true;
                     case R.id.totalPaisa:
                         onBackPressed();
-                       return true;
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.simpleCalc:
+                        startActivity(new Intent(getApplicationContext(),CalcLite.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+
+
                 }
                 return false;
             }
@@ -363,12 +374,12 @@ public class Gst extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrator.vibrate(VibrationEffect.createOneShot(40, VibrationEffect.DEFAULT_AMPLITUDE));
-                } else {
-                    vibrator.vibrate(40);
-                }
+//                Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    vibrator.vibrate(VibrationEffect.createOneShot(40, VibrationEffect.DEFAULT_AMPLITUDE));
+//                } else {
+//                    vibrator.vibrate(40);
+//                }
 
                 textViewCgst.setText("CGST Amount");
                 textViewCgstResult.setText("₹ 0");
@@ -9425,7 +9436,6 @@ public class Gst extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(0,0);
         this.finish();
     }
 
@@ -10725,6 +10735,11 @@ public class Gst extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Zero amount can't be shared.", Toast.LENGTH_SHORT).show();
 
             }
+
+        } else if (id == R.id.ResetButtonGst){
+
+            textViewclear.performClick();
+            Toast.makeText(this,"Data has been Reset", Toast.LENGTH_SHORT).show();
 
         }
 

@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/simpleCalc"
+        android:icon="@drawable/calcnew"
+        android:title="Calc Lite" />
+
+    <item
         android:id="@+id/totalPaisa"
         android:icon="@drawable/money"
         android:title="Total Paisa" />
 
     <item
         android:id="@+id/gst"
-        android:icon="@drawable/calcnew"
+        android:icon="@drawable/gst"
         android:iconTint="#ffffff"
-        android:title="Gst Calculator" />
+        android:title="Gst Easy" />
 
 </menu>

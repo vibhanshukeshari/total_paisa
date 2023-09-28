@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="G 20 India"
-        android:icon="@drawable/g_20"
-        android:id="@+id/g_20"
-        app:showAsAction="always"/>
-
-    <item
         android:title="Reset"
         android:icon="@drawable/ic_reset"
         android:id="@+id/RefreshButton"
@@ -27,5 +21,12 @@
         android:title="Remove Ads"
         android:icon="@drawable/crown"
         android:id="@+id/RemoveAd"
+        app:showAsAction="always"/>
+    <item
+        android:title="You are a VIP"
+        android:icon="@drawable/vip"
+        android:id="@+id/vip"
+        android:enabled="false"
+        android:visible="false"
         app:showAsAction="always"/>
 </menu>

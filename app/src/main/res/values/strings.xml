@@ -10,5 +10,6 @@
     <string name="play_console_license">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsu2BxZTG6t2yMSS+ScWIMKkzMnNTK6+zt9gxpplUlXikAp/3BOp9apczszMi3xQok6YRS/Y5ng3PHLH1DNSHnaCSZzkuYtudzG5VJyBfAzLN8FRiKECQmFrnRjq47T4pYbUNyth86Nq6SycPh/JZn1bSvJobyii525FSNlUBHRXLaog4XJFtqvEAZXlj5Cra9XzBPlTocixyX3583jCyT6c2BFekKn0UFKiXqlwDuO6CkI2FqqeUUv/+EPu9Sj94iZpGJaFQ3ZDiucsUWUS4eli9+l5iwWURjj1/HWKlSl6CiP7wNcKbtlqxbvWeWdJlDBehEWeIRIKIwh2Gs5fURwIDAQAB</string>
 
     <string name="product_id">remove_total_paisa_ad</string>
+    <string name="a_c">AC</string>
 
 </resources>

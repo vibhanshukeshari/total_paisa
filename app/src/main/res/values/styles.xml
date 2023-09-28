@@ -114,6 +114,52 @@
 <!--        <item name="android:textColorPrimary">#d9ffffff</item>-->
 <!--        <item name="android:textColorSecondary">@color/white</item>-->
 <!--    </style>-->
+    <style name="operatorButtons">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">25</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/blue_inactive</item>
+        <item name="android:background">@drawable/ripple_button_operator_calc</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">26sp</item>
+        <!--        <item name="android:textStyle">bold</item>-->
+    </style>
+
+
+    <style name="digitButtons">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">25</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:background">@drawable/ripple_button_calc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="backgroundTint">@color/dark_blue</item>
+        <item name="android:layout_margin">0dp</item>
+
+    </style>
+
+
+
+    <style name="nineButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">25</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:background">@drawable/ripple_button_9</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="backgroundTint">@color/dark_blue</item>
+        <item name="android:layout_margin">0dp</item>
+
+    </style>
+
+
 
 
 </resources>

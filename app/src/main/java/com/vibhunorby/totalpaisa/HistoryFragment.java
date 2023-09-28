@@ -128,6 +128,7 @@ public class HistoryFragment extends Fragment {
 
         if (prefs.isRemoveAd()) {
             menu.findItem(R.id.RemoveAd).setVisible(false);
+            menu.findItem(R.id.vip).setVisible(true);
         }
 
 

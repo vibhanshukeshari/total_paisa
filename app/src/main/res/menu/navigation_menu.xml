@@ -67,7 +67,7 @@
 
 
             <item
-                android:title="Easy Loan Interest Calculator"
+                android:title="Interest Calculator"
                 android:icon="@drawable/link"
                 android:id="@+id/easy_loan" />
 

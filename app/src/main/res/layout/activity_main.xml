@@ -145,7 +145,7 @@
                                 android:maxLines="1"
                                 android:maxWidth="160dp"
                                 android:ellipsize="end"
-                                android:text="Total Amount =>"
+                                android:text="Total Amount ="
                                 android:textColor="#ffffff"
                                 android:textSize="20sp" />
 
@@ -311,7 +311,7 @@
                         android:layout_gravity="center"
                         app:adSize="FULL_WIDTHx50"
                         android:background="#15202b"
-                        app:adUnitId="ca-app-pub-2808567025402378/7365986297">
+                        app:adUnitId="ca-app-pub-2808567025402378/6630674373">
                     </com.google.android.gms.ads.AdView>
                     </LinearLayout>
                     <LinearLayout
