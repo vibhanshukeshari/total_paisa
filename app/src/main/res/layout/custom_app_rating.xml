@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <!-- Dialog message -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/emotion_rating_request" />
+
+    <!-- Vertical buttons -->
+    <Button
+        android:id="@+id/rateTotalPaisa"
+        android:layout_width="match_parent"
+        android:textAllCaps="false"
+        android:layout_height="wrap_content"
+        android:textColor="#ffd700"
+        android:textSize="16sp"
+        android:text="Rate Total Paisa ⭐" />
+
+    <Button
+        android:id="@+id/remindMeLater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textColor="#f0f0f0"
+        android:textSize="14sp"
+        android:text="Remind me later 🙂" />
+    <Button
+        android:id="@+id/noThanks"
+        android:layout_width="match_parent"
+        android:textAllCaps="false"
+        android:textColor="#ffffcc"
+        android:textSize="12sp"
+        android:layout_height="wrap_content"
+        android:text="No, thanks! 😔" />
+</LinearLayout>

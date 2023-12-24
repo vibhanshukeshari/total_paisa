@@ -11,5 +11,18 @@
 
     <string name="product_id">remove_total_paisa_ad</string>
     <string name="a_c">AC</string>
+    <string name="_0">0</string>
+    <string name="delete">delete</string>
+    <string name="division">division</string>
+    <string name="_7">7</string>
+
+    <string name="emotion_rating_request">
+    <![CDATA[
+   "Your support is the heartbeat of our app, and we're deeply grateful for your journey with us. ❤️ Would you kindly consider leaving a rating for our app if it has left a positive mark on your heart or brought some sunshine to your day?" 🌟 Your feedback means the world to us. :)"
+    ]]>
+</string>
+    <string name="minus">minus</string>
+    <string name="plus">plus</string>
+
 
 </resources>

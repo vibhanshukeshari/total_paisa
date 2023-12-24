@@ -6,13 +6,19 @@ android {
 
     defaultConfig {
         applicationId "com.vibhunorby.totalpaisa"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 33
-        versionCode 30
-        versionName "27.09.23.30"
+
+        
+        versionCode 33
+        versionName "08.12.23.33"
         // 27 - In app purchase added, Ui Enhancements, version format changed  and many more. (28-04-23)
         // 28 - Testing (Release is already taken)
         // 29 - NativeAd Crash Solved. (05-05-23)
+        // 30 - Calc lite added (27-09-23)
+        // 31 - Quick Increment and Decrement added along with multiple Bug on Calc lite (01-12-23) [only internal testing]
+        //32 - Quick Increment and Decrement added along with multiple Bug on Calc lite (01-12-23)
+        //33 - Minor bug fixes in CalcLite isOperator save status through shapred prefrenced
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

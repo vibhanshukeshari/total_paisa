@@ -6,6 +6,11 @@
     <menu>
         <group android:checkableBehavior="none">
             <item
+                android:id="@+id/increment_decrement"
+                app:actionLayout="@layout/drawer_switch"
+                android:icon="@drawable/plus_minus"
+                android:title="Quick Increment/Decrement" />
+            <item
                 android:id="@+id/sound"
                 app:actionLayout="@layout/drawer_switch"
                 android:icon="@drawable/ic_baseline_settings_voice_24"
@@ -15,6 +20,11 @@
                 android:icon="@drawable/ic_baseline_fingerprint_24"
                 app:actionLayout="@layout/drawer_switch"
                 android:title="Fingerprint authentication" />
+            <item
+                android:id="@+id/keep_screen_on"
+                android:icon="@drawable/keep_screen_on"
+                app:actionLayout="@layout/drawer_switch"
+                android:title="Keep screen on" />
         </group>
     </menu>
 </item>

@@ -9,16 +9,22 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +35,7 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,18 +96,14 @@ public class CalcLite extends AppCompatActivity {
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-
         btnClearDisplay.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.ac)));
         btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.equal)));
 
-
         numberFormatLocale = new NumberFormatLocale();
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.parseColor("#15202b"));
         }
-
 
         bottomNavigationView.setSelectedItemId(R.id.simpleCalc);
 
@@ -126,6 +129,46 @@ public class CalcLite extends AppCompatActivity {
             }
         });
 
+//////////////////////// this is used to auto increment and decrement the text size
+
+// Create a TextWatcher to monitor changes to the text
+
+        // 06/10/23 Amrit hostel
+        // it took two days to achive increment and decrement along with horizontal scroll view
+
+
+        tvDisplay.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // This method is called before the text changes.
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // This method is called as the text changes.
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // This method is called after the text has changed.
+
+                int characterCount = s.length(); // Get the character count
+
+                // Calculate the new text size based on the character count
+                int newTextSize = 60 - (characterCount * 1); // Start with a base text size of 60sp
+
+                // Ensure that the text size doesn't go below a minimum value
+                int minTextSize = 30; // Set your desired minimum text size
+                if (newTextSize < minTextSize) {
+                    newTextSize = minTextSize;
+                }
+
+                // Set the new text size to the TextView
+                tvDisplay.setTextSize(TypedValue.COMPLEX_UNIT_SP, newTextSize);
+            }
+        });
+
+////////////////////// end auto scale tvDisplay/////////////////////////////////////////////////////
 
         btn0.setOnClickListener(view -> {
             vibrate();
@@ -210,7 +253,6 @@ public class CalcLite extends AppCompatActivity {
 
             }
 
-
             if (cPressed) {
 
                 clearScreen();
@@ -221,7 +263,6 @@ public class CalcLite extends AppCompatActivity {
                 isOperatorPressed = true;
 
             }
-
 
             String newNumber = "";  // New number to replace the last number
 
@@ -241,20 +282,16 @@ public class CalcLite extends AppCompatActivity {
                 cPressed = true;
             }
 
-            tvPhrase.setText(tvPhraseText);
-        });
+            addCommaAgain(tvPhraseText);
 
+        });
 
         btnPercentage.setOnClickListener(v -> {
             vibrate();
             String tvPhraseText = tvPhrase.getText().toString().replace(",", "");
-//            double previousValue = 0;
 
             String myTvPhraseNumberIfZeroOrNot = calculateViaLibrary(tvPhraseText);
 
-//            btnEqual.setText("=");
-
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
             btnEqual.setEnabled(true);
 //            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
 
@@ -419,7 +456,9 @@ public class CalcLite extends AppCompatActivity {
 
                 }
 
-                tvPhrase.setText(tvPhraseText);
+
+                addCommaAgain(tvPhraseText);
+
                 calculateViaLibrary(tvPhraseText);
 
             }
@@ -427,10 +466,12 @@ public class CalcLite extends AppCompatActivity {
         });
 
 
+
+
         btnDelete.setOnClickListener(v -> {
             vibrate();
-            String tvPhraseText = tvPhrase.getText().toString();
-            String tvDisplayText = tvDisplay.getText().toString();
+            String tvPhraseText = tvPhrase.getText().toString().replace(",","");
+            String tvDisplayText = tvDisplay.getText().toString().replace(",","");
 
             if (!tvPhraseText.isEmpty() && !isEqualPressed) {
 
@@ -463,7 +504,6 @@ public class CalcLite extends AppCompatActivity {
                 tvPhrase.setText(tvPhraseText);
                 tvDisplay.setText(tvDisplayText);
 
-
                 if (!tvPhraseText.isEmpty() && tvDisplayText.equals("0")) {
 
                     boolean hasZeroAtEnd = tvPhraseText.charAt(tvPhraseText.length() - 1) == '0';
@@ -478,6 +518,7 @@ public class CalcLite extends AppCompatActivity {
                     isOperatorPressed = true;
                 }
 
+
                 Pattern pattern = Pattern.compile("(?<=\\D|^)\\d*\\.?\\d+(?!\\S*\\D)");
 
                 Matcher matcher = pattern.matcher(tvPhraseText);
@@ -489,8 +530,39 @@ public class CalcLite extends AppCompatActivity {
 
                     BigDecimal bigDecimalLastNumber = new BigDecimal(lastNumber);
                     numberFormatLocale.setNumber(bigDecimalLastNumber);
-                    tvDisplay.setText(numberFormatLocale.getNumberAfterFormat());
+                    tvDisplay.setText(numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
                 }
+
+
+                 pattern = Pattern.compile("[0-9]+\\.?[0-9]*");
+
+// Create a matcher for the input string
+                matcher = pattern.matcher(tvPhraseText);
+
+
+                StringBuffer formattedText = new StringBuffer();
+
+// Find all matches and replace them with formatted versions
+                while (matcher.find()) {
+                    String operands = matcher.group();
+                    BigDecimal operandBigDecimal = new BigDecimal(operands);
+
+
+                    BigDecimal tvPhraseTextBigDecimal = new BigDecimal(String.valueOf(operandBigDecimal));
+                    numberFormatLocale.setNumber(tvPhraseTextBigDecimal);
+
+
+                    // Append the formatted operand to the result
+                    matcher.appendReplacement(formattedText,numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+                }
+
+// Append the remaining part of the input string
+                matcher.appendTail(formattedText);
+
+                String formattedResult = formattedText.toString();
+// Set the formatted result to your desired output (e.g., set it to a TextView)
+                tvPhrase.setText(formattedResult);
+
 
             }
         });
@@ -498,13 +570,10 @@ public class CalcLite extends AppCompatActivity {
 
         btnDivision.setOnClickListener(v -> {
             vibrate();
-
-//            btnEqual.setText("=");
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
             btnEqual.setEnabled(true);
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
+//
+            String tvPhraseText = tvPhrase.getText().toString().replace(",","");
 
-            String tvPhraseText = tvPhrase.getText().toString().replace(",", "");
 
 // Check if the string ends with an operator
             if (tvPhraseText.endsWith(" + ") || tvPhraseText.endsWith(" - ") || tvPhraseText.endsWith(" x ") || tvPhraseText.endsWith(" ÷ ")) {
@@ -512,7 +581,9 @@ public class CalcLite extends AppCompatActivity {
                 String modifiedText = tvPhraseText.substring(0, tvPhraseText.length() - 3) + " ÷ ";
 
                 // Set the modified text back to the TextView
-                tvPhrase.setText(modifiedText);
+//
+                addCommaAgainUnlimited(modifiedText);
+
             } else {
 
                 isOperatorPressed = true;
@@ -524,13 +595,13 @@ public class CalcLite extends AppCompatActivity {
 
                 if (btnPercentagePressed && !tvPhraseText.isEmpty()) {
                     tvPhraseText += " ÷ ";
-                    tvPhrase.setText(tvPhraseText);
+//
+                    addCommaAgainUnlimited(tvPhraseText);
                     btnPercentagePressed = false;
 
                 } else {
                     tempNew += tvDisplayText + " ÷ ";
-                    tvPhrase.setText(tempNew);
-
+                    addCommaAgainUnlimited(tempNew);
                 }
 
             }
@@ -541,10 +612,8 @@ public class CalcLite extends AppCompatActivity {
         btnMultiplication.setOnClickListener(v -> {
 
             vibrate();
-//            btnEqual.setText("=");
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
+
             btnEqual.setEnabled(true);
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
 
             String tvPhraseText = tvPhrase.getText().toString().replace(",", "");
 
@@ -553,6 +622,7 @@ public class CalcLite extends AppCompatActivity {
                 String modifiedText = tvPhraseText.substring(0, tvPhraseText.length() - 3) + " x ";
 
                 tvPhrase.setText(modifiedText);
+                addCommaAgainUnlimited(modifiedText);
             } else {
 
                 isOperatorPressed = true;
@@ -564,12 +634,15 @@ public class CalcLite extends AppCompatActivity {
 
                 if (btnPercentagePressed && !tvPhraseText.isEmpty()) {
                     tvPhraseText += " x ";
-                    tvPhrase.setText(tvPhraseText);
+
+                    addCommaAgainUnlimited(tvPhraseText);
                     btnPercentagePressed = false;
+
 
                 } else {
                     tempNew += tvDisplayText + " x ";
-                    tvPhrase.setText(tempNew);
+
+                    addCommaAgainUnlimited(tempNew);
 
                 }
 
@@ -580,10 +653,7 @@ public class CalcLite extends AppCompatActivity {
 
         btnSubmission.setOnClickListener(v -> {
             vibrate();
-//            btnEqual.setText("=");
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
             btnEqual.setEnabled(true);
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
 
             String tvPhraseText = tvPhrase.getText().toString().replace(",", "");
 
@@ -593,7 +663,8 @@ public class CalcLite extends AppCompatActivity {
                 String modifiedText = tvPhraseText.substring(0, tvPhraseText.length() - 3) + " - ";
 
                 // Set the modified text back to the TextView
-                tvPhrase.setText(modifiedText);
+
+                addCommaAgainUnlimited(modifiedText);
             } else {
                 isOperatorPressed = true;
                 String tvDisplayText = tvDisplay.getText().toString().replace(",", "");
@@ -605,12 +676,13 @@ public class CalcLite extends AppCompatActivity {
 
                 if (btnPercentagePressed && !tvPhraseText.isEmpty()) {
                     tvPhraseText += " - ";
-                    tvPhrase.setText(tvPhraseText);
+//                    tvPhrase.setText(tvPhraseText);
+                    addCommaAgainUnlimited(tvPhraseText);
                     btnPercentagePressed = false;
 
                 } else {
                     tempNew += tvDisplayText + " - ";
-                    tvPhrase.setText(tempNew);
+                    addCommaAgainUnlimited(tempNew);
 
                 }
 
@@ -622,10 +694,8 @@ public class CalcLite extends AppCompatActivity {
 
         btnSum.setOnClickListener(v -> {
             vibrate();
-//            btnEqual.setText("=");
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
+
             btnEqual.setEnabled(true);
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
 
             String tvPhraseText = tvPhrase.getText().toString().replace(",", "");
 
@@ -635,7 +705,7 @@ public class CalcLite extends AppCompatActivity {
                 String modifiedText = tvPhraseText.substring(0, tvPhraseText.length() - 3) + " + ";
 
                 // Set the modified text back to the TextView
-                tvPhrase.setText(modifiedText);
+                addCommaAgainUnlimited(modifiedText);
             } else {
 
                 isOperatorPressed = true;
@@ -649,12 +719,12 @@ public class CalcLite extends AppCompatActivity {
 
                 if (btnPercentagePressed && !tvPhraseText.isEmpty()) {
                     tvPhraseText += " + ";
-                    tvPhrase.setText(tvPhraseText);
+                    addCommaAgainUnlimited(tvPhraseText);
                     btnPercentagePressed = false;
 
                 } else {
                     tempNew += tvDisplayText + " + ";
-                    tvPhrase.setText(tempNew);
+                    addCommaAgainUnlimited(tempNew);
 
                 }
 
@@ -671,44 +741,6 @@ public class CalcLite extends AppCompatActivity {
             vibrate();
             if (tvPhraseText.contains("=") || tvPhraseText.isEmpty()) {
 
-//                if(!tvPhraseText.isEmpty()){
-//
-//                    // set the data to edit text transaction
-//                    editTextTransaction.setText(tvDisplayText);
-//                    editTextTransaction.clearFocus();
-//                    // to be set dynamic currency symbol remember
-//                    textViewPrefixTransaction.setText("₹");
-//
-//
-//                    btnEqual.setEnabled(false);
-//
-////                    bottomSheetBehavior.setHideable(true);
-////
-////                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom_sheet);
-////                    animation.setAnimationListener(new Animation.AnimationListener() {
-////                        @Override
-////                        public void onAnimationStart(Animation animation) {
-////                            // Animation start event
-////                        }
-////
-////                        @Override
-////                        public void onAnimationEnd(Animation animation) {
-////                            bottomSheetView.setVisibility(View.GONE);
-////                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-////
-////
-////                        }
-////
-////                        @Override
-////                        public void onAnimationRepeat(Animation animation) {
-////                            // Animation repeat event
-////                        }
-////                    });
-////
-////                    bottomSheetView.startAnimation(animation);
-//
-//                }
-
                 return;
             }
 
@@ -719,14 +751,9 @@ public class CalcLite extends AppCompatActivity {
 
 
                 // Set the modified text back to the TextView
-                tvPhrase.setText(modifiedText);
+                addCommaAgainUnlimited(modifiedText);
 
             }
-
-//            btnEqual.setText(">");
-//            btnEqual.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.highlight_blue)));
-
 
             btnClearDisplay.setText(R.string.a_c);
 
@@ -741,8 +768,7 @@ public class CalcLite extends AppCompatActivity {
 
             String temp = tvPhrase.getText().toString().replace(",", "") + " = ";
 
-
-            tvPhrase.setText(temp);
+            addCommaAgainUnlimited(temp);
             op = ' ';
             num1 = BigDecimal.ZERO;
             num2 = BigDecimal.ZERO;
@@ -765,10 +791,6 @@ public class CalcLite extends AppCompatActivity {
                 btnDot.setEnabled(true); // Enable the button again
             }, 1000);
 
-
-//            btnEqual.setText("=");
-//            btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
-//            btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
             btnEqual.setEnabled(true);
 
 
@@ -829,10 +851,7 @@ public class CalcLite extends AppCompatActivity {
 
     private void handleNumericButtonClick(String value) {
 
-//        btnEqual.setText("=");
-//        btnEqual.setTextColor(Color.parseColor("#FFFFFF"));
         btnEqual.setEnabled(true);
-//        btnEqual.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.blue_inactive)));
 
         if (isEqualPressed) {
 
@@ -872,8 +891,6 @@ public class CalcLite extends AppCompatActivity {
             tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
         }
 
-//        tvDisplayText += value;
-
         //---------------23/09/23--------------
 
         tvDisplayText = tvDisplayText + value;
@@ -881,22 +898,12 @@ public class CalcLite extends AppCompatActivity {
         BigDecimal tvDisplayTextInBigDecimal = new BigDecimal(tvDisplayText.replace(",", ""));
         numberFormatLocale.setNumber(tvDisplayTextInBigDecimal);
 
-        tvDisplay.setText(numberFormatLocale.getNumberAfterFormat());
+        tvDisplay.setText(numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
 
-        //-----------------------------
+        //----------------------------
+        tvPhraseText = tvPhraseText + value;
 
-//        tvDisplay.setText(tvDisplayText);
-
-
-        tvPhraseText += value;
-        tvPhrase.setText(tvPhraseText);
-//        tvPhraseText = tvPhraseText + value;
-//
-//        String plainString = tvPhraseText.replace(",","");
-//        Toast.makeText(this, plainString, Toast.LENGTH_SHORT).show();
-//        BigDecimal tvPhraseTextBigDecimal = new BigDecimal(tvP);
-//        numberFormatLocale.setNumber(tvPhraseTextBigDecimal);
-//        tvPhrase.setText(numberFormatLocale.getNumberAfterFormat());
+        addCommaAgainUnlimited(tvPhraseText);
 
 
         isBtn0Pressed = false;
@@ -927,32 +934,27 @@ public class CalcLite extends AppCompatActivity {
             double result = eval(expression.replaceAll("x", "*").replaceAll("÷", "/"));
             BigDecimal roundedResult = BigDecimal.valueOf(result);
 
-            // Round the result to 2 decimal places
-//            BigDecimal roundedResult = decimalResult.setScale(2, RoundingMode.HALF_UP);
-
             // Check if the rounded result is a whole number
             if (roundedResult.stripTrailingZeros().scale() <= 0) {
-
-
-//                numberFormatLocale.setNumber(roundedResult);
-//                tvDisplay.setText(roundedResult.stripTrailingZeros().toPlainString());
 
                 numberFormatLocale.setNumber(roundedResult);
                 tvDisplay.setText(numberFormatLocale.getNumberAfterFormat());
 
 
-                String temp = tvPhrase.getText().toString().replace(",", "");
+                String temp = tvPhrase.getText().toString();
                 tvPhrase.setText(temp);
+
+
 
                 return roundedResult.stripTrailingZeros().toPlainString();
 
             } else {
-//                tvDisplay.setText(roundedResult.toPlainString());
 
                 numberFormatLocale.setNumber(roundedResult);
+
                 tvDisplay.setText(numberFormatLocale.getNumberAfterFormat());
 
-                String temp = tvPhrase.getText().toString().replace(",", "");
+                String temp = tvPhrase.getText().toString();
                 tvPhrase.setText(temp);
                 return roundedResult.toPlainString();
             }
@@ -1044,5 +1046,109 @@ public class CalcLite extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void addCommaAgain(String tvPhraseText){
+
+
+        Pattern  pattern = Pattern.compile("[0-9]+\\.?[0-9]*");
+
+// Create a matcher for the input string
+        Matcher matcher = pattern.matcher(tvPhraseText);
+
+        StringBuffer formattedText = new StringBuffer();
+
+// Find all matches and replace them with formatted versions
+        while (matcher.find()) {
+            String operands = matcher.group();
+            BigDecimal operandBigDecimal = new BigDecimal(operands);
+
+
+            BigDecimal tvPhraseTextBigDecimal = new BigDecimal(String.valueOf(operandBigDecimal));
+            numberFormatLocale.setNumber(tvPhraseTextBigDecimal);
+
+
+// there was a bug due to getNumberAfterFormat a logic was getting wrong so that i converted it to getNumberAfterFormatUnlimitedDecimal;
+            // Append the formatted operand to the result
+            matcher.appendReplacement(formattedText,numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+        }
+
+// Append the remaining part of the input string
+        matcher.appendTail(formattedText);
+
+        String formattedResult = formattedText.toString();
+// Set the formatted result to your desired output (e.g., set it to a TextView)
+        tvPhrase.setText(formattedResult);
+
+    }
+    public void addCommaAgainUnlimited(String tvPhraseText){
+
+
+        Pattern  pattern = Pattern.compile("[0-9]+\\.?[0-9]*");
+
+// Create a matcher for the input string
+        Matcher matcher = pattern.matcher(tvPhraseText);
+
+        StringBuffer formattedText = new StringBuffer();
+
+// Find all matches and replace them with formatted versions
+        while (matcher.find()) {
+            String operands = matcher.group();
+            BigDecimal operandBigDecimal = new BigDecimal(operands);
+
+
+            BigDecimal tvPhraseTextBigDecimal = new BigDecimal(String.valueOf(operandBigDecimal));
+            numberFormatLocale.setNumber(tvPhraseTextBigDecimal);
+
+
+            // Append the formatted operand to the result
+            matcher.appendReplacement(formattedText,numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+        }
+
+// Append the remaining part of the input string
+        matcher.appendTail(formattedText);
+
+        String formattedResult = formattedText.toString();
+// Set the formatted result to your desired output (e.g., set it to a TextView)
+        tvPhrase.setText(formattedResult);
+
+
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+// Save text to SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("tvDisplayText", tvDisplay.getText().toString());
+        editor.putString("tvPhraseText", tvPhrase.getText().toString());
+        editor.putBoolean("equal_button",isEqualPressed);
+        editor.putBoolean("operator_button",isOperatorPressed);
+        editor.apply();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String tvDisplayText = sharedPreferences.getString("tvDisplayText", "0");
+        String tvPhraseText = sharedPreferences.getString("tvPhraseText", "");
+        boolean isEqualButtonPressed = sharedPreferences.getBoolean("equal_button",false);
+        boolean isOperatorButtonPressed = sharedPreferences.getBoolean("operator_button",false);
+
+        // Set the retrieved text to the TextViews
+        tvDisplay.setText(tvDisplayText);
+        tvPhrase.setText(tvPhraseText);
+        isEqualPressed =  isEqualButtonPressed;
+        isOperatorPressed = isOperatorButtonPressed;
+
+        if(!isEqualPressed && !tvDisplay.getText().toString().equals("0")){
+            btnClearDisplay.setText("C");
+        }
+    }
 }
 

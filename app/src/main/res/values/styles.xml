@@ -122,9 +122,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/blue_inactive</item>
         <item name="android:background">@drawable/ripple_button_operator_calc</item>
-        <item name="android:padding">10dp</item>
+<!--        <item name="android:padding">10dp</item>-->
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">26sp</item>
+        <item name="android:textSize">26dp</item>
         <!--        <item name="android:textStyle">bold</item>-->
     </style>
 
@@ -133,11 +133,11 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">25</item>
-        <item name="android:padding">10dp</item>
+<!--        <item name="android:padding">10dp</item>-->
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:background">@drawable/ripple_button_calc</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">24dp</item>
         <item name="backgroundTint">@color/dark_blue</item>
         <item name="android:layout_margin">0dp</item>
 
@@ -149,16 +149,15 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">25</item>
-        <item name="android:padding">10dp</item>
+<!--        <item name="android:padding">10dp</item>-->
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:background">@drawable/ripple_button_9</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">24dp</item>
         <item name="backgroundTint">@color/dark_blue</item>
         <item name="android:layout_margin">0dp</item>
 
     </style>
-
 
 
 

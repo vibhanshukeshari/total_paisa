@@ -14,6 +14,7 @@
     <color name="blue_inactive">#4C6B87</color>
     <color name="ac">#457396</color>
     <color name="equal">#3f7aa6</color>
+    <color name="plusMinus">#40ffffff</color>
 
 
 </resources>

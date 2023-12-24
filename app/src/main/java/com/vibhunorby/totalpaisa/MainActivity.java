@@ -1,5 +1,6 @@
 package com.vibhunorby.totalpaisa;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.biometric.BiometricPrompt;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -53,6 +54,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -94,6 +97,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -128,7 +132,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ///////////////////////////////////////////////////////
     //                                                   //
     private final String PRODUCT_PREMIUM = "remove_ads_total_paisa";
-    //Price - 149 ₹  (28-04-23)  //
+    //Price - 149 ₹  (28-04-23)
+    // price- 9 ₹ (28/6/23)
+    //price- 50 ₹ (28/09/23)
     ///////////////////////////////////////////////////////
 
     Prefs prefs;
@@ -156,7 +162,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout adscontainermain;
     public static boolean share_was_pressed = false;
     private CountDownTimer countDownTimer;
+
+    static boolean toggleStatusIncrementDecrement;
     static boolean toggleStatusFingerPrint;
+
+    static boolean toggleStatusKeepScreenOn;
     static boolean toggleStatusTellerSound;
     public static boolean refresh_first_time_only = true;
     public static boolean save_button_for_refreshing_sqlite = false;
@@ -199,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static boolean keyboard_up;
     SwitchCompat switchCompatFingerPrint;
     SwitchCompat switchCompatTellerSound;
+    SwitchCompat switchCompatKeepScreenOn;
+    SwitchCompat switchCompatIncrementDecrement;
     Menu menu;
     public LinearLayout textViewResultTopBar;
 
@@ -208,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
 
+    public ImageButton plus500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,9 +228,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.myToolBar);
         setSupportActionBar(toolbar);
 
-
-        // it is used after getting feedback of a user on total paisa;
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
 
@@ -241,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switchCompatFingerPrint = MenuItemCompat.getActionView(menu.findItem(R.id.finger_print)).findViewById(R.id.drawer_switch);
         switchCompatTellerSound = MenuItemCompat.getActionView(menu.findItem(R.id.sound)).findViewById(R.id.drawer_switch);
+        switchCompatKeepScreenOn = MenuItemCompat.getActionView(menu.findItem(R.id.keep_screen_on)).findViewById(R.id.drawer_switch);
+        switchCompatIncrementDecrement = MenuItemCompat.getActionView(menu.findItem(R.id.increment_decrement)).findViewById(R.id.drawer_switch);
 
 
 //     I was noticed this after 5 months and then searched about this;
@@ -269,6 +281,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         parentLayout = findViewById(R.id.parent);
         textViewResult = findViewById(R.id.textViewResult);
         adscontainermain = findViewById(R.id.adsContainer_main);
+
+        
+        plus500 = findViewById(R.id.plus_500);
 
         getTabs();
         prefs = new Prefs(this);
@@ -607,13 +622,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         dbHandler = new DBHandler(MainActivity.this);
 
-// In  app ratings api , I coudn't use google api because it has a cons it asks at the day first but i wanted at day three of install of the app.
-        FiveStarMe.with(this)
-                .setInstallDays(3)
-                .setLaunchTimes(3)
-                .setDebug(false)
-                .monitor();
-        FiveStarMe.showRateDialogIfMeetsConditions(this);
+
+
+
+        ///////// automatic rate us prompt////////06/10/23////AppRater class and custom_app_rating.xml used////
+        AppRater.app_launched(this);
+
+        ////////////////////////////////////////////////////
+
+
+
+        Calendar calendar = Calendar.getInstance();
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+
+        String greeting;
+        int image;
+        if (hourOfDay >= 4 && hourOfDay < 12) {
+            greeting = "Good Morning";
+            image = R.drawable.good_morning;
+        } else if (hourOfDay >= 12 && hourOfDay < 17) {
+            greeting = "Good Afternoon";
+            image = R.drawable.good_afternoon;
+        } else if (hourOfDay >=17 && hourOfDay < 20){
+            greeting = "Good Evening";
+            image = R.drawable.good_evening;
+        } else {
+            greeting = "Good Night";
+            image = R.drawable.good_night;
+        }
+
+
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+//
+// Set the title and subtitle
+        if(actionBar != null){
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowCustomEnabled(true);
+
+            TextView titleText = findViewById(R.id.titleText);
+            ImageView iconImage = findViewById(R.id.iconImage);
+
+            titleText.setText(greeting);
+            iconImage.setImageResource(image);
+        }
+
+
+
+
+
+
+
+
+
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1002,6 +1066,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+
+
+
 
 
         shareButtonDetails.setOnClickListener(new View.OnClickListener() {
@@ -1536,6 +1603,101 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         thread.start();
 
 
+        switchCompatIncrementDecrement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+
+                    toggleStatusIncrementDecrement = true;
+
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Check if the fragment is ready (you can replace this condition)
+
+
+                            if(CalculationFragment.isCalculationFragmentReady){
+
+                                CalculationFragment.plus500.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus200.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus100.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus50.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus20.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus10.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus5.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus20coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus10coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus5coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus2coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.plus1coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.plusExtraCoin.setVisibility(View.VISIBLE);
+
+
+
+                                CalculationFragment.minus500.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus200.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus100.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus50.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus20.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus10.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus5.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus20coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus10coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus5coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus2coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.minus1coin.setVisibility(View.VISIBLE);
+                                CalculationFragment.minusExtraCoin.setVisibility(View.VISIBLE);
+
+                            }
+
+
+                        }
+                    }, 1000);
+
+
+
+
+
+
+
+                } else {
+
+                    toggleStatusIncrementDecrement = false;
+
+
+                    CalculationFragment.plus500.setVisibility(View.GONE);
+                    CalculationFragment.plus200.setVisibility(View.GONE);
+                    CalculationFragment.plus100.setVisibility(View.GONE);
+                    CalculationFragment.plus50.setVisibility(View.GONE);
+                    CalculationFragment.plus20.setVisibility(View.GONE);
+                    CalculationFragment.plus10.setVisibility(View.GONE);
+                    CalculationFragment.plus5.setVisibility(View.GONE);
+                    CalculationFragment.plus20coin.setVisibility(View.GONE);
+                    CalculationFragment.plus10coin.setVisibility(View.GONE);
+                    CalculationFragment.plus5coin.setVisibility(View.GONE);
+                    CalculationFragment.plus2coin.setVisibility(View.GONE);
+                    CalculationFragment.plus1coin.setVisibility(View.GONE);
+                    CalculationFragment.plusExtraCoin.setVisibility(View.GONE);
+
+                    CalculationFragment.minus500.setVisibility(View.GONE);
+                    CalculationFragment.minus200.setVisibility(View.GONE);
+                    CalculationFragment.minus100.setVisibility(View.GONE);
+                    CalculationFragment.minus50.setVisibility(View.GONE);
+                    CalculationFragment.minus20.setVisibility(View.GONE);
+                    CalculationFragment.minus10.setVisibility(View.GONE);
+                    CalculationFragment.minus5.setVisibility(View.GONE);
+                    CalculationFragment.minus20coin.setVisibility(View.GONE);
+                    CalculationFragment.minus10coin.setVisibility(View.GONE);
+                    CalculationFragment.minus5coin.setVisibility(View.GONE);
+                    CalculationFragment.minus2coin.setVisibility(View.GONE);
+                    CalculationFragment.minus1coin.setVisibility(View.GONE);
+                    CalculationFragment.minusExtraCoin.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
         switchCompatTellerSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -1543,14 +1705,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     toggleStatusTellerSound = true;
 
+
+
                 } else {
 
                     toggleStatusTellerSound = false;
+
 
                 }
             }
         });
 
+
+        switchCompatKeepScreenOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+
+                    toggleStatusKeepScreenOn = true;
+                    // it is used after getting feedback of a user on total paisa; but it was used without switch button now switch is added on 06/10/23 amrit hostel
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+                } else {
+
+                    toggleStatusKeepScreenOn = false;
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
+                }
+            }
+        });
 
     }
 
@@ -2097,7 +2282,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+        if (switchCompatIncrementDecrement.isChecked()) {
+            toggleStatusIncrementDecrement = true;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.putBoolean("boolean", true);
+            editor.commit();
 
+        } else {
+            toggleStatusIncrementDecrement = false;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("boolean", false);
+            editor.commit();
+        }
 
         if (switchCompatFingerPrint.isChecked()) {
             toggleStatusFingerPrint = true;
@@ -2127,6 +2326,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             toggleStatusTellerSound = false;
             SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusTellerSound", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("boolean", false);
+            editor.commit();
+        }
+
+
+        if (switchCompatKeepScreenOn.isChecked()) {
+            toggleStatusKeepScreenOn = true;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusKeepScreenOn", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.putBoolean("boolean", true);
+            editor.commit();
+
+        } else {
+            toggleStatusKeepScreenOn = false;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusKeepScreenOn", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("boolean", false);
             editor.commit();
@@ -2140,6 +2356,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onDestroy();
 
+        if (switchCompatIncrementDecrement.isChecked()) {
+            toggleStatusIncrementDecrement = true;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.putBoolean("boolean", true);
+            editor.commit();
+
+        } else {
+            toggleStatusIncrementDecrement = false;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("boolean", false);
+            editor.commit();
+        }
+
         if (switchCompatFingerPrint.isChecked()) {
             toggleStatusFingerPrint = true;
             SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusFingerPrint", MODE_PRIVATE);
@@ -2167,6 +2399,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             toggleStatusTellerSound = false;
             SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusTellerSound", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("boolean", false);
+            editor.commit();
+        }
+
+        if (switchCompatKeepScreenOn.isChecked()) {
+            toggleStatusKeepScreenOn = true;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusKeepScreenOn", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.putBoolean("boolean", true);
+            editor.commit();
+
+        } else {
+            toggleStatusKeepScreenOn = false;
+            SharedPreferences sharedPreferences = getSharedPreferences("toggleStatusKeepScreenOn", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("boolean", false);
             editor.commit();
@@ -2209,11 +2457,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nativeAdStyle3();
         }
 
-        SharedPreferences getShared = getSharedPreferences("toggleStatusFingerPrint", MODE_PRIVATE);
+        SharedPreferences getShared = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
+        toggleStatusIncrementDecrement = getShared.getBoolean("boolean", true);
+
+        getShared = getSharedPreferences("toggleStatusFingerPrint", MODE_PRIVATE);
         toggleStatusFingerPrint = getShared.getBoolean("boolean", false);
 
         getShared = getSharedPreferences("toggleStatusTellerSound", MODE_PRIVATE);
         toggleStatusTellerSound = getShared.getBoolean("boolean", true);
+
+        getShared = getSharedPreferences("toggleStatusKeepScreenOn", MODE_PRIVATE);
+        toggleStatusKeepScreenOn = getShared.getBoolean("boolean", true);
+
+
+        if (toggleStatusIncrementDecrement) {
+            switchCompatIncrementDecrement.setChecked(true);
+        } else {
+            switchCompatIncrementDecrement.setChecked(false);
+        }
 
 
         if (toggleStatusTellerSound) {
@@ -2227,6 +2488,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switchCompatFingerPrint.setChecked(true);
         } else {
             switchCompatFingerPrint.setChecked(false);
+        }
+
+
+        if (toggleStatusKeepScreenOn) {
+            switchCompatKeepScreenOn.setChecked(true);
+        } else {
+            switchCompatKeepScreenOn.setChecked(false);
         }
 
 

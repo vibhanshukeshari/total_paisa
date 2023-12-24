@@ -417,15 +417,25 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
+                        android:layout_marginEnd="5dp"
                         android:text="500  X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+
+
+                    <ImageButton
+                        android:id="@+id/minus_500"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -435,8 +445,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -468,13 +476,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_500"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq500"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="gravity"
@@ -487,7 +505,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -511,11 +529,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="200  X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/minus_200"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -526,8 +553,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -559,13 +584,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_200"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq200"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -578,7 +613,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -602,11 +637,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="100  X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/minus_100"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -617,8 +661,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -650,13 +692,22 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_100"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
                     <TextView
                         android:id="@+id/textVieweq100"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -669,7 +720,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -693,12 +744,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="50   X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+                    <ImageButton
+                        android:id="@+id/minus_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -708,8 +767,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -741,13 +798,22 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
                     <TextView
                         android:id="@+id/textVieweq50"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -760,7 +826,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -784,12 +850,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="20   X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+                    <ImageButton
+                        android:id="@+id/minus_20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -799,8 +873,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -832,13 +904,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq20"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -851,7 +933,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -875,12 +957,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="10   X"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+                    <ImageButton
+                        android:id="@+id/minus_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -890,8 +980,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -923,13 +1011,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq10"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -942,7 +1040,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -966,12 +1064,19 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="5    X"
                         android:textColor="#ffffff"
                         android:textSize="21sp" />
-
+                    <ImageButton
+                        android:id="@+id/minus_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -981,8 +1086,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1014,13 +1117,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq5"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1033,7 +1146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -1126,12 +1239,20 @@
                             android:layout_marginEnd="5dp"
                             android:layout_weight="0.8"
                             android:gravity="center"
-                            android:paddingStart="2dp"
-                            android:paddingEnd="2dp"
                             android:text="20 coin x"
                             android:textColor="#ffffff"
                             android:textSize="18sp" />
 
+                        <ImageButton
+                            android:id="@+id/minus_20_coin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_margin="0dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_minus"
+                            android:contentDescription="@string/minus"
+                            app:tint="@color/plusMinus" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="0dp"
@@ -1141,8 +1262,6 @@
                             app:hintTextColor="#8899a6"
                             app:boxStrokeColor="#8899a6"
                             app:boxStrokeWidth="1dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="5dp"
                             android:layout_marginBottom="1dp"
                             app:boxBackgroundColor="#10171f"
                             app:boxCornerRadiusBottomEnd="15dp"
@@ -1174,13 +1293,23 @@
                                 android:textSize="20sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <ImageButton
+                            android:id="@+id/plus_20_coin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_margin="0dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_plus"
+                            android:contentDescription="@string/plus"
+                            app:tint="@color/plusMinus" />
+
                         <TextView
                             android:id="@+id/textVieweq20Coin"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:layout_weight="0.2"
                             android:gravity="center"
                             android:text="="
                             android:textAlignment="center"
@@ -1193,7 +1322,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:layout_weight="1.4"
+                            android:layout_weight="1.1"
                             android:gravity="center"
                             android:paddingStart="2dp"
                             android:paddingEnd="2dp"
@@ -1225,12 +1354,20 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="10 coin x"
                         android:textColor="#ffffff"
                         android:textSize="18sp" />
 
+                        <ImageButton
+                            android:id="@+id/minus_10_coin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_margin="0dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_minus"
+                            android:contentDescription="@string/minus"
+                            app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -1240,8 +1377,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1273,13 +1408,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                        <ImageButton
+                            android:id="@+id/plus_10_coin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:layout_margin="0dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_plus"
+                            android:contentDescription="@string/plus"
+                            app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq10Coin"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1292,7 +1437,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -1317,12 +1462,21 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="5 coin x"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+
+                    <ImageButton
+                        android:id="@+id/minus_5_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -1332,8 +1486,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1365,13 +1517,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_5_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq5Coin"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1384,7 +1546,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -1404,16 +1566,25 @@
                         android:id="@+id/textView2Coin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.8"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="2 coin x"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+
+                    <ImageButton
+                        android:id="@+id/minus_2_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -1423,8 +1594,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1456,13 +1625,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_2_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq2Coin"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1475,7 +1654,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -1499,12 +1678,21 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="0.8"
                         android:gravity="center"
-                        android:paddingStart="2dp"
-                        android:paddingEnd="2dp"
                         android:text="1 coin x"
                         android:textColor="#ffffff"
                         android:textSize="20sp" />
 
+
+                    <ImageButton
+                        android:id="@+id/minus_1_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -1514,8 +1702,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1547,13 +1733,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_1_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweq1Coin"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1566,7 +1762,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
@@ -1651,6 +1847,17 @@
                         android:textColor="#ffffff"
                         android:textSize="16sp" />
 
+                    <ImageButton
+                        android:id="@+id/minus_extra_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_minus"
+                        android:contentDescription="@string/minus"
+                        app:tint="@color/plusMinus" />
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
@@ -1660,8 +1867,6 @@
                         app:hintTextColor="#8899a6"
                         app:boxStrokeColor="#8899a6"
                         app:boxStrokeWidth="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginBottom="1dp"
                         app:boxBackgroundColor="#10171f"
                         app:boxCornerRadiusBottomEnd="15dp"
@@ -1691,13 +1896,23 @@
                             android:textSize="20sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageButton
+                        android:id="@+id/plus_extra_coin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_margin="0dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_plus"
+                        android:contentDescription="@string/plus"
+                        app:tint="@color/plusMinus" />
+
                     <TextView
                         android:id="@+id/textVieweqCoinExtra"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="="
                         android:textAlignment="center"
@@ -1710,7 +1925,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1.1"
                         android:gravity="center"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"

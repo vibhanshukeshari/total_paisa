@@ -3,6 +3,7 @@ package com.vibhunorby.totalpaisa;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -18,11 +19,13 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -30,9 +33,16 @@ import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static com.vibhunorby.totalpaisa.MainActivity.toggleStatusIncrementDecrement;
 
 public class CalculationFragment extends Fragment {
+
+    boolean btnPlusMinusWasPressed;
+    boolean lengthFive = true;
+
+    boolean lengthSix = true;
 
     Prefs prefs;
     private SoundPool soundPool;
@@ -52,7 +62,12 @@ public class CalculationFragment extends Fragment {
     static EditText editTextNumber2000, editTextNumber500, editTextNumber200, editTextNumber100, editTextNumber50, editTextNumber20, editTextNumber10, editTextNumber5;
     static EditText editTextNumber20Coin, editTextNumber10Coin, editTextNumber5Coin, editTextNumber2Coin, editTextNumber1Coin, editTextNumberCoinExtra;
 
+    static ImageButton minus500,plus500,minus200,plus200,minus100,plus100,minus50,plus50,minus20,plus20,minus10,plus10,minus5,plus5,
+    minus20coin,plus20coin,minus10coin,plus10coin,minus5coin,plus5coin,minus2coin,plus2coin,minus1coin,plus1coin,minusExtraCoin,plusExtraCoin;
      static NestedScrollView nestedScrollView;
+
+
+     static boolean isCalculationFragmentReady = false;
 
     public static CalculationFragment getInstance() {
 
@@ -108,6 +123,38 @@ public class CalculationFragment extends Fragment {
         editTextNumber2Coin = view.findViewById(R.id.editTextNumber2Coin);
         editTextNumber1Coin = view.findViewById(R.id.editTextNumber1Coin);
         editTextNumberCoinExtra = view.findViewById(R.id.editTextNumberCoinExtra);
+
+        minus500 = view.findViewById(R.id.minus_500);
+        minus200 = view.findViewById(R.id.minus_200);
+        minus100 = view.findViewById(R.id.minus_100);
+        minus50 = view.findViewById(R.id.minus_50);
+        minus20 = view.findViewById(R.id.minus_20);
+        minus10 = view.findViewById(R.id.minus_10);
+        minus5 = view.findViewById(R.id.minus_5);
+        minus20coin = view.findViewById(R.id.minus_20_coin);
+        minus10coin = view.findViewById(R.id.minus_10_coin);
+        minus5coin = view.findViewById(R.id.minus_5_coin);
+        minus2coin = view.findViewById(R.id.minus_2_coin);
+        minus1coin = view.findViewById(R.id.minus_1_coin);
+        minusExtraCoin = view.findViewById(R.id.minus_extra_coin);
+
+        plus500 = view.findViewById(R.id.plus_500);
+        plus200 = view.findViewById(R.id.plus_200);
+        plus100 = view.findViewById(R.id.plus_100);
+        plus50 = view.findViewById(R.id.plus_50);
+        plus20 = view.findViewById(R.id.plus_20);
+        plus10 = view.findViewById(R.id.plus_10);
+        plus5 = view.findViewById(R.id.plus_5);
+        plus20coin = view.findViewById(R.id.plus_20_coin);
+        plus10coin = view.findViewById(R.id.plus_10_coin);
+        plus5coin = view.findViewById(R.id.plus_5_coin);
+        plus2coin = view.findViewById(R.id.plus_2_coin);
+        plus1coin = view.findViewById(R.id.plus_1_coin);
+        plusExtraCoin = view.findViewById(R.id.plus_extra_coin);
+
+        btnPlusMinusWasPressed = false;
+
+
 
 //        This is used to close soft keyboard on outside click of the edit text
 //        one method(fun) is used in the last of the programme and parent layout has mentioned clickable and focusable
@@ -199,47 +246,881 @@ public class CalculationFragment extends Fragment {
         textViewDayOfTheWeek.setText(today);
 
 
+        ///////////plus minus button start/////07/10/23/Amrit hostel//////
+
+        int colorLightWhite = ContextCompat.getColor(requireContext(), R.color.light_white);
+        int colorPlusMinus = ContextCompat.getColor(requireContext(),R.color.plusMinus);
+
+
+
+
+
+
+        minus500.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText500 = editTextNumber500.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+        if(!editText500.equals("")){
+                    int fiveHundred = Integer.parseInt(editText500);
+
+                    if(fiveHundred == 1 || fiveHundred == 0){
+                        editTextNumber500.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                        fiveHundred--;
+
+                    editTextNumber500.setText(String.valueOf(fiveHundred));
+                    editTextNumber500.setSelection(editTextNumber500.getText().length());
+                    editTextNumber500.requestFocus();
+
+                }
+
+            }
+        });
+
+// this is used because compact switch doesn't work on off when app starts means don't invoke switchCompatIncrementDecrement.setOnCheckedChangeListener will not invoke when switch is off
+        if(!toggleStatusIncrementDecrement){
+            plus500.setVisibility(View.GONE);
+            plus200.setVisibility(View.GONE);
+            plus100.setVisibility(View.GONE);
+            plus50.setVisibility(View.GONE);
+            plus20.setVisibility(View.GONE);
+            plus10.setVisibility(View.GONE);
+            plus5.setVisibility(View.GONE);
+            plus20coin.setVisibility(View.GONE);
+            plus10coin.setVisibility(View.GONE);
+            plus5coin.setVisibility(View.GONE);
+            plus2coin.setVisibility(View.GONE);
+            plus1coin.setVisibility(View.GONE);
+            plusExtraCoin.setVisibility(View.GONE);
+
+            minus500.setVisibility(View.GONE);
+            minus200.setVisibility(View.GONE);
+            minus100.setVisibility(View.GONE);
+            minus50.setVisibility(View.GONE);
+            minus20.setVisibility(View.GONE);
+            minus10.setVisibility(View.GONE);
+            minus5.setVisibility(View.GONE);
+            minus20coin.setVisibility(View.GONE);
+            minus10coin.setVisibility(View.GONE);
+            minus5coin.setVisibility(View.GONE);
+            minus2coin.setVisibility(View.GONE);
+            minus1coin.setVisibility(View.GONE);
+            minusExtraCoin.setVisibility(View.GONE);
+        }
+
+
+        plus500.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText500 = editTextNumber500.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText500.equals("")) {
+                    int fiveHundred = Integer.parseInt(editText500);
+
+                    if (fiveHundred == 99999) {
+                        return;
+                    }
+
+
+                    fiveHundred++;
+
+                    editTextNumber500.setText(String.valueOf(fiveHundred));
+                    editTextNumber500.setSelection(editTextNumber500.getText().length());
+                } else{
+
+                    editTextNumber500.setText("1");
+                    editTextNumber500.setSelection(editTextNumber500.getText().length());
+
+                }
+
+
+                editTextNumber500.requestFocus();
+
+
+            }
+
+        });
+
+
+        minus200.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText200 = editTextNumber200.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText200.equals("")){
+                    int twoHundred = Integer.parseInt(editText200);
+
+                    if(twoHundred == 1 || twoHundred == 0){
+                        editTextNumber200.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    twoHundred--;
+
+                    editTextNumber200.setText(String.valueOf(twoHundred));
+                    editTextNumber200.setSelection(editTextNumber200.getText().length());
+                    editTextNumber200.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus200.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText200 = editTextNumber200.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText200.equals("")) {
+                    int twoHundred = Integer.parseInt(editText200);
+
+                    if (twoHundred == 99999) {
+                        return;
+                    }
+                    twoHundred++;
+
+                    editTextNumber200.setText(String.valueOf(twoHundred));
+                    editTextNumber200.setSelection(editTextNumber200.getText().length());
+                } else{
+
+                    editTextNumber200.setText("1");
+                    editTextNumber200.setSelection(editTextNumber200.getText().length());
+
+                }
+
+                editTextNumber200.requestFocus();
+
+            }
+        });
+
+        minus100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText100 = editTextNumber100.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText100.equals("")){
+                    int oneHundred = Integer.parseInt(editText100);
+
+                    if(oneHundred == 1 || oneHundred == 0){
+                        editTextNumber100.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    oneHundred--;
+
+                    editTextNumber100.setText(String.valueOf(oneHundred));
+                    editTextNumber100.setSelection(editTextNumber100.getText().length());
+                    editTextNumber100.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText100 = editTextNumber100.getText().toString() + "";
+
+                 btnPlusMinusWasPressed = true;
+
+
+                if(!editText100.equals("")) {
+                    int oneHundred = Integer.parseInt(editText100);
+
+                    if (oneHundred == 99999) {
+                        return;
+                    }
+                    oneHundred++;
+
+                    editTextNumber100.setText(String.valueOf(oneHundred));
+                    editTextNumber100.setSelection(editTextNumber100.getText().length());
+                } else{
+
+                    editTextNumber100.setText("1");
+                    editTextNumber100.setSelection(editTextNumber100.getText().length());
+
+                }
+
+                editTextNumber100.requestFocus();
+
+            }
+        });
+
+        minus50.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText50 = editTextNumber50.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText50.equals("")){
+                    int fifty = Integer.parseInt(editText50);
+
+                    if(fifty == 1 || fifty == 0){
+                        editTextNumber50.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    fifty--;
+
+                    editTextNumber50.setText(String.valueOf(fifty));
+                    editTextNumber50.setSelection(editTextNumber50.getText().length());
+                    editTextNumber50.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus50.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText50 = editTextNumber50.getText().toString() + "";
+
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText50.equals("")) {
+                    int fifty = Integer.parseInt(editText50);
+
+                    if (fifty == 99999) {
+                        return;
+                    }
+                    fifty++;
+
+                    editTextNumber50.setText(String.valueOf(fifty));
+                    editTextNumber50.setSelection(editTextNumber50.getText().length());
+                } else{
+
+                    editTextNumber50.setText("1");
+                    editTextNumber50.setSelection(editTextNumber50.getText().length());
+
+                }
+
+                editTextNumber50.requestFocus();
+
+            }
+        });
+
+        minus20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText20 = editTextNumber20.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText20.equals("")){
+                    int twenty = Integer.parseInt(editText20);
+
+                    if(twenty == 1 || twenty == 0){
+                        editTextNumber20.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    twenty--;
+
+                    editTextNumber20.setText(String.valueOf(twenty));
+                    editTextNumber20.setSelection(editTextNumber20.getText().length());
+                    editTextNumber20.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText20 = editTextNumber20.getText().toString() + "";
+
+
+                 btnPlusMinusWasPressed = true;
+
+                if(!editText20.equals("")) {
+                    int twenty = Integer.parseInt(editText20);
+
+                    if (twenty == 99999) {
+                        return;
+                    }
+                    twenty++;
+
+                    editTextNumber20.setText(String.valueOf(twenty));
+                    editTextNumber20.setSelection(editTextNumber20.getText().length());
+                } else{
+
+                    editTextNumber20.setText("1");
+                    editTextNumber20.setSelection(editTextNumber20.getText().length());
+
+                }
+
+                editTextNumber20.requestFocus();
+
+            }
+        });
+
+        minus10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText10 = editTextNumber10.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText10.equals("")){
+                    int ten = Integer.parseInt(editText10);
+
+                    if(ten == 1 || ten == 0){
+                        editTextNumber10.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    ten--;
+
+                    editTextNumber10.setText(String.valueOf(ten));
+                    editTextNumber10.setSelection(editTextNumber10.getText().length());
+                    editTextNumber10.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText10 = editTextNumber10.getText().toString() + "";
+
+                 btnPlusMinusWasPressed = true;
+
+
+                if(!editText10.equals("")) {
+                    int ten = Integer.parseInt(editText10);
+
+                    if (ten == 99999) {
+                        return;
+                    }
+                    ten++;
+
+                    editTextNumber10.setText(String.valueOf(ten));
+                    editTextNumber10.setSelection(editTextNumber10.getText().length());
+                } else{
+
+                    editTextNumber10.setText("1");
+                    editTextNumber10.setSelection(editTextNumber10.getText().length());
+
+                }
+
+                editTextNumber10.requestFocus();
+
+            }
+        });
+
+        minus5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText5 = editTextNumber5.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText5.equals("")){
+                    int five = Integer.parseInt(editText5);
+
+                    if(five == 1 || five == 0){
+                        editTextNumber5.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    five--;
+
+                    editTextNumber5.setText(String.valueOf(five));
+                    editTextNumber5.setSelection(editTextNumber5.getText().length());
+                    editTextNumber5.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText5 = editTextNumber5.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+
+                if(!editText5.equals("")) {
+                    int five = Integer.parseInt(editText5);
+
+                    if (five == 99999) {
+                        return;
+                    }
+                    five++;
+
+                    editTextNumber5.setText(String.valueOf(five));
+                    editTextNumber5.setSelection(editTextNumber5.getText().length());
+                } else{
+
+                    editTextNumber5.setText("1");
+                    editTextNumber5.setSelection(editTextNumber5.getText().length());
+
+                }
+
+                editTextNumber5.requestFocus();
+
+            }
+        });
+
+        minus20coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText20Coin = editTextNumber20Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText20Coin.equals("")){
+                    int twentyCoin = Integer.parseInt(editText20Coin);
+
+                    if(twentyCoin == 1 || twentyCoin == 0){
+                        editTextNumber20Coin.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    twentyCoin--;
+
+                    editTextNumber20Coin.setText(String.valueOf(twentyCoin));
+                    editTextNumber20Coin.setSelection(editTextNumber20Coin.getText().length());
+                    editTextNumber20Coin.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus20coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText20Coin = editTextNumber20Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+
+                if(!editText20Coin.equals("")) {
+                    int twentyCoin = Integer.parseInt(editText20Coin);
+
+                    if (twentyCoin == 999999) {
+                        return;
+                    }
+                    twentyCoin++;
+
+                    editTextNumber20Coin.setText(String.valueOf(twentyCoin));
+                    editTextNumber20Coin.setSelection(editTextNumber20Coin.getText().length());
+                } else{
+
+                    editTextNumber20Coin.setText("1");
+                    editTextNumber20Coin.setSelection(editTextNumber20Coin.getText().length());
+
+                }
+
+                editTextNumber20Coin.requestFocus();
+
+            }
+        });
+
+        minus10coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText10Coin = editTextNumber10Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText10Coin.equals("")){
+                    int tenCoin = Integer.parseInt(editText10Coin);
+
+                    if(tenCoin == 1 || tenCoin == 0){
+                        editTextNumber10Coin.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    tenCoin--;
+
+                    editTextNumber10Coin.setText(String.valueOf(tenCoin));
+                    editTextNumber10Coin.setSelection(editTextNumber10Coin.getText().length());
+                    editTextNumber10Coin.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus10coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText10Coin = editTextNumber10Coin.getText().toString() + "";
+
+                 btnPlusMinusWasPressed = true;
+
+
+                if(!editText10Coin.equals("")) {
+                    int tenCoin = Integer.parseInt(editText10Coin);
+
+                    if (tenCoin == 999999) {
+                        return;
+                    }
+                    tenCoin++;
+
+                    editTextNumber10Coin.setText(String.valueOf(tenCoin));
+                    editTextNumber10Coin.setSelection(editTextNumber10Coin.getText().length());
+                } else{
+
+                    editTextNumber10Coin.setText("1");
+                    editTextNumber10Coin.setSelection(editTextNumber10Coin.getText().length());
+
+                }
+
+                editTextNumber10Coin.requestFocus();
+
+            }
+        });
+
+        minus5coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText5Coin = editTextNumber5Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText5Coin.equals("")){
+                    int fiveCoin = Integer.parseInt(editText5Coin);
+
+                    if(fiveCoin == 1 || fiveCoin == 0){
+                        editTextNumber5Coin.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    fiveCoin--;
+
+                    editTextNumber5Coin.setText(String.valueOf(fiveCoin));
+                    editTextNumber5Coin.setSelection(editTextNumber5Coin.getText().length());
+                    editTextNumber5Coin.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus5coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText5Coin = editTextNumber5Coin.getText().toString() + "";
+
+                 btnPlusMinusWasPressed = true;
+
+
+                if(!editText5Coin.equals("")) {
+                    int fiveCoin = Integer.parseInt(editText5Coin);
+
+                    if (fiveCoin == 999999) {
+                        return;
+                    }
+                    fiveCoin++;
+
+                    editTextNumber5Coin.setText(String.valueOf(fiveCoin));
+                    editTextNumber5Coin.setSelection(editTextNumber5Coin.getText().length());
+                } else{
+
+                    editTextNumber5Coin.setText("1");
+                    editTextNumber5Coin.setSelection(editTextNumber5Coin.getText().length());
+
+                }
+
+                editTextNumber5Coin.requestFocus();
+
+            }
+        });
+
+        minus2coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText2Coin = editTextNumber2Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText2Coin.equals("")){
+                    int twoCoin = Integer.parseInt(editText2Coin);
+
+                    if(twoCoin == 1 || twoCoin == 0){
+                        editTextNumber2Coin.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    twoCoin--;
+
+                    editTextNumber2Coin.setText(String.valueOf(twoCoin));
+                    editTextNumber2Coin.setSelection(editTextNumber2Coin.getText().length());
+                    editTextNumber2Coin.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus2coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText2Coin = editTextNumber2Coin.getText().toString() + "";
+
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText2Coin.equals("")) {
+                    int twoCoin = Integer.parseInt(editText2Coin);
+
+                    if (twoCoin == 999999) {
+                        return;
+                    }
+                    twoCoin++;
+
+                    editTextNumber2Coin.setText(String.valueOf(twoCoin));
+                    editTextNumber2Coin.setSelection(editTextNumber2Coin.getText().length());
+                } else{
+
+                    editTextNumber2Coin.setText("1");
+                    editTextNumber2Coin.setSelection(editTextNumber2Coin.getText().length());
+
+                }
+
+                editTextNumber2Coin.requestFocus();
+
+            }
+        });
+
+        minus1coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText1Coin = editTextNumber1Coin.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editText1Coin.equals("")){
+                    int oneCoin = Integer.parseInt(editText1Coin);
+
+                    if(oneCoin == 1 || oneCoin == 0){
+                        editTextNumber1Coin.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    oneCoin--;
+
+                    editTextNumber1Coin.setText(String.valueOf(oneCoin));
+                    editTextNumber1Coin.setSelection(editTextNumber1Coin.getText().length());
+                    editTextNumber1Coin.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plus1coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editText1Coin = editTextNumber1Coin.getText().toString() + "";
+
+
+                  btnPlusMinusWasPressed = true;
+
+                if(!editText1Coin.equals("")) {
+                    int oneCoin = Integer.parseInt(editText1Coin);
+
+                    if (oneCoin == 999999) {
+                        return;
+                    }
+                    oneCoin++;
+
+                    editTextNumber1Coin.setText(String.valueOf(oneCoin));
+                    editTextNumber1Coin.setSelection(editTextNumber1Coin.getText().length());
+                } else{
+
+                    editTextNumber1Coin.setText("1");
+                    editTextNumber1Coin.setSelection(editTextNumber1Coin.getText().length());
+
+                }
+
+                editTextNumber1Coin.requestFocus();
+
+            }
+        });
+
+        minusExtraCoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editTextExtraCoin = editTextNumberCoinExtra.getText().toString() + "";
+
+                btnPlusMinusWasPressed = true;
+
+                if(!editTextExtraCoin.equals("")){
+                    int extraCoin = Integer.parseInt(editTextExtraCoin);
+
+                    if(extraCoin == 1 || extraCoin == 0){
+                        editTextNumberCoinExtra.setText("");
+//                        minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                        return;
+                    }
+                    extraCoin--;
+
+                    editTextNumberCoinExtra.setText(String.valueOf(extraCoin));
+                    editTextNumberCoinExtra.setSelection(editTextNumberCoinExtra.getText().length());
+                    editTextNumberCoinExtra.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        plusExtraCoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String editTextExtraCoin = editTextNumberCoinExtra.getText().toString() + "";
+
+                 btnPlusMinusWasPressed = true;  
+
+
+                if(!editTextExtraCoin.equals("")) {
+                    int extraCoin = Integer.parseInt(editTextExtraCoin);
+
+                    if (extraCoin == 999999) {
+                        return;
+                    }
+                    extraCoin++;
+
+                    editTextNumberCoinExtra.setText(String.valueOf(extraCoin));
+                    editTextNumberCoinExtra.setSelection(editTextNumberCoinExtra.getText().length());
+                } else{
+
+                    editTextNumberCoinExtra.setText("1");
+                    editTextNumberCoinExtra.setSelection(editTextNumberCoinExtra.getText().length());
+
+                }
+
+                editTextNumberCoinExtra.requestFocus();
+
+            }
+        });
+
+
+
+        ///////////////////////plus minus end ////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        It took one week to get the idea about using set on click listener with focus listener before i was using only focus listener.
 
 //        This is used to hide bottom navigation for the second click because setOnClickListener doesn't listen first.
 //
-        editTextNumber2000.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(!MainActivity.keyboard_up) {
-
-                    try {
-                        ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
-                        ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
-                        ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
-                    }catch (NullPointerException ignored){ }
-
-                }
-
-            }
-        });
+//        editTextNumber2000.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(!MainActivity.keyboard_up) {
+//
+//                    try {
+//                        ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
+//                        ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
+//                        ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
+//                    }catch (NullPointerException ignored){ }
+//
+//                }
+//
+//            }
+//        });
 
 //        This is used to hide bottom navigation for the first click because only focus listen first.
-                editTextNumber2000.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View view, boolean focus) {
-
-                if(focus) {
-
-                    if(!MainActivity.keyboard_up) {
-
-                        try {
-                            ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
-                            ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
-                            ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
-                        }catch (NullPointerException ignored){ }
-
-                    }
-                }
-            }
-        });
+//                editTextNumber2000.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//
+//            @Override
+//            public void onFocusChange(View view, boolean focus) {
+//
+//                if(focus) {
+//
+//                    if(!MainActivity.keyboard_up) {
+//
+//                        try {
+//                            ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
+//                            ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
+//                            ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
+//                        }catch (NullPointerException ignored){ }
+//
+//                    }
+//                }
+//            }
+//        });
 
         editTextNumber500.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,6 +1129,7 @@ public class CalculationFragment extends Fragment {
 
                 if(!MainActivity.keyboard_up) {
 
+
                     try {
                         ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
                         ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
@@ -256,6 +1138,7 @@ public class CalculationFragment extends Fragment {
 
                 }
             }
+//
         });
 
 //        This is used to hide bottom navigation for the first click because only focus listen first.
@@ -264,18 +1147,47 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean focus) {
 
+
+
+
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+
+                    String editText500 = editTextNumber500.getText().toString() + "";
+                    if(!editText500.equals("")){
+                        minus500.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus500.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
                             ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
                             ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
+
                         }catch (NullPointerException ignored){ }
 
                     }
+
+
+                    btnPlusMinusWasPressed = false;
+
+                }else {
+
+                    minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
+
+
+
                 }
+
+
             }
         });
 
@@ -294,7 +1206,7 @@ public class CalculationFragment extends Fragment {
                 }
             }
         });
-
+//
 //        This is used to hide bottom navigation for the first click because only focus listen first.
         editTextNumber200.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -304,7 +1216,17 @@ public class CalculationFragment extends Fragment {
                 if(focus) {
 
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText200 = editTextNumber200.getText().toString() + "";
+                    if(!editText200.equals("")){
+                        minus200.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus200.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -313,6 +1235,12 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+                    btnPlusMinusWasPressed = false;
+                } else {
+
+                    minus200.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus200.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
                 }
             }
         });
@@ -342,7 +1270,18 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+
+                    String editText100 = editTextNumber100.getText().toString() + "";
+                    if(!editText100.equals("")){
+                        minus100.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus100.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -351,6 +1290,12 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+                    btnPlusMinusWasPressed = false;
+
+                } else {
+
+                    minus100.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus100.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -381,7 +1326,17 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+
+                    String editText50 = editTextNumber50.getText().toString() + "";
+                    if(!editText50.equals("")){
+                        minus50.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus50.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -390,6 +1345,13 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed = false;
+
+                }else {
+
+                    minus50.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus50.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -411,7 +1373,7 @@ public class CalculationFragment extends Fragment {
                 }
             }
         });
-
+//
 //        This is used to hide bottom navigation for the first click because only focus listen first.
         editTextNumber20.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -420,7 +1382,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText20 = editTextNumber20.getText().toString() + "";
+                    if(!editText20.equals("")){
+                        minus20.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus20.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -429,6 +1400,12 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+                    btnPlusMinusWasPressed = false;
+                }else {
+
+                    minus20.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus20.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
                 }
             }
         });
@@ -458,7 +1435,15 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText10 = editTextNumber10.getText().toString() + "";
+                    if(!editText10.equals("")){
+                        minus10.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+                    plus10.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -467,6 +1452,12 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+                    btnPlusMinusWasPressed = false;
+
+                }else {
+
+                    minus10.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus10.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -497,7 +1488,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText5 = editTextNumber5.getText().toString() + "";
+                    if(!editText5.equals("")){
+                        minus5.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus5.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up  && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -506,6 +1506,13 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed =false;
+
+                }else {
+
+                    minus5.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus5.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -529,7 +1536,45 @@ public class CalculationFragment extends Fragment {
         });
 
 
-        editTextNumber20Coin.setOnClickListener(new View.OnClickListener() {
+
+//        This is used to hide bottom navigation for the first click because only focus listen first.
+        editTextNumber20Coin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View view, boolean focus) {
+
+                if(focus) {
+
+                    String editText20Coin = editTextNumber20Coin.getText().toString() + "";
+                    if(!editText20Coin.equals("")){
+                        minus20coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus20coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
+
+                        try {
+                            ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
+                            ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
+                            ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
+                        }catch (NullPointerException ignored){ }
+
+                    }
+
+                    btnPlusMinusWasPressed = false;
+
+                }else{
+                    minus20coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus20coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
+                }
+            }
+        });
+
+        editTextNumber10Coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -546,7 +1591,6 @@ public class CalculationFragment extends Fragment {
             }
         });
 
-//        This is used to hide bottom navigation for the first click because only focus listen first.
         editTextNumber10Coin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -554,7 +1598,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText10Coin = editTextNumber10Coin.getText().toString() + "";
+                    if(!editText10Coin.equals("")){
+                        minus10coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus10coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -564,32 +1617,18 @@ public class CalculationFragment extends Fragment {
 
                     }
 
+                    btnPlusMinusWasPressed = false;
+
+                }else{
+                    minus10coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus10coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
                 }
             }
         });
 
 
 //        This is used to hide bottom navigation for the first click because only focus listen first.
-        editTextNumber10Coin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View view, boolean focus) {
-
-                if(focus) {
-
-                    if(!MainActivity.keyboard_up) {
-
-                        try {
-                            ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
-                            ((MainActivity) getActivity()).underLine.setVisibility(View.GONE);
-                            ((MainActivity) getActivity()).textViewResultTopBar.setVisibility(View.GONE);
-                        }catch (NullPointerException ignored){ }
-
-                    }
-
-                }
-            }
-        });
 
         editTextNumber5Coin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -616,7 +1655,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText5Coin = editTextNumber5Coin.getText().toString() + "";
+                    if(!editText5Coin.equals("")){
+                        minus5coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus5coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -625,6 +1673,13 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed = false;
+
+                } else {
+
+                    minus5coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus5coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -656,7 +1711,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText2Coin = editTextNumber2Coin.getText().toString() + "";
+                    if(!editText2Coin.equals("")){
+                        minus2coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus2coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -665,6 +1729,12 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed = false;
+
+                } else {
+                    minus2coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus2coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -695,7 +1765,16 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
-                    if(!MainActivity.keyboard_up) {
+                    String editText1Coin = editTextNumber1Coin.getText().toString() + "";
+                    if(!editText1Coin.equals("")){
+                        minus1coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    }
+
+
+                    plus1coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -704,6 +1783,13 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed = false;
+
+                }else{
+                    minus1coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plus1coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
                 }
             }
         });
@@ -732,8 +1818,17 @@ public class CalculationFragment extends Fragment {
 
                 if(focus) {
 
+                    String editTextExtraCoin = editTextNumber1Coin.getText().toString() + "";
+                    if(!editTextExtraCoin.equals("")){
+                        minusExtraCoin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
 
-                    if(!MainActivity.keyboard_up) {
+                    }
+
+
+                    plusExtraCoin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+
+
+                    if(!MainActivity.keyboard_up && !btnPlusMinusWasPressed) {
 
                         try {
                             ((MainActivity) getActivity()).textViewResultAmountLayout.setVisibility(View.GONE);
@@ -742,6 +1837,14 @@ public class CalculationFragment extends Fragment {
                         }catch (NullPointerException ignored){ }
 
                     }
+
+                    btnPlusMinusWasPressed = false;
+
+                } else {
+
+                    minusExtraCoin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    plusExtraCoin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+
                 }
             }
         });
@@ -1267,6 +2370,7 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+
                 int TwoThousand;
                 if(editTextNumber2000.getText().toString().length() == 5) {
 
@@ -1445,11 +2549,48 @@ public class CalculationFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                
+                String editText500 = editTextNumber500.getText().toString() + "";
+
+                if(editText500.equals("")){
+                    minus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus500.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText500.equals("99999")){
+                    plus500.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    if(!editText500.equals("")){
+
+                    plus500.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
+
+
+
+
+
+
+
 
                 if(editTextNumber500.getText().toString().length() == 5) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
 
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
+
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber500.getText().toString().equals("")) {
@@ -1620,11 +2761,38 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if(editTextNumber200.getText().toString().length() == 5) {
 
+                String editText200 = editTextNumber200.getText().toString() + "";
+
+                if(editText200.equals("")){
+                    minus200.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus200.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText200.equals("99999")){
+                    plus200.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if(!editText200.equals("")){
 
-//
+                        plus200.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
+
+                if(editTextNumber200.getText().toString().length() == 5) {
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
+
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber200.getText().toString().equals("")) {
@@ -1785,10 +2953,36 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-                if(editTextNumber100.getText().toString().length() == 5) {
+                String editText100 = editTextNumber100.getText().toString() + "";
 
+                if(editText100.equals("")){
+                    minus100.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus100.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText100.equals("99999")){
+                    plus100.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText100.equals("")) {
 
+                        plus100.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
+                if(editTextNumber100.getText().toString().length() == 5) {
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
+
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber100.getText().toString().equals("")) {
@@ -1955,11 +3149,36 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editText50 = editTextNumber50.getText().toString() + "";
+
+                if(editText50.equals("")){
+                    minus50.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus50.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText50.equals("99999")){
+                    plus50.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText50.equals("")) {
+
+                        plus50.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumber50.getText().toString().length() == 5) {
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
 
-                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT);
-
-
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber50.getText().toString().equals("")) {
@@ -2127,11 +3346,37 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                String editText20 = editTextNumber20.getText().toString() + "";
+
+                if(editText20.equals("")){
+                    minus20.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus20.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText20.equals("99999")){
+                    plus20.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText20.equals("")) {
+
+                        plus20.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
 
                 if(editTextNumber20.getText().toString().length() == 5) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
 
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber20.getText().toString().equals("")) {
@@ -2298,11 +3543,37 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editText10 = editTextNumber10.getText().toString() + "";
+
+                if(editText10.equals("")){
+                    minus10.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus10.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText10.equals("99999")){
+                    plus10.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText10.equals("")) {
+
+                        plus10.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumber10.getText().toString().length() == 5) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
 
-
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber10.getText().toString().equals("")) {
@@ -2470,10 +3741,37 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editText5 = editTextNumber5.getText().toString() + "";
+
+                if(editText5.equals("")){
+                    minus5.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus5.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText5.equals("99999")){
+                    plus5.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText5.equals("")) {
+
+                        plus5.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumber5.getText().toString().length() == 5) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthFive){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthFive = false;
+                    }
 
+                } else {
+                    lengthFive = true;
                 }
 
                 if (!editTextNumber5.getText().toString().equals("")) {
@@ -2643,11 +3941,36 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                String editText20coin = editTextNumber20Coin.getText().toString() + "";
 
+                if(editText20coin.equals("")){
+                    minus20coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus20coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText20coin.equals("999999")){
+                    plus20coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText20coin.equals("")) {
+
+                        plus20coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
                 if(editTextNumber20Coin.getText().toString().length() == 6) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
 
+                } else {
+                    lengthSix = true;
                 }
 
                 if (!editTextNumber20Coin.getText().toString().equals("")) {
@@ -2817,10 +4140,37 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editText10coin = editTextNumber10Coin.getText().toString() + "";
+
+                if(editText10coin.equals("")){
+                    minus10coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus10coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText10coin.equals("999999")){
+                    plus10coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText10coin.equals("")) {
+
+                        plus10coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumber10Coin.getText().toString().length() == 6) {
 
-                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
 
+                } else {
+                    lengthSix = true;
                 }
 
                 if (!editTextNumber10Coin.getText().toString().equals("")) {
@@ -2989,12 +4339,37 @@ public class CalculationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                String editText5coin = editTextNumber5Coin.getText().toString() + "";
+
+                if(editText5coin.equals("")){
+                    minus5coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus5coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText5coin.equals("999999")){
+                    plus5coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText5coin.equals("")) {
+
+                        plus5coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
 
                 if(editTextNumber5Coin.getText().toString().length() == 6) {
 
-                     Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
 
-
+                } else {
+                    lengthSix = true;
                 }
 
                 if (!editTextNumber5Coin.getText().toString().equals("")) {
@@ -3151,11 +4526,37 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editText2coin = editTextNumber2Coin.getText().toString() + "";
+
+                if(editText2coin.equals("")){
+                    minus2coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minus2coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editText2coin.equals("999999")){
+                    plus2coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText2coin.equals("")) {
+
+                        plus2coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumber2Coin.getText().toString().length() == 6) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
 
-
+                } else {
+                    lengthSix = true;
                 }
 
                 if (!editTextNumber2Coin.getText().toString().equals("")) {
@@ -3318,12 +4719,38 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-                if(editTextNumber1Coin.getText().toString().length() == 6) {
+                String editText1coin = editTextNumber1Coin.getText().toString() + "";
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                if(editText1coin.equals("")){
+                    minus1coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
 
+
+
+                }else{
+                    minus1coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
                 }
 
+                if(editText1coin.equals("999999")){
+                    plus1coin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editText1coin.equals("")) {
+
+                        plus1coin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
+                if(editTextNumber1Coin.getText().toString().length() == 6) {
+
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
+
+                } else {
+                    lengthSix = true;
+                }
                 if (!editTextNumber1Coin.getText().toString().equals("")) {
                     int OneCoin = Integer.parseInt(editTextNumber1Coin.getText().toString());
                     textViewRes1Coin.setText(AddComma.getIndianCurrencyFormat(String.valueOf(1 * OneCoin)));
@@ -3483,10 +4910,37 @@ public class CalculationFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
+                String editTextExtraCoin = editTextNumberCoinExtra.getText().toString() + "";
+
+                if(editTextExtraCoin.equals("")){
+                    minusExtraCoin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+//                    plus500.setColorFilter(colorPlusMinus,PorterDuff.Mode.SRC_IN);
+
+
+
+                }else{
+                    minusExtraCoin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                }
+
+                if(editTextExtraCoin.equals("999999")){
+                    plusExtraCoin.setColorFilter(colorPlusMinus, PorterDuff.Mode.SRC_IN);
+                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (!editTextExtraCoin.equals("")) {
+
+                        plusExtraCoin.setColorFilter(colorLightWhite, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+
                 if(editTextNumberCoinExtra.getText().toString().length() == 6) {
 
-                    Toast.makeText(getContext(), "Maximum limit reached.", Toast.LENGTH_SHORT).show();
+                    if(lengthSix){
+                        Toast.makeText(getContext(), "Maximum length reached.", Toast.LENGTH_SHORT).show();
+                        lengthSix = false;
+                    }
 
+                } else {
+                    lengthSix = true;
                 }
 
                 if (!editTextNumberCoinExtra.getText().toString().equals("")) {
@@ -3833,6 +5287,8 @@ public class CalculationFragment extends Fragment {
             } catch (NullPointerException ignored){ }
 
         }catch (NullPointerException ignored){}
+
+        isCalculationFragmentReady = true;
 
     }
 

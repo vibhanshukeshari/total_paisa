@@ -6,8 +6,40 @@
     android:layout_height="?attr/actionBarSize"
     android:elevation="4dp"
     android:background="#15202b"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp"
     android:id="@+id/myToolBar"
     app:titleTextColor="#ffffff"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <!-- res/layout/custom_toolbar_layout.xml -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/cursive"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <!-- Icon on the right side of the title -->
+        <ImageView
+            android:id="@+id/iconImage"
+            android:layout_marginStart="5dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/titleText" />
+
+    </RelativeLayout>
+
 
 </androidx.appcompat.widget.Toolbar>
