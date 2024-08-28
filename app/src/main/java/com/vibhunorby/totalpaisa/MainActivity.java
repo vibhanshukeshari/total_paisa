@@ -1,5 +1,6 @@
 package com.vibhunorby.totalpaisa;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBar;
 import androidx.biometric.BiometricPrompt;
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -70,8 +72,8 @@ import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
-import com.google.android.ads.nativetemplates.NativeTemplateStyle;
-import com.google.android.ads.nativetemplates.TemplateView;
+//import com.google.android.ads.nativetemplates.NativeTemplateStyle;
+//import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdLoader;
@@ -89,6 +91,7 @@ import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -103,7 +106,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.Executor;
-import five.star.me.FiveStarMe;
+
 import static android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_CANCELED;
 import static android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_HW_NOT_PRESENT;
 import static android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_HW_UNAVAILABLE;
@@ -126,6 +129,7 @@ import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumber500;
 import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumber5Coin;
 import static com.vibhunorby.totalpaisa.CalculationFragment.editTextNumberCoinExtra;
 import static com.vibhunorby.totalpaisa.CalculationFragment.textViewResCoinExtra;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Boolean adLoaded3rd = false;
     Boolean adLoaded4th = false;
     AdView mAdView;
-    TemplateView template,template2,template3,template4;
+    //    TemplateView template,template2,template3,template4;
     private InterstitialAd interstitial;
     public static boolean adRemoved;
     LinearLayout adscontainermain;
@@ -204,9 +208,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPager viewPager;
     private Toolbar toolbar;
     static BottomNavigationView bottomNavigationView;
+
     private CoordinatorLayout parentLayout;
     static LinearLayout bottomNavigationLayout;
     static boolean keyboard_up;
+
+    ImageButton imageButtonAddRemoveCurrency;
     SwitchCompat switchCompatFingerPrint;
     SwitchCompat switchCompatTellerSound;
     SwitchCompat switchCompatKeepScreenOn;
@@ -224,6 +231,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        int nightModeFlags = getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppTheme_Dark);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme_Light);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                // Handle the case when the system theme is undefined
+                setTheme(R.style.AppTheme_Light); // Default theme
+                break;
+    }
+
+
+
+
+
+
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.myToolBar);
         setSupportActionBar(toolbar);
@@ -247,8 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         menu = navigationView.getMenu();
 
-
-
+        imageButtonAddRemoveCurrency = MenuItemCompat.getActionView(menu.findItem(R.id.add_remove_currency)).findViewById(R.id.add_remove_settings);
         switchCompatFingerPrint = MenuItemCompat.getActionView(menu.findItem(R.id.finger_print)).findViewById(R.id.drawer_switch);
         switchCompatTellerSound = MenuItemCompat.getActionView(menu.findItem(R.id.sound)).findViewById(R.id.drawer_switch);
         switchCompatKeepScreenOn = MenuItemCompat.getActionView(menu.findItem(R.id.keep_screen_on)).findViewById(R.id.drawer_switch);
@@ -282,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         textViewResult = findViewById(R.id.textViewResult);
         adscontainermain = findViewById(R.id.adsContainer_main);
 
-        
+
         plus500 = findViewById(R.id.plus_500);
 
         getTabs();
@@ -328,77 +371,77 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
+// Total paisa Native 1 was generating  approx 10 $ per month but disable due to over ad. on 06/03/24
 
 //-----------------------------Native Ad 1 ------------------------------------------
 
-        if(!prefs.isRemoveAd()) {
-
-            ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.light_blue));
-            ColorDrawable buttonBackground =  new ColorDrawable(getColor(R.color.highlight_blue));
-            AdLoader adLoader = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/2063210847")
-                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(NativeAd nativeAd) {
-
-                            NativeTemplateStyle styles = new
-                                    NativeTemplateStyle.Builder().
-                                    withCallToActionBackgroundColor(buttonBackground).
-                                    withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-                                    withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-                                    withMainBackgroundColor(colorDrawable).build();
-
-                            template = findViewById(R.id.nativeAds);
-                            dividerNativeAd1 = findViewById(R.id.dividerNativeAd1);
-                            dividerNativeAd2 = findViewById(R.id.dividerNativeAd2);
-
-
-                            if(template != null) {
-                                template.setNativeAd(nativeAd);
-                                template.setStyles(styles);
-                                template.setVisibility(View.VISIBLE);
-
-                            }
-
-                            try {
-                                dividerNativeAd1.setVisibility(View.VISIBLE);
-                                dividerNativeAd2.setVisibility(View.VISIBLE);
-
-                            }catch (NullPointerException ignored){};
-
-
-                            if (isDestroyed()) {
-                                nativeAd.destroy();
-                                adLoaded = false;
-                                return;
-                            }
-
-                            adLoaded = true;
-
-                        }
-                    })
-                    .withAdListener(new AdListener() {
-                        @Override
-                        public void onAdFailedToLoad(LoadAdError adError) {
-
-                            try {
-                                template.setVisibility(View.GONE);
-                                dividerNativeAd1.setVisibility(View.GONE);
-                                dividerNativeAd2.setVisibility(View.GONE);
-
-                            }catch (NullPointerException ignored) {}
-
-
-                            adLoaded = false;
-                        }
-                    })
-                    .withNativeAdOptions(new NativeAdOptions.Builder()
-                            .build())
-                    .build();
-            adLoader.loadAd(new AdRequest.Builder().build());
-
-
-        }
+//        if(!prefs.isRemoveAd()) {
+//
+//            ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.light_blue));
+//            ColorDrawable buttonBackground =  new ColorDrawable(getColor(R.color.highlight_blue));
+//            AdLoader adLoader = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/2063210847")
+//                    .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+//                        @Override
+//                        public void onNativeAdLoadapped(NativeAd nativeAd) {
+//
+//                            NativeTemplateStyle styles = new
+//                                    NativeTemplateStyle.Builder().
+//                                    withCallToActionBackgroundColor(buttonBackground).
+//                                    withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                    withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                    withMainBackgroundColor(colorDrawable).build();
+//
+//                            template = findViewById(R.id.nativeAds);
+//                            dividerNativeAd1 = findViewById(R.id.dividerNativeAd1);
+//                            dividerNativeAd2 = findViewById(R.id.dividerNativeAd2);
+//
+//
+//                            if(template != null) {
+//                                template.setNativeAd(nativeAd);
+//                                template.setStyles(styles);
+//                                template.setVisibility(View.VISIBLE);
+//
+//                            }
+//
+//                            try {
+//                                dividerNativeAd1.setVisibility(View.VISIBLE);
+//                                dividerNativeAd2.setVisibility(View.VISIBLE);
+//
+//                            }catch (NullPointerException ignored){};
+//
+//
+//                            if (isDestroyed()) {
+//                                nativeAd.destroy();
+//                                adLoaded = false;
+//                                return;
+//                            }
+//
+//                            adLoaded = true;
+//
+//                        }
+//                    })
+//                    .withAdListener(new AdListener() {
+//                        @Override
+//                        public void onAdFailedToLoad(LoadAdError adError) {
+//
+//                            try {
+//                                template.setVisibility(View.GONE);
+//                                dividerNativeAd1.setVisibility(View.GONE);
+//                                dividerNativeAd2.setVisibility(View.GONE);
+//
+//                            }catch (NullPointerException ignored) {}
+//
+//
+//                            adLoaded = false;
+//                        }
+//                    })
+//                    .withNativeAdOptions(new NativeAdOptions.Builder()
+//                            .build())
+//                    .build();
+//            adLoader.loadAd(new AdRequest.Builder().build());
+//
+//
+//        }
 
 
 //----------------------------End Native Ad 1st----------------------------------------
@@ -407,74 +450,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //-----------------------------Native Ad 2 ------------------------------------------
 
-        if(!prefs.isRemoveAd()) {
-
-        ColorDrawable colorDrawable2 = new ColorDrawable(getColor(R.color.light_blue));
-        ColorDrawable buttonBackground2 =  new ColorDrawable(getColor(R.color.highlight_blue));
-        AdLoader adLoader2 = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/3771044188")
-                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-                    @Override
-                    public void onNativeAdLoaded(NativeAd nativeAd2) {
-
-                        NativeTemplateStyle styles2 = new
-                                NativeTemplateStyle.Builder().
-                                withCallToActionBackgroundColor(buttonBackground2).
-                                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-                                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-                                withMainBackgroundColor(colorDrawable2).build();
-
-                        template2 = findViewById(R.id.nativeAds2);
-                        dividerNativeAd3 = findViewById(R.id.dividerNativeAd3);
-                        dividerNativeAd4 = findViewById(R.id.dividerNativeAd4);
-
-                        if(template2 != null) {
-                            template2.setNativeAd(nativeAd2);
-                            template2.setStyles(styles2);
-                            template2.setVisibility(View.VISIBLE);
-                        }
-                        try {
-
-                            dividerNativeAd3.setVisibility(View.VISIBLE);
-                            dividerNativeAd4.setVisibility(View.VISIBLE);
-
-                        }catch (NullPointerException ignored){};
-
-
-                        if (isDestroyed()) {
-                            nativeAd2.destroy();
-                            adLoaded2nd = false;
-                            return;
-                        }
-
-
-
-                        adLoaded2nd = true;
-
-
-                    }
-                })
-                .withAdListener(new AdListener() {
-                    @Override
-                    public void onAdFailedToLoad(LoadAdError adError) {
-
-                        try {
-                            template2.setVisibility(View.GONE);
-                            dividerNativeAd3.setVisibility(View.GONE);
-                            dividerNativeAd4.setVisibility(View.GONE);
-
-                        }catch (NullPointerException ignored) {}
-
-
-                        adLoaded2nd = false;
-                    }
-                })
-                .withNativeAdOptions(new NativeAdOptions.Builder()
-                        .build())
-                .build();
-        adLoader2.loadAd(new AdRequest.Builder().build());
-
-
-        }
+//        if(!prefs.isRemoveAd()) {
+//
+//        ColorDrawable colorDrawable2 = new ColorDrawable(getColor(R.color.light_blue));
+//        ColorDrawable buttonBackground2 =  new ColorDrawable(getColor(R.color.highlight_blue));
+//        AdLoader adLoader2 = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/3771044188")
+//                .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+//                    @Override
+//                    public void onNativeAdLoaded(NativeAd nativeAd2) {
+//
+//                        NativeTemplateStyle styles2 = new
+//                                NativeTemplateStyle.Builder().
+//                                withCallToActionBackgroundColor(buttonBackground2).
+//                                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                withMainBackgroundColor(colorDrawable2).build();
+//
+//                        template2 = findViewById(R.id.nativeAds2);
+//                        dividerNativeAd3 = findViewById(R.id.dividerNativeAd3);
+//                        dividerNativeAd4 = findViewById(R.id.dividerNativeAd4);
+//
+//                        if(template2 != null) {
+//                            template2.setNativeAd(nativeAd2);
+//                            template2.setStyles(styles2);
+//                            template2.setVisibility(View.VISIBLE);
+//                        }
+//                        try {
+//
+//                            dividerNativeAd3.setVisibility(View.VISIBLE);
+//                            dividerNativeAd4.setVisibility(View.VISIBLE);
+//
+//                        }catch (NullPointerException ignored){};
+//
+//
+//                        if (isDestroyed()) {
+//                            nativeAd2.destroy();
+//                            adLoaded2nd = false;
+//                            return;
+//                        }
+//
+//
+//
+//                        adLoaded2nd = true;
+//
+//
+//                    }
+//                })
+//                .withAdListener(new AdListener() {
+//                    @Override
+//                    public void onAdFailedToLoad(LoadAdError adError) {
+//
+//                        try {
+//                            template2.setVisibility(View.GONE);
+//                            dividerNativeAd3.setVisibility(View.GONE);
+//                            dividerNativeAd4.setVisibility(View.GONE);
+//
+//                        }catch (NullPointerException ignored) {}
+//
+//
+//                        adLoaded2nd = false;
+//                    }
+//                })
+//                .withNativeAdOptions(new NativeAdOptions.Builder()
+//                        .build())
+//                .build();
+//        adLoader2.loadAd(new AdRequest.Builder().build());
+//
+//
+//        }
 
 
 //----------------------------End Native Ad 2nd----------------------------------------
@@ -559,30 +602,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //----------------------------Interstitial-----------------------------------------
 
-        if(!prefs.isRemoveAd()){
-            AdRequest adRequestInterstitial = new AdRequest.Builder().build();
-            InterstitialAd.load(this,"ca-app-pub-2808567025402378/8723523975", adRequestInterstitial,
-                    new InterstitialAdLoadCallback() {
-                        @Override
-                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-
-                            interstitial = interstitialAd;
-
-                        }
-
-                        @Override
-                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-
-                            interstitial = null;
-
-                        }
-                    });
-
-        } else {
-            interstitial = null;
-        }
+//        if(!prefs.isRemoveAd()){
+//            AdRequest adRequestInterstitial = new AdRequest.Builder().build();
+//            InterstitialAd.load(this,"ca-app-pub-2808567025402378/8723523975", adRequestInterstitial,
+//                    new InterstitialAdLoadCallback() {
+//                        @Override
+//                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
 //
-
+//                            interstitial = interstitialAd;
+//
+//                        }
+//
+//                        @Override
+//                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+//
+//                            interstitial = null;
+//
+//                        }
+//                    });
+//
+//        } else {
+//            interstitial = null;
+//        }
+//
 
 //        --------------------------End of Interstitial---------------------------------------------
 
@@ -617,6 +659,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(!prefs.isRemoveAd()){
             restorePurchases();
         }
+
+
+
+
 
 ////////////////////////////////End of Remove Ads////////////////////////////////////////////////////////////
 
@@ -790,7 +836,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             mytime, myday, notes, coins);
                     dbHandler.close();
 
-                     Toast.makeText(MainActivity.this, "Data has been saved check History.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Data has been saved check History.", Toast.LENGTH_SHORT).show();
 
 
                     try {
@@ -972,7 +1018,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 mytime, myday, notes, coins);
                         dbHandler.close();
 
-                         Toast.makeText(MainActivity.this, "Data has been saved check History.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Data has been saved check History.", Toast.LENGTH_SHORT).show();
 
 
                         try {
@@ -1465,27 +1511,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         bottomNavigationView.setSelectedItemId(R.id.totalPaisa);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.gst:
-//                        startActivity(new Intent(getApplicationContext(), Gst.class));
-                        overridePendingTransition(R.anim.transparent, R.anim.fade_out);
-                        return true;
-                    case R.id.totalPaisa:
-                        return true;
+                int itemId = item.getItemId();
 
-                    case R.id.simpleCalc:
-                        startActivity(new Intent(getApplicationContext(), CalcLite.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-
+                if (itemId == R.id.gst) {
+                    // Uncomment the following line if you want to start the GST activity
+                    // startActivity(new Intent(getApplicationContext(), Gst.class));
+//                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
+                    return true;
+                } else if (itemId == R.id.totalPaisa) {
+                    return true;
+                } else if (itemId == R.id.simpleCalc) {
+                    startActivity(new Intent(getApplicationContext(), CalcLite.class));
+                    overridePendingTransition(0, 0);
+                    return true;
                 }
 
                 return false;
             }
         });
+
+
+
 
         RelativeLayout relativeLayout = findViewById(R.id.rootView);
         relativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -1499,23 +1548,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    keyboard is up
 
 
-                    if(adLoaded){
-                        nativeAdStyle();
-
-                    }
-
-                    if(adLoaded2nd){
-                        nativeAdStyle2();
-
-                    }
-
-                    if(adLoaded3rd){
-                        nativeAdStyle3();
-                    }
-
-                    if(adLoaded4th){
-                        nativeAdStyle4();
-                    }
+//                    if(adLoaded){
+//                        nativeAdStyle();
+//
+//                    }
+//
+//                    if(adLoaded2nd){
+//                        nativeAdStyle2();
+//
+//                    }
+//
+//                    if(adLoaded3rd){
+//                        nativeAdStyle3();
+//                    }
+//
+//                    if(adLoaded4th){
+//                        nativeAdStyle4();
+//                    }
 
 
 
@@ -1540,23 +1589,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 } else {
 //                    keyboard is down
-                    if(adLoaded){
-                        nativeAdStyle();
-
-                    }
-
-                    if(adLoaded2nd){
-                        nativeAdStyle2();
-
-                    }
-
-                    if(adLoaded3rd){
-                        nativeAdStyle3();
-                    }
-
-                    if(adLoaded4th){
-                        nativeAdStyle4();
-                    }
+//                    if(adLoaded){
+//                        nativeAdStyle();
+//
+//                    }
+//
+//                    if(adLoaded2nd){
+//                        nativeAdStyle2();
+//
+//                    }
+//
+//                    if(adLoaded3rd){
+//                        nativeAdStyle3();
+//                    }
+//
+//                    if(adLoaded4th){
+//                        nativeAdStyle4();
+//                    }
 
                     if (keyboard_up) {
 //
@@ -1602,6 +1651,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
         thread.start();
 
+
+
+        imageButtonAddRemoveCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "i am clicked", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+        });
 
         switchCompatIncrementDecrement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -1737,7 +1815,178 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+
+
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle back press here
+                // For example, you can call a custom method or finish the activity
+
+
+
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+
+
+                    if (viewPager.getCurrentItem() == 0) {
+
+                        final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.alertDialog);
+                        dialogBuilder.setTitle("Confirm Exit !");
+                        dialogBuilder.setIcon(R.drawable.alert_24);
+                        dialogBuilder.setMessage("Are you sure you want to exit ?");
+
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View dialogView = inflater.inflate(R.layout.native_alert, null);
+                        dialogBuilder.setView(dialogView);
+
+
+                        TextView tvExit = (TextView) dialogView.findViewById(R.id.tv_exit);
+                        TextView tvCancel = (TextView) dialogView.findViewById(R.id.tv_cancel);
+//                template3 = (TemplateView) dialogView.findViewById(R.id.nativeAd3);
+                        androidx.appcompat.app.AlertDialog alertDialog = dialogBuilder.create();
+                        alertDialog.show();
+
+                        tvExit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+
+//                        if (interstitial != null) {
+//
+//
+//                            if (!isInterstitialAdshown) {
+//                                interstitial.show(MainActivity.this);
+//
+//                                interstitial.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                                    @Override
+//                                    public void onAdClicked() {
+//                                        // Called when a click is recorded for an ad.
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onAdDismissedFullScreenContent() {
+//                                        // Called when ad is dismissed.
+//                                        interstitial = null;
+//                                        MainActivity.super.onBackPressed();
+//                                    }
+//
+//                                    @Override
+//                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+//                                        // Called when ad fails to show.
+//                                        interstitial = null;
+                                finishAffinity();
+//                                    }
+//
+//                                    @Override
+//                                    public void onAdImpression() {
+//                                        // Called when an impression is recorded for an ad.
+//                                    }
+//
+//                                    @Override
+//                                    public void onAdShowedFullScreenContent() {
+//                                        // Called when ad is shown.
+//
+//                                    }
+//                                });
+//
+//                                isInterstitialAdshown = true;
+//
+//                            }
+//
+//
+//                        } else {
+
+//                            MainActivity.super.onBackPressed();
+//
+//                        }
+
+
+                            }
+                        });
+
+                        tvCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+
+//                if(!prefs.isRemoveAd()) {
+//                    ColorDrawable colorDrawable3 = new ColorDrawable(getColor(R.color.light_blue));
+//                    ColorDrawable buttonBackground3 = new ColorDrawable(getColor(R.color.highlight_blue));
+//                    AdLoader adLoader3 = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/6898118013")
+//                            .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
+//                                @Override
+//                                public void onNativeAdLoaded(NativeAd nativeAd3) {
+//
+//                                    NativeTemplateStyle styles3 = new
+//                                            NativeTemplateStyle.Builder().
+//                                            withCallToActionBackgroundColor(buttonBackground3).
+//                                            withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                            withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                                            withMainBackgroundColor(colorDrawable3).build();
+//
+//
+//                                    if(template3 != null){
+//                                        template3.setNativeAd(nativeAd3);
+//                                        template3.setStyles(styles3);
+//                                        template3.setVisibility(View.VISIBLE);
+//
+//                                    }
+//
+//                                    if (isDestroyed()) {
+//                                        nativeAd3.destroy();
+//                                        adLoaded3rd = false;
+//                                        return;
+//                                    }
+//
+//                                    adLoaded3rd = true;
+//
+//
+//                                }
+//                            })
+//                            .withAdListener(new AdListener() {
+//                                @Override
+//                                public void onAdFailedToLoad(LoadAdError adError) {
+//
+//                                    try {
+//                                        template3.setVisibility(View.GONE);
+//
+//
+//                                    } catch (NullPointerException ignored) {
+//                                    }
+//
+//
+//
+//                                    adLoaded3rd = false;
+//                                }
+//                            })
+//                            .withNativeAdOptions(new NativeAdOptions.Builder()
+//                                    .build())
+//                            .build();
+//                    adLoader3.loadAd(new AdRequest.Builder().build());
+//                }
+
+                    } else {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() - 2);
+                    }
+                }
+
+            }
+        });
+
+
+
+
+
     }
+
 
     public void getTabs() {
         final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -1796,48 +2045,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-                                if (interstitial != null) {
-
-                                    if(!isInterstitialAdshown){
-                                        interstitial.show(MainActivity.this);
-
-                                        interstitial.setFullScreenContentCallback(new FullScreenContentCallback() {
-                                            @Override
-                                            public void onAdClicked() {
-                                                // Called when a click is recorded for an ad.
-
-                                            }
-
-                                            @Override
-                                            public void onAdDismissedFullScreenContent() {
-                                                // Called when ad is dismissed.
-                                                interstitial = null;
-//                                            MainActivity.super.onBackPressed();
-                                            }
-
-                                            @Override
-                                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                                // Called when ad fails to show.
-                                                interstitial = null;
-//                                            MainActivity.super.onBackPressed();
-
-                                            }
-
-                                            @Override
-                                            public void onAdImpression() {
-                                                // Called when an impression is recorded for an ad.
-                                            }
-
-                                            @Override
-                                            public void onAdShowedFullScreenContent() {
-                                                // Called when ad is shown.
-
-                                            }
-                                        });
-                                        isInterstitialAdshown = true;
-                                    }
-
-                                }
+//                                if (interstitial != null) {
+//
+//                                    if(!isInterstitialAdshown){
+//                                        interstitial.show(MainActivity.this);
+//
+//                                        interstitial.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                                            @Override
+//                                            public void onAdClicked() {
+//                                                // Called when a click is recorded for an ad.
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onAdDismissedFullScreenContent() {
+//                                                // Called when ad is dismissed.
+//                                                interstitial = null;
+////                                            MainActivity.super.onBackPressed();
+//                                            }
+//
+//                                            @Override
+//                                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+//                                                // Called when ad fails to show.
+//                                                interstitial = null;
+////                                            MainActivity.super.onBackPressed();
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onAdImpression() {
+//                                                // Called when an impression is recorded for an ad.
+//                                            }
+//
+//                                            @Override
+//                                            public void onAdShowedFullScreenContent() {
+//                                                // Called when ad is shown.
+//
+//                                            }
+//                                        });
+//                                        isInterstitialAdshown = true;
+//                                    }
+//
+//                                }
 
 
 
@@ -2443,19 +2692,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        if(adLoaded){
-            nativeAdStyle();
-
-        }
-
-        if(adLoaded2nd){
-            nativeAdStyle2();
-
-        }
-
-        if(adLoaded3rd){
-            nativeAdStyle3();
-        }
+//        if(adLoaded){
+//            nativeAdStyle();
+//
+//        }
+//
+//        if(adLoaded2nd){
+//            nativeAdStyle2();
+//
+//        }
+//
+//        if(adLoaded3rd){
+//            nativeAdStyle3();
+//        }
 
         SharedPreferences getShared = getSharedPreferences("toggleStatusIncrementDecrement", MODE_PRIVATE);
         toggleStatusIncrementDecrement = getShared.getBoolean("boolean", true);
@@ -2511,28 +2760,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (Resources.NotFoundException ignored) {
         }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
 
-                switch (item.getItemId()) {
-                    case R.id.gst:
-                        startActivity(new Intent(getApplicationContext(), Gst.class));
-                        overridePendingTransition(R.anim.transparent, R.anim.fade_out);
-                        return true;
-                    case R.id.totalPaisa:
-//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.simpleCalc:
-                        startActivity(new Intent(getApplicationContext(),CalcLite.class));
-                        overridePendingTransition(0,0);
-                        return true;
+                if (itemId == R.id.gst) {
+//                    startActivity(new Intent(getApplicationContext(), Gst.class));
+//                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
+                    return true;
+                } else if (itemId == R.id.totalPaisa) {
+                    // Uncomment the following lines if needed:
+                    // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    // overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.simpleCalc) {
+                    startActivity(new Intent(getApplicationContext(), CalcLite.class));
+                    overridePendingTransition(0, 0);
+                    return true;
                 }
 
                 return false;
             }
         });
+
 
     }
 
@@ -2893,7 +3144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(sendIntent);
 
             } else {
-                 Toast.makeText(MainActivity.this, "Zero amount can't be shared.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Zero amount can't be shared.", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -2998,166 +3249,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     //    It took 2 days to set fragment to default on back pressed. Before I was messed up with tab layout fragment backpressed.
-    @Override
-    public void onBackPressed() {
-
-
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-
-
-            if (viewPager.getCurrentItem() == 0) {
-
-                final MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(MainActivity.this, R.style.alertDialog);
-                dialogBuilder.setTitle("Confirm Exit !");
-                dialogBuilder.setIcon(R.drawable.alert_24);
-                dialogBuilder.setMessage("Are you sure you want to exit ?");
-
-
-                LayoutInflater inflater = this.getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.native_alert, null);
-                dialogBuilder.setView(dialogView);
-
-
-                TextView tvExit = (TextView) dialogView.findViewById(R.id.tv_exit);
-                TextView tvCancel = (TextView) dialogView.findViewById(R.id.tv_cancel);
-//                template3 = (TemplateView) dialogView.findViewById(R.id.nativeAd3);
-                androidx.appcompat.app.AlertDialog alertDialog = dialogBuilder.create();
-                alertDialog.show();
-
-                tvExit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-                        if (interstitial != null) {
-
-
-                            if(!isInterstitialAdshown){
-                                interstitial.show(MainActivity.this);
-
-                                interstitial.setFullScreenContentCallback(new FullScreenContentCallback() {
-                                    @Override
-                                    public void onAdClicked() {
-                                        // Called when a click is recorded for an ad.
-
-                                    }
-
-                                    @Override
-                                    public void onAdDismissedFullScreenContent() {
-                                        // Called when ad is dismissed.
-                                        interstitial = null;
-                                        MainActivity.super.onBackPressed();
-                                    }
-
-                                    @Override
-                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                        // Called when ad fails to show.
-                                        interstitial = null;
-                                        MainActivity.super.onBackPressed();
-                                    }
-
-                                    @Override
-                                    public void onAdImpression() {
-                                        // Called when an impression is recorded for an ad.
-                                    }
-
-                                    @Override
-                                    public void onAdShowedFullScreenContent() {
-                                        // Called when ad is shown.
-
-                                    }
-                                });
-
-                                isInterstitialAdshown = true;
-
-                            }
-
-
-
-                        } else {
-
-                            MainActivity.super.onBackPressed();
-
-                        }
-
-
-                    }
-                });
-
-                tvCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-
-
-
-//                if(!prefs.isRemoveAd()) {
-//                    ColorDrawable colorDrawable3 = new ColorDrawable(getColor(R.color.light_blue));
-//                    ColorDrawable buttonBackground3 = new ColorDrawable(getColor(R.color.highlight_blue));
-//                    AdLoader adLoader3 = new AdLoader.Builder(this, "ca-app-pub-2808567025402378/6898118013")
-//                            .forNativeAd(new NativeAd.OnNativeAdLoadedListener() {
-//                                @Override
-//                                public void onNativeAdLoaded(NativeAd nativeAd3) {
-//
-//                                    NativeTemplateStyle styles3 = new
-//                                            NativeTemplateStyle.Builder().
-//                                            withCallToActionBackgroundColor(buttonBackground3).
-//                                            withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-//                                            withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-//                                            withMainBackgroundColor(colorDrawable3).build();
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
 //
 //
-//                                    if(template3 != null){
-//                                        template3.setNativeAd(nativeAd3);
-//                                        template3.setStyles(styles3);
-//                                        template3.setVisibility(View.VISIBLE);
-//
-//                                    }
-//
-//                                    if (isDestroyed()) {
-//                                        nativeAd3.destroy();
-//                                        adLoaded3rd = false;
-//                                        return;
-//                                    }
-//
-//                                    adLoaded3rd = true;
-//
-//
-//                                }
-//                            })
-//                            .withAdListener(new AdListener() {
-//                                @Override
-//                                public void onAdFailedToLoad(LoadAdError adError) {
-//
-//                                    try {
-//                                        template3.setVisibility(View.GONE);
-//
-//
-//                                    } catch (NullPointerException ignored) {
-//                                    }
-//
-//
-//
-//                                    adLoaded3rd = false;
-//                                }
-//                            })
-//                            .withNativeAdOptions(new NativeAdOptions.Builder()
-//                                    .build())
-//                            .build();
-//                    adLoader3.loadAd(new AdRequest.Builder().build());
-//                }
-
-            } else {
-                viewPager.setCurrentItem(viewPager.getCurrentItem() - 2);
-            }
-        }
+//    }
 
 
-    }
 
 
     public static void hideSoftKeyboard(MainActivity activity) {
@@ -3196,159 +3295,146 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
+        int itemId = menuItem.getItemId();
+        Intent intent;
+        Uri uri;
 
-            case R.id.rate_us:
+        if (itemId == R.id.rate_us) {
+            uri = Uri.parse("https://play.google.com/store/apps/details?id=com.vibhunorby.totalpaisa");
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
 
-                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.vibhunorby.totalpaisa");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+        } else if (itemId == R.id.share_app) {
+            StringBuilder forShareLink = new StringBuilder();
+            forShareLink.append("Download the Total paisa app, Indian Cash denomination and cash tally ");
+            forShareLink.append('\n');
+            forShareLink.append("https://play.google.com/store/apps/details?id=com.vibhunorby.totalpaisa");
+            intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, (Serializable) forShareLink);
+            intent.setType("text/plain");
+            startActivity(intent);
 
+        }else if (itemId == R.id.feedback) {
+            Intent feedbackEmail = new Intent(Intent.ACTION_SENDTO);
+            feedbackEmail.setData(Uri.parse("mailto:")); // This ensures only email apps handle the intent
+            feedbackEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"vibhanshu.keshari@gmail.com"});
+            feedbackEmail.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Total paisa app");
+            feedbackEmail.putExtra(Intent.EXTRA_TEXT, "Dear Team,\n\nI would like to provide the following feedback for the Total paisa app:\n");
 
-                break;
+            if (feedbackEmail.resolveActivity(getPackageManager()) != null) {
+                startActivity(feedbackEmail);
+            } else {
+                Toast.makeText(MainActivity.this, "No email app is installed.", Toast.LENGTH_SHORT).show();
+            }
 
-            case R.id.share_app:
+    } else if (itemId == R.id.privacy) {
+            uri = Uri.parse("https://total-paisa.flycricket.io/privacy.html");
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
 
-                StringBuilder forShareLink = new StringBuilder();
-                forShareLink.append("Download the Total paisa app, Indian Cash denomination and cash tally ");
-                forShareLink.append('\n');
-                forShareLink.append("https://play.google.com/store/apps/details?id=com.vibhunorby.totalpaisa");
-                intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, (Serializable) forShareLink);
-                intent.setType("text/plain");
-                startActivity(intent);
+        } else if (itemId == R.id.term_and_condition) {
+            uri = Uri.parse("https://total-paisa.flycricket.io/terms.html");
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
 
-                break;
-
-            case R.id.feedback:
-                Intent feedbackEmail = new Intent(Intent.ACTION_SEND);
-                feedbackEmail.setType("message/rfc822");
-                feedbackEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{"vibhanshu.keshari@gmail.com"});
-                feedbackEmail.putExtra(Intent.EXTRA_SUBJECT, "Feedback for Total paisa app");
-                feedbackEmail.setPackage("com.google.android.gm");
-                if (feedbackEmail.resolveActivity(getPackageManager()) != null) {
-                    startActivity(feedbackEmail);
-                } else {
-                     Toast.makeText(MainActivity.this, "Gmail App is not installed.", Toast.LENGTH_SHORT).show();
-
-                }
-
-                break;
-
-            case R.id.privacy:
-//                flycricket is used to host this privacy free of cost.
-//                Generated by github users nishant and contributors.
-                uri = Uri.parse("https://total-paisa.flycricket.io/privacy.html");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-                break;
-            case R.id.term_and_condition:
-
-                uri = Uri.parse("https://total-paisa.flycricket.io/terms.html");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-                break;
-
-            case R.id.easy_loan:
-
-                uri = Uri.parse("https://play.google.com/store/apps/details?id=com.loan.interest.rate.calculator.simple");
-                intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-                break;
-
+        } else if (itemId == R.id.easy_loan) {
+            uri = Uri.parse("https://play.google.com/store/apps/details?id=com.loan.interest.rate.calculator.simple");
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
         }
+
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-public void nativeAdStyle(){
+
+//public void nativeAdStyle(){
+//
+//
+//    ColorDrawable buttonBackground =  new ColorDrawable(getColor(R.color.highlight_blue));
+//    ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.light_blue));
+//
+////    NativeTemplateStyle styles = new
+////            NativeTemplateStyle.Builder().
+////            withCallToActionBackgroundColor(buttonBackground).
+////            withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+////            withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+////            withMainBackgroundColor(colorDrawable).build();
+//
+////    if(adLoaded){
+////        if(template != null){
+////            template.setStyles(styles);
+////
+////        }
+////    }
+//
+//}
 
 
-    ColorDrawable buttonBackground =  new ColorDrawable(getColor(R.color.highlight_blue));
-    ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.light_blue));
-
-    NativeTemplateStyle styles = new
-            NativeTemplateStyle.Builder().
-            withCallToActionBackgroundColor(buttonBackground).
-            withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-            withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-            withMainBackgroundColor(colorDrawable).build();
-
-    if(adLoaded){
-        if(template != null){
-            template.setStyles(styles);
-
-        }
-    }
-
-}
-
-
-    public void nativeAdStyle2(){
-        ColorDrawable buttonBackground2 =  new ColorDrawable(getColor(R.color.highlight_blue));
-        ColorDrawable colorDrawable2 = new ColorDrawable(getColor(R.color.light_blue));
-
-        NativeTemplateStyle styles2 = new
-                NativeTemplateStyle.Builder().
-                withCallToActionBackgroundColor(buttonBackground2).
-                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-                withMainBackgroundColor(colorDrawable2).build();
-
-        if(adLoaded2nd){
-            if(template2 != null){
-                template2.setStyles(styles2);
-            }
-        }
-
-    }
-
-
-
-    public void nativeAdStyle3(){
-        ColorDrawable buttonBackground3 =  new ColorDrawable(getColor(R.color.highlight_blue));
-        ColorDrawable colorDrawable3 = new ColorDrawable(getColor(R.color.light_blue));
-
-        NativeTemplateStyle styles3 = new
-                NativeTemplateStyle.Builder().
-                withCallToActionBackgroundColor(buttonBackground3).
-                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-                withMainBackgroundColor(colorDrawable3).build();
-
-        if(adLoaded3rd){
-            if(template3 != null){
-                template3.setStyles(styles3);
-
-            }
-        }
+//    public void nativeAdStyle2(){
+//        ColorDrawable buttonBackground2 =  new ColorDrawable(getColor(R.color.highlight_blue));
+//        ColorDrawable colorDrawable2 = new ColorDrawable(getColor(R.color.light_blue));
+//
+//        NativeTemplateStyle styles2 = new
+//                NativeTemplateStyle.Builder().
+//                withCallToActionBackgroundColor(buttonBackground2).
+//                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withMainBackgroundColor(colorDrawable2).build();
+//
+//        if(adLoaded2nd){
+//            if(template2 != null){
+//                template2.setStyles(styles2);
+//            }
+//        }
+//
+//    }
 
 
 
-    }
+//    public void nativeAdStyle3(){
+//        ColorDrawable buttonBackground3 =  new ColorDrawable(getColor(R.color.highlight_blue));
+//        ColorDrawable colorDrawable3 = new ColorDrawable(getColor(R.color.light_blue));
+//
+//        NativeTemplateStyle styles3 = new
+//                NativeTemplateStyle.Builder().
+//                withCallToActionBackgroundColor(buttonBackground3).
+//                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withMainBackgroundColor(colorDrawable3).build();
+//
+//        if(adLoaded3rd){
+//            if(template3 != null){
+//                template3.setStyles(styles3);
+//
+//            }
+//        }
+//
+//
+//
+//    }
 
-    public void nativeAdStyle4(){
-        ColorDrawable buttonBackground4 =  new ColorDrawable(getColor(R.color.highlight_blue));
-        ColorDrawable colorDrawable4 = new ColorDrawable(getColor(R.color.light_blue));
-
-        NativeTemplateStyle styles4 = new
-                NativeTemplateStyle.Builder().
-                withCallToActionBackgroundColor(buttonBackground4).
-                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
-                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
-                withMainBackgroundColor(colorDrawable4).build();
-
-        if(adLoaded4th){
-            if(template4 != null){
-                template4.setStyles(styles4);
-
-            }
-        }
-
-
-
-    }
+//    public void nativeAdStyle4(){
+//        ColorDrawable buttonBackground4 =  new ColorDrawable(getColor(R.color.highlight_blue));
+//        ColorDrawable colorDrawable4 = new ColorDrawable(getColor(R.color.light_blue));
+//
+//        NativeTemplateStyle styles4 = new
+//                NativeTemplateStyle.Builder().
+//                withCallToActionBackgroundColor(buttonBackground4).
+//                withSecondaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withPrimaryTextTypefaceColor(getColor(R.color.light_white)).
+//                withMainBackgroundColor(colorDrawable4).build();
+//
+//        if(adLoaded4th){
+//            if(template4 != null){
+//                template4.setStyles(styles4);
+//
+//            }
+//        }
+//
+//
+//
+//    }
 
     void establishConnection() {
         billingClient.startConnection(new BillingClientStateListener() {

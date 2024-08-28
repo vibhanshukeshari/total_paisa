@@ -1,24 +1,32 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "29.0.2"
+        namespace 'com.vibhunorby.totalpaisa'
+    compileSdkVersion 34
+    buildToolsVersion "34.0.0" // Optional, update to the latest build tools version if available
 
     defaultConfig {
         applicationId "com.vibhunorby.totalpaisa"
         minSdkVersion 24
-        targetSdkVersion 33
+        targetSdkVersion 34
 
-        
-        versionCode 33
-        versionName "08.12.23.33"
-        // 27 - In app purchase added, Ui Enhancements, version format changed  and many more. (28-04-23)
+        versionCode 34
+        versionName "08.12.23.34"
+        // 27 - In app purchase added, Ui Enhancements, version format changed and many more. (28-04-23)
         // 28 - Testing (Release is already taken)
         // 29 - NativeAd Crash Solved. (05-05-23)
         // 30 - Calc lite added (27-09-23)
         // 31 - Quick Increment and Decrement added along with multiple Bug on Calc lite (01-12-23) [only internal testing]
-        //32 - Quick Increment and Decrement added along with multiple Bug on Calc lite (01-12-23)
-        //33 - Minor bug fixes in CalcLite isOperator save status through shapred prefrenced
+        // 32 - Quick Increment and Decrement added along with multiple Bug on Calc lite (01-12-23)
+        // 33 - Minor bug fixes in CalcLite, isOperator save status through shared preferences
+
+//        39 - This version is used for testing new project for the Total paisa using kotlin and jet pack
+//        38 - Multiple CalcLite bug fixes (30/03/24) (App Bundle)
+//        37 - Native ad 1 that is the ad between currency and coin has been removed due to over ad (06/03/24) (App Bundle)
+//        36 - Native ad 1 that is the ad between currency and coin has been removed due to over ad (06/03/24) (APK)
+//        35 - Minor bug fixes in CalcLite, after decimal comma separator was disappeared due to wrong regex.(28/12/23)
+//        34 - Minor bug fixes in CalcLite, reversing the order (24-12-23) (only Open Testing)
+
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,35 +38,30 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_22
+        targetCompatibility JavaVersion.VERSION_22
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation project(path: ':nativetemplates')
+    implementation 'androidx.navigation:navigation-runtime:2.7.7'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.google.android.gms:play-services-ads:22.0.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    implementation 'com.google.android.gms:play-services-ads:23.3.0'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'androidx.biometric:biometric:1.1.0'
-    implementation 'com.google.android.play:core:1.10.3'
-    implementation 'com.vorlonsoft:androidrate:1.0.8'
-    implementation 'com.github.numerative:Five-Star-Me:2.0.0'
+    implementation 'com.vorlonsoft:androidrate:1.2.1'
+    //    implementation 'com.github.numerative:Five-Star-Me:2.0.0'
 
-    def billing_version = "5.2.0"
+    def billing_version = "7.0.0"
     implementation "com.android.billingclient:billing:$billing_version"
 
+
     implementation 'net.objecthunter:exp4j:0.4.8'
-
-
-
-
-
 }

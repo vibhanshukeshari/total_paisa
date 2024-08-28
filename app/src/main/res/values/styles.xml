@@ -1,12 +1,63 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#1da1f3 </item>
-        <item name="colorPrimaryDark">#131d27</item>
-        <item name="colorAccent">#ffffff</item>
+    <style name="AppTheme.Light" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary color -->
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimaryDark">@color/light_primary_dark</item>
+        <item name="colorAccent">@color/light_accent</item>
+        <item name="android:windowBackground">@color/light_background</item>
+        <item name="android:textColor">@color/light_text</item>
+        <item name="android:textColorSecondary">@color/light_text_secondary</item>
+        <item name="colorButtonNormal">@color/light_button_normal</item>
+        <item name="colorControlActivated">@color/light_accent</item>
+    </style>
+
+
+    <style name="BottomNavTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Override Material3 styles if necessary -->
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Dark theme -->
+    <style name="AppTheme.Dark" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary color -->
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryDark">@color/dark_primary_dark</item>
+        <item name="colorAccent">@color/dark_button_normal</item>
+        <item name="android:windowBackground">@color/dark_background</item>
+        <item name="android:textColor">@color/dark_text</item>
+        <item name="android:textColorSecondary">@color/dark_text_secondary</item>
+        <item name="colorButtonNormal">@color/dark_button_normal</item>
+        <item name="backgroundColor">@color/dark_background_color</item>
         <item name="drawerArrowStyle">@style/humbergerStyle</item>
     </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <style name="humbergerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
@@ -101,7 +152,6 @@
 
     <style name="alertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:dialogCornerRadius">10dp</item>
-        <item name="android:forceDarkAllowed">false</item>
         <item name="android:background">#15202b</item>
         <item name="android:textColorPrimary">#d9ffffff</item>
         <item name="android:textColorSecondary">#ffffff</item>

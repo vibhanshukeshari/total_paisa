@@ -12,13 +12,6 @@
         android:orientation="vertical">
 
 
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nativeAd3"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            app:gnt_template_type="@layout/gnt_medium_template_view"/>
 
 
         <RelativeLayout

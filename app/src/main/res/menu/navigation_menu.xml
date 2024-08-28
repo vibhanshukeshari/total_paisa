@@ -2,75 +2,80 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item android:title="Settings">
-    <menu>
-        <group android:checkableBehavior="none">
+    <item android:title="Settings">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/add_remove_currency"
+                    android:icon="@drawable/add_remove_icon"
+                    app:actionLayout="@layout/add_remove_setting"
+                    android:title="Add/Remove Currency" />
+                <item
+                    android:id="@+id/increment_decrement"
+                    app:actionLayout="@layout/drawer_switch"
+                    android:icon="@drawable/plus_minus"
+                    android:title="Quick Increment/Decrement" />
+                <item
+                    android:id="@+id/sound"
+                    app:actionLayout="@layout/drawer_switch"
+                    android:icon="@drawable/ic_baseline_settings_voice_24"
+                    android:title="Teller balance sound" />
+                <item
+                    android:id="@+id/finger_print"
+                    android:icon="@drawable/ic_baseline_fingerprint_24"
+                    app:actionLayout="@layout/drawer_switch"
+                    android:title="Fingerprint authentication" />
+                <item
+                    android:id="@+id/keep_screen_on"
+                    android:icon="@drawable/keep_screen_on"
+                    app:actionLayout="@layout/drawer_switch"
+                    android:title="Keep screen on" />
+            </group>
+        </menu>
+    </item>
+
+
+
+    <item android:title="Communicate">
+        <menu>
             <item
-                android:id="@+id/increment_decrement"
-                app:actionLayout="@layout/drawer_switch"
-                android:icon="@drawable/plus_minus"
-                android:title="Quick Increment/Decrement" />
+                android:title="Share app"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:id="@+id/share_app" />
+
             <item
-                android:id="@+id/sound"
-                app:actionLayout="@layout/drawer_switch"
-                android:icon="@drawable/ic_baseline_settings_voice_24"
-                android:title="Teller balance sound" />
+                android:title="Rate us"
+                android:icon="@drawable/ic_baseline_rate_24"
+                android:id="@+id/rate_us" />
+
+
             <item
-                android:id="@+id/finger_print"
-                android:icon="@drawable/ic_baseline_fingerprint_24"
-                app:actionLayout="@layout/drawer_switch"
-                android:title="Fingerprint authentication" />
-            <item
-                android:id="@+id/keep_screen_on"
-                android:icon="@drawable/keep_screen_on"
-                app:actionLayout="@layout/drawer_switch"
-                android:title="Keep screen on" />
-        </group>
-    </menu>
-</item>
+                android:title="Feedback"
+                android:icon="@drawable/ic_baseline_feedback_24"
+                android:id="@+id/feedback" />
 
-
-
-<item android:title="Communicate">
-    <menu>
-        <item
-            android:title="Share app"
-            android:icon="@drawable/ic_baseline_share_24"
-            android:id="@+id/share_app" />
-
-        <item
-            android:title="Rate us"
-            android:icon="@drawable/ic_baseline_rate_24"
-            android:id="@+id/rate_us" />
-
-
-        <item
-            android:title="Feedback"
-            android:icon="@drawable/ic_baseline_feedback_24"
-            android:id="@+id/feedback" />
-
-    </menu>
-</item>
+        </menu>
+    </item>
 
 
 
 
     <item android:title="Legal documents">
-    <menu>
+        <menu>
 
 
-        <item
-            android:title="Privacy policy"
-            android:icon="@drawable/ic_baseline_policy_24"
-            android:id="@+id/privacy" />
+            <item
+                android:title="Privacy policy"
+                android:icon="@drawable/ic_baseline_policy_24"
+                android:id="@+id/privacy" />
 
 
-        <item
-            android:title="Term of use"
-            android:icon="@drawable/ic_baseline_term_condition_24"
-            android:id="@+id/term_and_condition" />
-    </menu>
-</item>
+            <item
+                android:title="Term of use"
+                android:icon="@drawable/ic_baseline_term_condition_24"
+                android:id="@+id/term_and_condition" />
+        </menu>
+    </item>
 
     <item android:title="Try Interest Calculator">
         <menu>

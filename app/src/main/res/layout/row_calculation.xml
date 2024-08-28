@@ -249,14 +249,6 @@
                 </LinearLayout>
 
 
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nativeAds2"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    app:gnt_template_type="@layout/gnt_medium_template_view"/>
-
 
 
                 <LinearLayout
@@ -293,7 +285,8 @@
                     android:layout_height="0dp"
                     android:paddingBottom="7.5dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                tools:ignore="Suspicious0dp">
 
                     <TextView
                         android:id="@+id/textView2000"
@@ -1180,15 +1173,6 @@
                 </LinearLayout>
 
 
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nativeAds"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    app:gnt_template_type="@layout/gnt_medium_template_view"/>
-
-
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -1789,16 +1773,6 @@
                     android:background="#39434d">
 
                 </LinearLayout>
-
-
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nativeAds4"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    app:gnt_template_type="@layout/gnt_medium_template_view"/>
-
 
 
                 <LinearLayout

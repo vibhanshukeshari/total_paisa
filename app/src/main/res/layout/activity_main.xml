@@ -334,6 +334,7 @@
 
         </RelativeLayout>
 
+
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -342,13 +343,19 @@
             android:layout_gravity="start"
             app:menu="@menu/navigation_menu"
             android:background="#10171f"
-            android:id="@+id/navigation_view" >
+            android:theme="@style/BottomNavTheme"
+            android:id="@+id/navigation_view">
             <Button
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/fake_button"/>
 
         </com.google.android.material.navigation.NavigationView>
+
+
+
+
+
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </RelativeLayout>

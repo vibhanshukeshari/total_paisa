@@ -11,31 +11,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,6 +83,33 @@ public class CalcLite extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
+
+        int nightModeFlags = getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (nightModeFlags) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppTheme_Dark);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme_Light);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                // Handle the case when the system theme is undefined
+                setTheme(R.style.AppTheme_Light); // Default theme
+                break;
+        }
+
+
+
         setContentView(R.layout.activity_calc_lite);
 
 
@@ -107,24 +134,27 @@ public class CalcLite extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.simpleCalc);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.gst:
-                        startActivity(new Intent(getApplicationContext(), Gst.class));
-                        overridePendingTransition(0, 0);
-                        finish();
-                        return true;
-                    case R.id.totalPaisa:
-                        onBackPressed();
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.simpleCalc:
-//                        startActivity(new Intent(getApplicationContext(),CalcLite.class));
-//                        overridePendingTransition(0,0);
-                        return true;
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.gst) {
+//                    startActivity(new Intent(getApplicationContext(), Gst.class));
+//                    overridePendingTransition(0, 0);
+//                    finish();
+                    return true;
+                } else if (itemId == R.id.totalPaisa) {
+                    onBackPressed();
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.simpleCalc) {
+                    // Uncomment the following lines if needed:
+                    // startActivity(new Intent(getApplicationContext(), CalcLite.class));
+                    // overridePendingTransition(0, 0);
+                    return true;
                 }
+
                 return false;
             }
         });
@@ -178,8 +208,8 @@ public class CalcLite extends AppCompatActivity {
         });
 
         btn1.setOnClickListener(v -> {
-            vibrate();
-            handleNumericButtonClick("1");
+                    vibrate();
+                    handleNumericButtonClick("1");
                 }
         );
 
@@ -233,6 +263,7 @@ public class CalcLite extends AppCompatActivity {
         btnClearDisplay.setOnClickListener(v -> {
             vibrate();
             tvDisplay.setText("0");
+            btnPercentagePressed = false;
 
             btnClearDisplay.setText(R.string.a_c);
 
@@ -307,7 +338,8 @@ public class CalcLite extends AppCompatActivity {
                     tvPhrase.setText(tvPhraseText += 0);
                 }
 //
-                btnPercentagePressed = true;
+
+
 
 
                 // Find the last operator index
@@ -315,6 +347,8 @@ public class CalcLite extends AppCompatActivity {
                         Math.max(tvPhraseText.lastIndexOf("x"), tvPhraseText.lastIndexOf("÷")));
 
                 if (lastOperatorIndex != -1 && !isOperatorPressed) {
+                    btnPercentagePressed = true;
+
 
                     char lastOperator = tvPhraseText.charAt(lastOperatorIndex);
 
@@ -339,14 +373,16 @@ public class CalcLite extends AppCompatActivity {
 
                                 // Calculate the percentage value based on the previous number
                                 double percentageValue = (number * tvPhraseWithoutLastNumber) / 100;
-                                DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                                // this 0.00 was before replaced with 0.000000 because the precision was not enough altered on 30/06/4
+                                DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
                                 String roundedPercentageValue = decimalFormat.format(percentageValue);
-
 
                                 // Convert the percentage value back to a string
 
                                 // Replace the last number in the tvPhraseText string with the percentage value
                                 tvPhraseText = tvPhraseText.substring(0, lastOperatorIndex + 1) + " " + roundedPercentageValue;
+
+
                             }
                         } else {
                             // Get the substring after the last operator
@@ -363,6 +399,7 @@ public class CalcLite extends AppCompatActivity {
                                 if (lastNumberIndex != -1) {
 
 
+
                                     tvPhraseWithoutLastNumber = Double.parseDouble(calculateViaLibrary(tvPhraseText.substring(0, lastNumberIndex).trim()));
 
 
@@ -372,7 +409,7 @@ public class CalcLite extends AppCompatActivity {
                                 // Calculate the percentage value based on the previous number
                                 double percentageValue = (lastNumber * tvPhraseWithoutLastNumber) / 100;
 
-                                DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                                DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
                                 String roundedPercentageValue = decimalFormat.format(percentageValue);
 
 
@@ -397,7 +434,7 @@ public class CalcLite extends AppCompatActivity {
                                 // Divide the number by 10
                                 double updatedNumber = number / 100;
 
-                                DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                                DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
 
                                 // Set the updated number as the new tvPhraseText
                                 tvPhraseText = decimalFormat.format(updatedNumber);
@@ -416,7 +453,7 @@ public class CalcLite extends AppCompatActivity {
                                 // Divide the last number by 10
                                 double updatedNumber = lastNumber / 100;
 
-                                DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                                DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
 
 
                                 // Convert the updated number back to a string
@@ -431,11 +468,10 @@ public class CalcLite extends AppCompatActivity {
 
                 } else {
 
-
                     if ((!isOperatorPressed && !tvPhraseText.endsWith((" = ")) && !myTvPhraseNumberIfZeroOrNot.equals("0"))) {
                         double number = Double.parseDouble(tvPhraseText) / 100;
 
-                        DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                        DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
 
                         // Convert the updated number back to a string
                         tvPhraseText = decimalFormat.format(number);
@@ -448,10 +484,12 @@ public class CalcLite extends AppCompatActivity {
 
                     double number = Double.parseDouble(tvDisplay.getText().toString().replace(",", "")) / 100;
 
-                    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+                    DecimalFormat decimalFormat = new DecimalFormat("#0.000000");
 
                     // Convert the updated number back to a string
                     tvPhraseText = decimalFormat.format(number);
+
+
                     isEqualPressed = false;
 
                 }
@@ -477,32 +515,196 @@ public class CalcLite extends AppCompatActivity {
 
                 while (tvPhraseText.endsWith(" ")) {
                     tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
+//                    Toast.makeText(this, "i am delete", Toast.LENGTH_SHORT).show();
+
                 }
+
 
                 int lastOperatorIndex = Math.max(Math.max(tvPhraseText.lastIndexOf("+"), tvPhraseText.lastIndexOf("-")),
                         Math.max(tvPhraseText.lastIndexOf("x"), tvPhraseText.lastIndexOf("÷")));
 
                 if (lastOperatorIndex >= 0 && lastOperatorIndex == tvPhraseText.length() - 1) {
 
+
+
+
+
+
+
+// addded on 30/03/24 to delete if there is two consecutive operator
+
+//                    Pattern pattern = Pattern.compile("[-+x÷]{1} [-+x÷]{1}");
+//                    Matcher matcher = pattern.matcher(tvPhraseText);
+//
+//                    if (matcher.find()) {
+//                        // Two consecutive operators with a space in between are found
+//                        System.out.println("String contains two consecutive operators with a space in between.");
+//
+//                        tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
+//
+//                        tvPhrase.setText(tvPhraseText);
+//
+//
+//
+//
+//                    } else {
+//                        // Two consecutive operators with a space in between are not found
+//                        System.out.println("String does not contain two consecutive operators with a space in between.");
+//                    }
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     isOperatorPressed = true;
+
+
+
+
+
+
+
+
+
+
+
 
                     return;
                 }
 
+
+
+
+
+                // Define the patterns
+                String[] patterns = {"- -\\d$", "+ -\\d$", "- -\\d$", "+ \\+\\d$"};
+
+
+// Check if tvPhraseText ends with any of the patterns
+                boolean endsWithPattern = false;
+                for (String pattern : patterns) {
+                    if (tvPhraseText.matches(".*" + pattern)) {
+                        endsWithPattern = true;
+                        break;
+                    }
+                }
+
+                if (endsWithPattern) {
+                    // tvPhraseText ends with one of the specified patterns
+                    System.out.println("tvPhraseText ends with one of the specified patterns.");
+
+
+                    // delete two digit one is number another is opertor at a tiem
+                    tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 2);
+                    tvPhrase.setText(tvPhraseText);
+
+
+
+
+
+                } else {
+                    // tvPhraseText does not end with any of the specified patterns
+                    System.out.println("tvPhraseText does not end with any of the specified patterns.");
+//                    one digit at a time
+                    tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
+
+                }
+
+
+
+
+
                 // Delete one digit at a time
-                tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
+//                tvPhraseText = tvPhraseText.substring(0, tvPhraseText.length() - 1);
+
+
+
+//                Toast.makeText(this, "i deleted", Toast.LENGTH_SHORT).show();
+
 
 
                 if (!tvDisplayText.isEmpty()) {
                     tvDisplayText = tvDisplayText.substring(0, tvDisplayText.length() - 1);
+
+//                    Toast.makeText(this, tvDisplayText, Toast.LENGTH_SHORT).show();
                 }
 
                 if (tvDisplayText.isEmpty()) {
                     tvDisplayText = "0";
+                    btnPercentagePressed = false;
+
                 }
 
                 tvPhrase.setText(tvPhraseText);
+
+
                 tvDisplay.setText(tvDisplayText);
+
+
+
+//                Pattern pattern = Pattern.compile("(?<=\\D|^)\\d*\\.?\\d+(?!\\S*\\D)");
+//                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?![+\\-*/\\d\\s])");
+                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?![+\\-*/÷∙\\d\\s])");
+//                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?!(\\s*[+\\-*/÷∙]\\s*|\\d|\\s+))");
+
+
+
+
+
+
+
+
+
+//                Pattern pattern = Pattern.compile("(?<=\\D)\\d*\\.?\\d+(?![+\\-*/\\d\\s])");
+//                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?![+\\-*/\\d\\s])");
+//                Pattern pattern = Pattern.compile("(?<=\\D|^)\\d+\\.?\\d*(?![+\\-*/\\d\\s])");
+
+//                Pattern pattern = Pattern.compile("(?<=\\D|^)\\d+\\.?\\d*(?![+\\-*/\\d\\s])");
+//                Pattern pattern = Pattern.compile("(?![+\\-*/])\\d*\\.?\\d+(?![+\\-*/\\d\\s])");
+
+//                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?![+\\-*/\\d\\s])");
+//                Pattern pattern = Pattern.compile("\\d*\\.?\\d+(?![+\\-*/\\d\\s]$)");
+//                Pattern pattern = Pattern.compile("\\d+(?![+\\-*/\\d\\s])");
+
+
+
+
+
+
+
+
+
+                Matcher matcher = pattern.matcher(tvPhraseText);
+
+                String lastNumber;
+
+
+                while (matcher.find()) {
+                    lastNumber = matcher.group();
+
+
+
+                    Log.d("tvPhraseText",lastNumber);
+
+
+                    BigDecimal bigDecimalLastNumber = new BigDecimal(lastNumber);
+                    numberFormatLocale.setNumber(bigDecimalLastNumber);
+                    tvDisplay.setText(numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+                }
+
+
 
                 if (!tvPhraseText.isEmpty() && tvDisplayText.equals("0")) {
 
@@ -511,30 +713,21 @@ public class CalcLite extends AppCompatActivity {
                     if (!hasZeroAtEnd) {
                         tvPhraseText += "";
                         tvPhrase.setText(tvPhraseText);
+
                     }
 
                     btnClearDisplay.setText(R.string.a_c);
+                    tvDisplay.setText("0");
+
                     cPressed = true;
                     isOperatorPressed = true;
                 }
 
 
-                Pattern pattern = Pattern.compile("(?<=\\D|^)\\d*\\.?\\d+(?!\\S*\\D)");
-
-                Matcher matcher = pattern.matcher(tvPhraseText);
-
-                String lastNumber;
-
-                while (matcher.find()) {
-                    lastNumber = matcher.group();
-
-                    BigDecimal bigDecimalLastNumber = new BigDecimal(lastNumber);
-                    numberFormatLocale.setNumber(bigDecimalLastNumber);
-                    tvDisplay.setText(numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
-                }
 
 
-                 pattern = Pattern.compile("[0-9]+\\.?[0-9]*");
+                pattern = Pattern.compile("[0-9]+\\.?[0-9]*");
+
 
 // Create a matcher for the input string
                 matcher = pattern.matcher(tvPhraseText);
@@ -547,13 +740,17 @@ public class CalcLite extends AppCompatActivity {
                     String operands = matcher.group();
                     BigDecimal operandBigDecimal = new BigDecimal(operands);
 
+//                    Toast.makeText(this, operandBigDecimal.toString(), Toast.LENGTH_SHORT).show();
 
                     BigDecimal tvPhraseTextBigDecimal = new BigDecimal(String.valueOf(operandBigDecimal));
                     numberFormatLocale.setNumber(tvPhraseTextBigDecimal);
 
+//                    Toast.makeText(this, numberFormatLocale.getNumberAfterFormatUnlimitedDecimal(), Toast.LENGTH_SHORT).show();
 
                     // Append the formatted operand to the result
                     matcher.appendReplacement(formattedText,numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+//                                    Log.d("tvPhraseText", numberFormatLocale.getNumberAfterFormatUnlimitedDecimal());
+
                 }
 
 // Append the remaining part of the input string
@@ -562,6 +759,10 @@ public class CalcLite extends AppCompatActivity {
                 String formattedResult = formattedText.toString();
 // Set the formatted result to your desired output (e.g., set it to a TextView)
                 tvPhrase.setText(formattedResult);
+
+//                Log.d("tvPhraseText",formattedResult);
+
+//                tvDisplay.setText();
 
 
             }
@@ -783,6 +984,10 @@ public class CalcLite extends AppCompatActivity {
 
             vibrate();
 
+            if(btnPercentagePressed){
+                return;
+            }
+
 
             btnDot.setEnabled(false);
 
@@ -851,6 +1056,11 @@ public class CalcLite extends AppCompatActivity {
 
     private void handleNumericButtonClick(String value) {
 
+        // this is used to avoid accepting input when percentage is pressed
+        if(btnPercentagePressed){
+            return;
+        }
+
         btnEqual.setEnabled(true);
 
         if (isEqualPressed) {
@@ -909,6 +1119,7 @@ public class CalcLite extends AppCompatActivity {
         isBtn0Pressed = false;
         btnClearDisplay.setText("C");
         cPressed = false;
+
     }
 
     private void clearScreen() {
@@ -924,6 +1135,7 @@ public class CalcLite extends AppCompatActivity {
         isOperatorPressed = false;
         isBtn0Pressed = false;
         tvDisplay.setText("0");
+        btnPercentagePressed = false;
     }
 
 
