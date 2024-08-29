@@ -14,22 +14,8 @@
 
 
     <style name="BottomNavTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Override Material3 styles if necessary -->
-        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView</item>
+        <!-- Material2 specific styles -->
     </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- Dark theme -->

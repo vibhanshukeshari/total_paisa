@@ -324,6 +324,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#15202b"
+                        android:theme="@style/BottomNavTheme"
                         app:itemIconTint="@color/navigation_color"
                         app:itemTextColor="@color/navigation_color"
                         app:menu="@menu/menu_item" />
@@ -343,7 +344,6 @@
             android:layout_gravity="start"
             app:menu="@menu/navigation_menu"
             android:background="#10171f"
-            android:theme="@style/BottomNavTheme"
             android:id="@+id/navigation_view">
             <Button
                 android:layout_width="0dp"

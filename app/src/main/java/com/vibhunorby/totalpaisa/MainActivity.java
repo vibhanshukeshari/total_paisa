@@ -1518,8 +1518,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (itemId == R.id.gst) {
                     // Uncomment the following line if you want to start the GST activity
-                    // startActivity(new Intent(getApplicationContext(), Gst.class));
-//                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
+                     startActivity(new Intent(getApplicationContext(), Gst.class));
+                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
                     return true;
                 } else if (itemId == R.id.totalPaisa) {
                     return true;
@@ -2766,8 +2766,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.gst) {
-//                    startActivity(new Intent(getApplicationContext(), Gst.class));
-//                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
+                    startActivity(new Intent(getApplicationContext(), Gst.class));
+                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
                     return true;
                 } else if (itemId == R.id.totalPaisa) {
                     // Uncomment the following lines if needed:
