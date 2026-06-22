@@ -42,6 +42,8 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -349,7 +351,7 @@ public class Gst extends AppCompatActivity {
         newlayoutTotalAmount.addView(textViewTotalAmountResult);
 
 
-        textViewclear.setOnClickListener(_ -> {
+        textViewclear.setOnClickListener(v -> {
 
             textViewCgst.setText("CGST Amount");
             textViewCgstResult.setText("₹ 0");
@@ -387,152 +389,158 @@ public class Gst extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//
-//                if (!editTextInitialValue.getText().toString().isEmpty()) {
-//                    if (radioExcluding.isChecked()) {
-//                        if (radioIgst.isChecked()) {
-//                            if (chip3Percent.isChecked()) {
-//
-//                                excludingIgstChip(3);
-//
-//                            } else if (chip5Percent.isChecked()) {
-//
-//                                excludingIgstChip(5);
-//
-//                            } else if (chip12Percent.isChecked()) {
-//
-//                                excludingIgstChip(12);
-//
-//                            } else if (chip18Percent.isChecked()) {
-//
-//                                excludingIgstChip(18);
-//
-//                            } else if (chip28Percent.isChecked()) {
-//
-//                                excludingIgstChip(28);
-//
-//                            }
-//
-//
-//                        } else if (radioCgstSgst.isChecked()) {
-//                            if (chip3Percent.isChecked()) {
-//
-//                                excludingCgstSgstChip(3);
-//
-//                            } else if (chip5Percent.isChecked()) {
-//
-//                                excludingCgstSgstChip(5);
-//
-//                            } else if (chip12Percent.isChecked()) {
-//
-//                                excludingCgstSgstChip(12);
-//
-//
-//                            } else if (chip18Percent.isChecked()) {
-//
-//                                excludingCgstSgstChip(12);
-//
-//                            } else if (chip28Percent.isChecked()) {
-//
-//                                excludingCgstSgstChip(28);
-//
-//                            }
-//                        }
-//                    } else if (radioIncluding.isChecked()) {
-//                        if (radioCgstSgst.isChecked()) {
-//                            if (chip3Percent.isChecked()) {
-//
-//
-//                                includingCgstSgstChip(3);
-//
-//
-//                            } else if (chip5Percent.isChecked()) {
-//
-//
-//                                includingCgstSgstChip(5);
-//
-//
-//                            } else if (chip12Percent.isChecked()) {
-//
-//                                includingCgstSgstChip(12);
-//
-//                            } else if (chip18Percent.isChecked()) {
-//
-//                                includingCgstSgstChip(18);
-//
-//                            } else if (chip28Percent.isChecked()) {
-//
-//                                includingCgstSgstChip(28);
-//
-//                            }
-//
-//
-//                        } else if (radioIgst.isChecked()) {
-//                            if (chip3Percent.isChecked()) {
-//
-//                                includingIgstChip(3);
-//
-//                            } else if (chip5Percent.isChecked()) {
-//
-//                                includingIgstChip(5);
-//
-//                            } else if (chip12Percent.isChecked()) {
-//
-//                                includingIgstChip(12);
-//
-//                            } else if (chip18Percent.isChecked()) {
-//
-//                                includingIgstChip(18);
-//
-//                            } else if (chip28Percent.isChecked()) {
-//
-//                                includingIgstChip(28);
-//
-//                            }
-//                        }
-//                    }
-//
-//
-//                } else {
-//                    textViewCgstResult.setText("₹ 0");
-//                    textViewSgstResult.setText("₹ 0");
-//                    textViewIgstResult.setText("₹ 0");
-//                    textViewTotalAmountResult.setText("₹ 0");
-//                    textViewForResultNetAmount.setText("₹ 0");
-//                    textViewTotalAmountResult.setText("₹ 0");
-//                    totalAmountWord.setText("");
-//                }
-//
+
+
+                if (!editTextInitialValue.getText().toString().isEmpty()) {
+                    if (radioExcluding.isChecked()) {
+                        if (radioIgst.isChecked()) {
+                            if (chip3Percent.isChecked()) {
+
+                                excludingIgstChip(3);
+
+                            } else if (chip5Percent.isChecked()) {
+
+                                excludingIgstChip(5);
+
+                            } else if (chip12Percent.isChecked()) {
+
+                                excludingIgstChip(12);
+
+                            } else if (chip18Percent.isChecked()) {
+
+                                excludingIgstChip(18);
+
+                            } else if (chip28Percent.isChecked()) {
+
+                                excludingIgstChip(28);
+
+                            }
+
+
+                        } else if (radioCgstSgst.isChecked()) {
+                            if (chip3Percent.isChecked()) {
+
+                                excludingCgstSgstChip(3);
+
+                            } else if (chip5Percent.isChecked()) {
+
+                                excludingCgstSgstChip(5);
+
+                            } else if (chip12Percent.isChecked()) {
+
+                                excludingCgstSgstChip(12);
+
+
+                            } else if (chip18Percent.isChecked()) {
+
+                                excludingCgstSgstChip(12);
+
+                            } else if (chip28Percent.isChecked()) {
+
+                                excludingCgstSgstChip(28);
+
+                            }
+                        }
+                    } else if (radioIncluding.isChecked()) {
+                        if (radioCgstSgst.isChecked()) {
+                            if (chip3Percent.isChecked()) {
+
+
+                                includingCgstSgstChip(3);
+
+
+                            } else if (chip5Percent.isChecked()) {
+
+
+                                includingCgstSgstChip(5);
+
+
+                            } else if (chip12Percent.isChecked()) {
+
+                                includingCgstSgstChip(12);
+
+                            } else if (chip18Percent.isChecked()) {
+
+                                includingCgstSgstChip(18);
+
+                            } else if (chip28Percent.isChecked()) {
+
+                                includingCgstSgstChip(28);
+
+                            }
+
+
+                        } else if (radioIgst.isChecked()) {
+                            if (chip3Percent.isChecked()) {
+
+                                includingIgstChip(3);
+
+                            } else if (chip5Percent.isChecked()) {
+
+                                includingIgstChip(5);
+
+                            } else if (chip12Percent.isChecked()) {
+
+                                includingIgstChip(12);
+
+                            } else if (chip18Percent.isChecked()) {
+
+                                includingIgstChip(18);
+
+                            } else if (chip28Percent.isChecked()) {
+
+                                includingIgstChip(28);
+
+                            }
+                        }
+                    }
+
+
+                } else {
+                    textViewCgstResult.setText("₹ 0");
+                    textViewSgstResult.setText("₹ 0");
+                    textViewIgstResult.setText("₹ 0");
+                    textViewTotalAmountResult.setText("₹ 0");
+                    textViewForResultNetAmount.setText("₹ 0");
+                    textViewTotalAmountResult.setText("₹ 0");
+                    totalAmountWord.setText("");
+                }
+
             }
 
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(Editable s) {
 
+                if (!edit) return;
 
-                if(!editTextInitialValue.getText().toString().isEmpty()) {
+                String value = s.toString().replaceAll(",", "");
 
-                    String myTellerWithoutComma;
+                if (value.isEmpty()) return;
 
-                    if (edit) {
-                        edit = false;
-                        myTellerWithoutComma = editTextInitialValue.getText().toString().replaceAll(",", "");
-                        editTextInitialValue.setText(AddComma.getIndianCurrencyFormat(myTellerWithoutComma));
-                        edit = true;
+                edit = false;
+                try {
+                    String formatted = AddComma.getIndianCurrencyFormat(value);
 
-                    }
+                    editTextInitialValue.setText(formatted);
+                    editTextInitialValue.setSelection(formatted.length());
 
-                    editTextInitialValue.setSelection(editTextInitialValue.getText().toString().length() - cursorPosition);
-
-
+                } catch (Exception e) {
+                    Log.e("TEST", "Error", e);
                 }
+
+                String formatted = AddComma.getIndianCurrencyFormat(value);
+
+                editTextInitialValue.setText(formatted);
+                editTextInitialValue.setSelection(formatted.length());
+
+                edit = true;
             }
         });
 
 
 
-        radioCgstSgstIgst.setOnCheckedChangeListener((_, i) -> {
+        radioCgstSgstIgst.setOnCheckedChangeListener((v, i) -> {
 
 
               if(i == R.id.radioCgstAndSgst) {
@@ -679,7 +687,7 @@ public class Gst extends AppCompatActivity {
         });
 
 
-        radioExIN.setOnCheckedChangeListener((_, i) -> {
+        radioExIN.setOnCheckedChangeListener((v, i) -> {
 
 
             if (i == R.id.radioExcluding){
@@ -822,7 +830,7 @@ public class Gst extends AppCompatActivity {
 
 
 
-        chipGroup.setOnCheckedStateChangeListener((_, checkedIds) -> {
+        chipGroup.setOnCheckedStateChangeListener((v, checkedIds) -> {
 
             if(checkedIds.contains(R.id.chip3Percent)){
 
@@ -1190,7 +1198,7 @@ public class Gst extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void excludingIgstChip(int percentage){
 
-        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString());
+        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString().replace(",", ""));
         netAmount = initialAmount;
         roundNetAmount = String.format(Locale.getDefault(), "%.2f", netAmount);
         textViewForResultNetAmount.setText("₹ " + roundNetAmount);
@@ -1233,7 +1241,7 @@ public class Gst extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void excludingCgstSgstChip(int percentage){
 
-        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString());
+        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString().replace(",", ""));
         netAmount = initialAmount;
         roundNetAmount = String.format(Locale.getDefault(),"%.2f",netAmount);
         textViewForResultNetAmount.setText("₹ " + roundNetAmount);
@@ -1280,7 +1288,7 @@ public class Gst extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void includingCgstSgstChip(int percentage){
 
-        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString());
+        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString().replace(",", ""));
         netAmount = (initialAmount/(1 + (percentage/100.0)));
         roundNetAmount = String.format(Locale.getDefault(),"%.2f",netAmount);
         textViewForResultNetAmount.setText("₹ " + roundNetAmount);
@@ -1327,7 +1335,7 @@ public class Gst extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void includingIgstChip(int percentage){
 
-        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString());
+        initialAmount = Double.parseDouble("0" + editTextInitialValue.getText().toString().replace(",", ""));
         netAmount = (initialAmount/(1 + (percentage/100.0)));
         roundNetAmount = String.format(Locale.getDefault(),"%.2f",netAmount);
         textViewForResultNetAmount.setText("₹ " + roundNetAmount);

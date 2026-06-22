@@ -140,9 +140,9 @@ public class CalcLite extends AppCompatActivity {
                 int itemId = item.getItemId();
 
                 if (itemId == R.id.gst) {
-//                    startActivity(new Intent(getApplicationContext(), Gst.class));
-//                    overridePendingTransition(0, 0);
-//                    finish();
+                    startActivity(new Intent(getApplicationContext(), Gst.class));
+                    overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 } else if (itemId == R.id.totalPaisa) {
                     onBackPressed();
@@ -150,8 +150,8 @@ public class CalcLite extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.simpleCalc) {
                     // Uncomment the following lines if needed:
-                    // startActivity(new Intent(getApplicationContext(), CalcLite.class));
-                    // overridePendingTransition(0, 0);
+                     startActivity(new Intent(getApplicationContext(), CalcLite.class));
+                     overridePendingTransition(0, 0);
                     return true;
                 }
 

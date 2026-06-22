@@ -2760,29 +2760,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (Resources.NotFoundException ignored) {
         }
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-
-                if (itemId == R.id.gst) {
-                    startActivity(new Intent(getApplicationContext(), Gst.class));
-                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
-                    return true;
-                } else if (itemId == R.id.totalPaisa) {
-                    // Uncomment the following lines if needed:
-                    // startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    // overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.simpleCalc) {
-                    startActivity(new Intent(getApplicationContext(), CalcLite.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-
-                return false;
-            }
-        });
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                int itemId = item.getItemId();
+//
+//                if (itemId == R.id.gst) {
+//                    startActivity(new Intent(getApplicationContext(), Gst.class));
+//                    overridePendingTransition(R.anim.transparent, R.anim.fade_out);
+//                    return true;
+//                } else if (itemId == R.id.totalPaisa) {
+//                    // Uncomment the following lines if needed:
+//                    // startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                    // overridePendingTransition(0, 0);
+//                    return true;
+//                } else if (itemId == R.id.simpleCalc) {
+//                    startActivity(new Intent(getApplicationContext(), CalcLite.class));
+//                    overridePendingTransition(0, 0);
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
 
 
     }

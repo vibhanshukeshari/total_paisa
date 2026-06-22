@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="TwitterBlue">#1da1f3</color>
     <color name="mtrl_textinput_default_box_stroke_color">#39434d</color>
@@ -30,7 +30,7 @@
 
     <!-- Dark Theme Colors -->
     <color name="dark_primary">#162b46</color>
-    <color name="dark_primary_dark">#162b46</color>
+    <color name="dark_primary_dark">#15202b</color>
     <!--        <color name="dark_accent">#ff00ff</color>-->
     <color name="dark_background">#0c2136</color>
     <color name="dark_text">#d2e3fb</color>

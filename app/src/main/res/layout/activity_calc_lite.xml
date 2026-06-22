@@ -252,6 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#15202b"
+                app:itemActiveIndicatorStyle="@color/light_blue"
                 app:itemIconTint="@color/navigation_color"
                 app:itemTextColor="@color/navigation_color"
                 app:menu="@menu/menu_item" />
